@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --color-bg: #FEFEFE;
+  --color-surface: #ffffff;
+  --color-preview: #ffffff;
+  --card-shadow: 0 0 6px rgba(0, 0, 0, 0.11);
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #888888;
+  --color-text-tertiary: #aaaaaa;
+  --color-accent: #ffdd2d;
+  --color-accent-hover: #ffd000;
+  --color-border: #e8e8e4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+p, li, dd, td, blockquote {
+  line-height: 140%;
+}
+
+a { color: inherit; text-decoration: none; }
+
+a.case-link {
+  font-family: 'Inter', var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 140%;
+  color: #00ADFF;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: opacity 150ms ease-out;
+}
+
+a.case-link:visited {
+  color: #00ADFF;
+}
+
+a.case-link:hover {
+  opacity: 0.8;
+}
+
+button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* Transition utilities for hover preview */
+.preview-enter {
+  animation: previewFadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes previewFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-up-delay-1 {
+  animation: slideUp 300ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+.slide-up-delay-2 {
+  animation: slideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-enter {
+  animation: dropdownIn 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes testCardFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Portfolio section: no bottom padding so cover stack reaches container edge */
+.portfolio-section {
+  padding: 24px 24px 0 24px;
+  box-sizing: border-box;
+}
+
+/* Resume Skills section typography */
+.skills-subtitle {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.skill-pill {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.skills-pills-wrapper {
+  margin-top: 8px;
+}
+
+.resume-download {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 20px;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease-out, transform 120ms ease-out;
+  cursor: pointer;
+}
+
+.resume-download img {
+  width: 22px;
+  height: 22px;
+}
+
+.resume-download:hover {
+  background-color: #111111;
+}
+
+.resume-download:active {
+  transform: scale(0.96);
+}
