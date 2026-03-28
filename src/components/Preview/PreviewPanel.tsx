@@ -21,7 +21,7 @@ export function PreviewPanel({ activeCase, cases, showResume, onResumeEnter, onR
   const { locale } = useLocale();
   return (
     <main
-      className="portfolio-section w-[736px] h-full shrink-0 bg-[var(--color-preview)] rounded-[24px] overflow-hidden relative flex flex-col shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+      className="portfolio-section w-[736px] min-w-0 h-full bg-[var(--color-preview)] rounded-[24px] overflow-hidden relative flex flex-col shadow-[0_0_6px_rgba(0,0,0,0.11)]"
       onMouseEnter={showResume ? onResumeEnter : undefined}
       onMouseLeave={showResume ? onResumeLeave : undefined}
     >

@@ -54,8 +54,8 @@ export function PortfolioLayout() {
   }, []);
 
   return (
-    <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center">
-      <div className="flex gap-[20px] w-[1362px] h-[771px]">
+    <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center px-[20px]">
+      <div className="flex gap-[20px] max-w-[1362px] w-full h-[771px]">
         <Sidebar
           siteContent={siteContent}
           cases={cases}
