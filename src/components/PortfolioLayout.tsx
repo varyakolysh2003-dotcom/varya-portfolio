@@ -56,9 +56,12 @@ export function PortfolioLayout() {
   return (
     <div
       className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center"
-      style={{ paddingLeft: 60, paddingRight: 60 }}
+      style={{ paddingLeft: 60, paddingRight: 60, paddingTop: 24, paddingBottom: 24 }}
     >
-      <div className="flex gap-[20px] w-full max-w-[1362px] h-[771px]">
+      <div
+        className="flex gap-[20px] w-full max-w-[1362px]"
+        style={{ height: 'min(771px, calc(100dvh - 48px))' }}
+      >
         <Sidebar
           siteContent={siteContent}
           cases={cases}
