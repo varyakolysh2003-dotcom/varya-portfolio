@@ -29,7 +29,7 @@ export function Sidebar({
   const navigate = useNavigate();
 
   return (
-    <aside className="flex-[606_1_0%] min-w-0 flex flex-col gap-[16px]">
+    <aside className="flex-[606_1_0%] min-w-0 flex flex-col gap-[16px] max-w-[606px]">
       {/* Header: avatar + name + language */}
       <div className="flex items-start justify-between mb-0.5">
         <div className="flex items-center gap-3.5">
