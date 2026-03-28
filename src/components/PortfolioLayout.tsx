@@ -54,7 +54,10 @@ export function PortfolioLayout() {
   }, []);
 
   return (
-    <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center px-[40px] box-border">
+    <div
+      className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center"
+      style={{ paddingLeft: 60, paddingRight: 60 }}
+    >
       <div className="flex gap-[20px] w-full max-w-[1362px] h-[771px]">
         <Sidebar
           siteContent={siteContent}

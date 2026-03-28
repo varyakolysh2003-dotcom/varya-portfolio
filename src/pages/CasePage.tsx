@@ -120,7 +120,7 @@ export function CasePage() {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center px-4">
+      <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center" style={{ paddingLeft: 60, paddingRight: 60 }}>
         <div className="max-w-[960px] w-full">
           <Link to="/" className="inline-flex items-center text-[16px] font-medium text-[var(--color-text-secondary)] mb-4">
             ← {locale === 'ru' ? 'Назад к работам' : 'Back to projects'}
@@ -169,7 +169,7 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="min-h-dvh bg-[var(--color-bg)] flex justify-center items-start px-4" style={{ paddingTop: 32, paddingBottom: 84 }}>
+    <div className="min-h-dvh bg-[var(--color-bg)] flex justify-center items-start" style={{ paddingTop: 32, paddingBottom: 84, paddingLeft: 60, paddingRight: 60 }}>
       <div className="max-w-[880px] w-full">
         <Link
           to="/"
