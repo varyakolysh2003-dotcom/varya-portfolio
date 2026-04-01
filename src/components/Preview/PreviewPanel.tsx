@@ -21,7 +21,7 @@ export function PreviewPanel({ activeCase, cases, showResume, onResumeEnter, onR
   const { locale } = useLocale();
   return (
     <main
-      className="portfolio-section flex-[736_1_0%] min-w-0 max-w-[736px] h-full bg-[var(--color-preview)] rounded-[24px] overflow-hidden relative flex flex-col shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+      className="portfolio-section w-full lg:flex-[736_1_0%] min-w-0 lg:max-w-[736px] h-auto lg:h-full bg-[var(--color-preview)] rounded-[var(--radius-media)] overflow-hidden relative flex flex-col shadow-[0_0_6px_rgba(0,0,0,0.11)]"
       onMouseEnter={showResume ? onResumeEnter : undefined}
       onMouseLeave={showResume ? onResumeLeave : undefined}
     >
@@ -80,7 +80,7 @@ function DefaultContent({
   const reversed = [...cases].reverse();
 
   return (
-    <div className="flex flex-col h-full min-h-0 relative overflow-hidden">
+    <div className="flex flex-col h-full min-h-0 relative overflow-hidden pb-6 lg:pb-0">
       {/* Text block: title + description + metadata grid */}
       <div ref={textBlockRef} className="mb-4 shrink-0">
         {activeCase ? (
@@ -97,7 +97,7 @@ function DefaultContent({
                   : typograph('I design end-to-end scenarios and improve the visual quality of digital products')}
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
               <ContactItem
                 label={locale === 'ru' ? 'Почта' : 'Email'}
                 value="varyakolysh2003@gmail.ru"
@@ -121,10 +121,10 @@ function DefaultContent({
           </div>
         )}
       </div>
-      {/* Cover stack: active card top = text block bottom + 32px */}
+      {/* Cover stack: active card top = text block bottom + 32px — hidden on mobile/tablet (hover-only) */}
       <div
         ref={stackRef}
-        className="flex flex-col"
+        className="hidden lg:flex flex-col"
         style={{
           position: 'absolute',
           left: 20,
@@ -144,7 +144,7 @@ function DefaultContent({
           return (
             <div
               key={cs.id}
-              className="relative w-full rounded-[45px] overflow-hidden"
+              className="relative w-full rounded-[var(--radius-media)] overflow-hidden"
               style={{
                 marginTop: index > 0 ? -286 : 0,
                 zIndex: isActive ? 20 : index + 1,
@@ -183,7 +183,7 @@ function DefaultContentCaseBlock({
           {typograph(caseStudy.description[locale])}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-x-12 gap-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
         <MetaItem
           label={locale === 'ru' ? 'Моя роль' : 'My role'}
           value={typograph(caseStudy.role[locale])}

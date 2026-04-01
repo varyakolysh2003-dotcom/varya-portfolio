@@ -29,7 +29,7 @@ export function Sidebar({
   const navigate = useNavigate();
 
   return (
-    <aside className="flex-[606_1_0%] min-w-0 flex flex-col gap-[16px] max-w-[606px]">
+    <aside className="w-full lg:flex-[606_1_0%] min-w-0 flex flex-col gap-[16px] lg:max-w-[606px]">
       {/* Header: avatar + name + language */}
       <div className="flex items-start justify-between mb-0.5">
         <div className="flex items-center gap-3.5">
@@ -56,7 +56,7 @@ export function Sidebar({
         onMouseEnter={onResumeEnter}
         onMouseLeave={onResumeLeave}
         style={{ padding: '16px 24px' }}
-        className={`w-full box-border rounded-[32px] shadow-[0_0_6px_rgba(0,0,0,0.11)] transition-colors duration-200 cursor-pointer ${showResume ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}`}
+        className={`w-full box-border rounded-[24px] lg:rounded-[32px] shadow-[0_0_6px_rgba(0,0,0,0.11)] transition-colors duration-200 cursor-pointer ${showResume ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}`}
       >
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-[4px] flex-1 min-w-0">
@@ -97,7 +97,7 @@ export function Sidebar({
               onClick={isDisabled ? undefined : handleClick}
               style={{ padding: '16px 24px' }}
               className={`
-                w-full box-border h-[146px] rounded-[32px]
+                w-full box-border min-h-[120px] lg:h-[146px] rounded-[24px] lg:rounded-[32px]
                 shadow-[0_0_6px_rgba(0,0,0,0.11)]
                 transition-colors duration-200
                 ${isDisabled ? 'cursor-default' : 'cursor-pointer'} overflow-hidden

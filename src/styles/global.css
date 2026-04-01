@@ -19,6 +19,23 @@
   --color-border: #e8e8e4;
 }
 
+/* Responsive media radius token:
+   mobile: 24px
+   tablet: 32px
+   desktop: 52px
+*/
+:root {
+  --radius-media: 24px;
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  :root { --radius-media: 32px; }
+}
+
+@media (min-width: 1024px) {
+  :root { --radius-media: 52px; }
+}
+
 @layer base {
   * {
     margin: 0;
@@ -127,6 +144,134 @@ img { display: block; max-width: 100%; }
 .portfolio-section {
   padding: 24px 24px 0 24px;
   box-sizing: border-box;
+}
+
+/* Scroll-to-top button — responsive */
+.scroll-to-top-btn {
+  position: fixed;
+  right: 56px;
+  bottom: 32px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-text-primary, #1a1a1a);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@media (max-width: 767px) {
+  .scroll-to-top-btn {
+    right: 16px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .scroll-to-top-btn {
+    right: 24px;
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Mobile responsive utilities ── */
+
+/* Case page container: reduce padding on mobile + account for sticky nav */
+@media (max-width: 1279px) {
+  .case-container {
+    padding-top: 56px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .case-container {
+    padding: 56px 16px 64px 16px !important;
+  }
+
+  /* ── Mobile typography for case pages ── */
+  /* Scale headings down for mobile reading */
+  .case-container h1 {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+  .case-container h2 {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+  .case-container h3 {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Body text: comfortable mobile reading size */
+  .case-container p,
+  .case-container span,
+  .case-container a.case-link {
+    font-size: 15px !important;
+  }
+
+  /* Section meta labels */
+  .case-container .text-\[20px\] {
+    font-size: 17px !important;
+  }
+
+  /* Reduce large section gaps */
+  .case-sections {
+    gap: 16px !important;
+  }
+
+  /* Tag pills on mobile */
+  .case-container .skill-pill {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .case-container {
+    padding: 56px 32px 72px 32px !important;
+  }
+
+  /* Tablet typography — slightly reduced from desktop */
+  .case-container h1 {
+    font-size: 22px !important;
+  }
+  .case-container h2 {
+    font-size: 20px !important;
+  }
+}
+
+/* Reduce large border radius on mobile for case page image containers */
+@media (max-width: 767px) {
+  .case-container .rounded-\[32px\] {
+    border-radius: 20px !important;
+  }
+  .case-container .rounded-\[24px\] {
+    border-radius: 16px !important;
+  }
+
+  /* Ensure content doesn't overflow */
+  .case-sections > section,
+  .case-sections > div {
+    max-width: 100%;
+  }
+
+  /* Case page back link */
+  .case-container a[href="/"] {
+    font-size: 17px !important;
+  }
 }
 
 /* Resume Skills section typography */

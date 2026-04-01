@@ -3,6 +3,7 @@ import type { CaseStudy } from '../types';
 import { cases, siteContent } from '../data/cases';
 import { Sidebar } from './Sidebar/Sidebar';
 import { PreviewPanel } from './Preview/PreviewPanel';
+import { MobileHome } from './MobileHome';
 
 export function PortfolioLayout() {
   const [activeCase, setActiveCase] = useState<CaseStudy | null>(null);
@@ -54,32 +55,40 @@ export function PortfolioLayout() {
   }, []);
 
   return (
-    <div
-      className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center"
-      style={{ paddingLeft: 60, paddingRight: 60, paddingTop: 24, paddingBottom: 24 }}
-    >
+    <>
+      {/* Desktop layout — hidden on mobile/tablet */}
       <div
-        className="flex gap-[20px] w-full max-w-[1362px]"
-        style={{ height: 'min(771px, calc(100dvh - 48px))' }}
+        className="portfolio-container min-h-dvh bg-[var(--color-bg)] hidden lg:flex items-center justify-center"
+        style={{ paddingLeft: 60, paddingRight: 60, paddingTop: 24, paddingBottom: 24 }}
       >
-        <Sidebar
-          siteContent={siteContent}
-          cases={cases}
-          activeCaseId={activeCase?.id ?? null}
-          showResume={showResume}
-          onCaseEnter={handleCaseEnter}
-          onCaseLeave={handleCaseLeave}
-          onResumeEnter={handleResumeEnter}
-          onResumeLeave={handleResumeLeave}
-        />
-        <PreviewPanel
-          activeCase={activeCase}
-          cases={cases}
-          showResume={showResume}
-          onResumeEnter={handleResumeEnter}
-          onResumeLeave={handleResumeLeave}
-        />
+        <div
+          className="portfolio-inner flex gap-[20px] w-full max-w-[1362px]"
+          style={{ height: 'min(771px, calc(100dvh - 48px))' }}
+        >
+          <Sidebar
+            siteContent={siteContent}
+            cases={cases}
+            activeCaseId={activeCase?.id ?? null}
+            showResume={showResume}
+            onCaseEnter={handleCaseEnter}
+            onCaseLeave={handleCaseLeave}
+            onResumeEnter={handleResumeEnter}
+            onResumeLeave={handleResumeLeave}
+          />
+          <PreviewPanel
+            activeCase={activeCase}
+            cases={cases}
+            showResume={showResume}
+            onResumeEnter={handleResumeEnter}
+            onResumeLeave={handleResumeLeave}
+          />
+        </div>
       </div>
-    </div>
+
+      {/* Mobile/Tablet layout — hidden on desktop */}
+      <div className="lg:hidden">
+        <MobileHome siteContent={siteContent} cases={cases} />
+      </div>
+    </>
   );
 }

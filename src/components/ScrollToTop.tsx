@@ -26,30 +26,16 @@ export function ScrollToTop() {
     <button
       onClick={scrollToTop}
       aria-label="Scroll to top"
+      className="scroll-to-top-btn"
       style={{
-        position: 'fixed',
-        right: 56,
-        bottom: 32,
-        width: 72,
-        height: 72,
-        borderRadius: '50%',
-        backgroundColor: 'var(--color-text-primary, #1a1a1a)',
-        border: 'none',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
-        zIndex: 1000,
         opacity: visible ? 1 : 0,
         transform: visible ? 'scale(1)' : 'scale(0.8)',
         pointerEvents: visible ? 'auto' : 'none',
-        transition: 'opacity 0.25s ease, transform 0.25s ease',
       }}
     >
       <svg
-        width="24"
-        height="24"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="white"

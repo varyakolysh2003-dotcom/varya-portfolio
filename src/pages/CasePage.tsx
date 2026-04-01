@@ -1,12 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { cases } from '../data/cases';
 import { ScrollToTop } from '../components/ScrollToTop';
 import { useLocale } from '../context/LocaleContext';
 import { typograph } from '../utils/typograph';
 import type { CaseStudy } from '../types';
-import onboardingImg from '../../public/covers/YandexLavka materials/Onboarding.png';
-import inviteImg from '../../public/covers/YandexLavka materials/Invite.png';
 
 const NAV_ITEMS = [
   { id: 'section-context', label: { ru: 'Контекст', en: 'Context' } },
@@ -22,15 +20,17 @@ const LEGACY_CASE_SLUG: Record<string, string> = {
 
 /** T-Bank testing block: prototype screens in filename order (same for RU/EN). */
 const TBANK_TESTING_PROTOTYPE_IMAGES = [
-  '/covers/T-bank/1_1.png',
-  '/covers/T-bank/1_2.png',
-  '/covers/T-bank/1_3.png',
-  '/covers/T-bank/1_4.png',
+  '/covers/T-bank/1_1.webp',
+  '/covers/T-bank/1_2.webp',
+  '/covers/T-bank/1_3.webp',
+  '/covers/T-bank/1_4.webp',
 ] as const;
 
 export function CasePage() {
   const { caseSlug } = useParams<{ caseSlug: string }>();
   const { locale } = useLocale();
+  const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
+  const mobileSectionsRef = useRef<HTMLDivElement>(null);
 
   const benchmarkingLogos: string[] = [
     '/logos/Uber.png',
@@ -113,6 +113,18 @@ export function CasePage() {
     if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
   }, []);
 
+  useEffect(() => {
+    function onDocMouseDown(e: MouseEvent) {
+      if (!mobileSectionsOpen) return;
+      const root = mobileSectionsRef.current;
+      if (root && !root.contains(e.target as Node)) {
+        setMobileSectionsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', onDocMouseDown);
+    return () => document.removeEventListener('mousedown', onDocMouseDown);
+  }, [mobileSectionsOpen]);
+
   const resolvedCaseId = caseSlug ? (LEGACY_CASE_SLUG[caseSlug] ?? caseSlug) : undefined;
   const caseStudy: CaseStudy | undefined = resolvedCaseId
     ? cases.find((c) => c.id === resolvedCaseId)
@@ -120,7 +132,7 @@ export function CasePage() {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center" style={{ paddingLeft: 60, paddingRight: 60 }}>
+      <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center px-4 md:px-8 lg:px-[60px]">
         <div className="max-w-[960px] w-full">
           <Link to="/" className="inline-flex items-center text-[16px] font-medium text-[var(--color-text-secondary)] mb-4">
             ← {locale === 'ru' ? 'Назад к работам' : 'Back to projects'}
@@ -169,11 +181,74 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="min-h-dvh bg-[var(--color-bg)] flex justify-center items-start" style={{ paddingTop: 32, paddingBottom: 84, paddingLeft: 60, paddingRight: 60 }}>
+    {/* Mobile sticky sections menu */}
+    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+      <nav
+        className="xl:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
+        style={{ padding: '10px 16px' }}
+      >
+        <div className="relative" ref={mobileSectionsRef}>
+          <div className="flex items-center justify-between gap-3">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 font-sans font-semibold text-[18px] text-[var(--color-text-primary)] no-underline"
+            >
+              <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
+              {locale === 'ru' ? 'Назад' : 'Back'}
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMobileSectionsOpen((v) => !v)}
+              className="shrink-0 inline-flex items-center justify-center w-[40px] h-[40px] rounded-[14px] bg-[#F1F1F1]"
+              aria-label={locale === 'ru' ? 'Разделы' : 'Sections'}
+              aria-expanded={mobileSectionsOpen}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'rgba(0,0,0,0.55)' }}>
+                <path d="M4 6h16" />
+                <path d="M4 12h16" />
+                <path d="M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+          {mobileSectionsOpen && (
+            <div
+              className="absolute right-0 mt-2 w-[220px] rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.10)] border border-[var(--color-border)] overflow-hidden"
+            >
+              {NAV_ITEMS.map(({ id, label }) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById(id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    setMobileSectionsOpen(false);
+                  }}
+                  className="w-full text-left"
+                  style={{
+                    padding: '12px 14px',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: 14,
+                    fontWeight: activeSection === id ? 600 : 500,
+                    color: activeSection === id ? 'var(--color-text-primary)' : 'rgba(0, 0, 0, 0.55)',
+                    backgroundColor: activeSection === id ? 'rgba(0,0,0,0.04)' : '#ffffff',
+                  }}
+                >
+                  {label[locale]}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </nav>
+    )}
+
+    <div className="case-container min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
       <div className="max-w-[880px] w-full">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
+          className="hidden xl:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
         >
           <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
           {locale === 'ru' ? 'Назад' : 'Back'}
@@ -249,7 +324,7 @@ export function CasePage() {
           {/* Cover — 24px from info grid */}
           <section style={{ marginTop: 24 }}>
             {caseStudy.coverVideo ? (
-              <div className="w-full rounded-[32px] overflow-hidden bg-[var(--color-bg-secondary)]">
+              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-bg-secondary)]">
                 <video
                   src={caseStudy.coverVideo}
                   autoPlay
@@ -257,12 +332,12 @@ export function CasePage() {
                   loop
                   playsInline
                   preload="metadata"
-                  className="w-full object-cover"
-                  style={{ height: 720, transform: 'scale(1.06)', objectPosition: 'center' }}
+                  className="w-full object-cover h-[280px] sm:h-[400px] md:h-[540px] lg:h-[720px]"
+                  style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
                 />
               </div>
             ) : (
-              <div className="w-full rounded-[32px] overflow-hidden bg-[#EFEFEF] min-h-[260px] md:min-h-[320px]">
+              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#EFEFEF] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
                 <img
                   src={caseStudy.cover}
                   alt={caseStudy.title[locale]}
@@ -327,7 +402,7 @@ export function CasePage() {
           </section>
 
           {/* Content group — 112px from Контекст задачи, 24px between sections */}
-          <section className="flex flex-col" style={{ marginTop: 96, gap: 24 }}>
+          <section className="case-sections flex flex-col" style={{ marginTop: 96, gap: 24 }}>
             {/* Вводные */}
             {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
@@ -461,21 +536,22 @@ export function CasePage() {
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
                 </h2>
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1LRl-KDdeQimxpKBun8hETvOJCzPieYxeCYp-0cD6-xk/edit?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="case-link"
-                >
-                  {locale === 'ru' ? typograph('Полная таблица анализа конкурентов') : typograph('Full competitive analysis table')}
-                </a>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-[24px]">
-                {okoloBenchmarkingLogos.map((src) => (
+              <div className="grid grid-cols-6 gap-2 justify-items-center sm:flex sm:flex-wrap sm:justify-center sm:gap-[24px]">
+                {okoloBenchmarkingLogos.map((src, idx) => {
+                  const total = okoloBenchmarkingLogos.length;
+                  const isLastRow = idx >= 3;
+                  // Center the last row on mobile by offsetting its first item.
+                  // With 6 columns and each item spanning 2:
+                  // - total=4 → last row has 1 item → start at col 3
+                  const mobileStart =
+                    isLastRow && idx === 3 && total === 4 ? 'col-start-3' : '';
+
+                  return (
                   <div
                     key={src}
-                    className="w-[120px] h-[120px] rounded-[24px] overflow-hidden bg-white flex items-center justify-center"
+                    className={`col-span-2 ${mobileStart} w-[72px] h-[72px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] rounded-[16px] md:rounded-[24px] overflow-hidden bg-white flex items-center justify-center`}
                   >
                     <img
                       src={src}
@@ -483,7 +559,8 @@ export function CasePage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
@@ -664,7 +741,7 @@ export function CasePage() {
                   </h2>
                 </div>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -674,7 +751,7 @@ export function CasePage() {
                   />
                 </div>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -916,7 +993,7 @@ export function CasePage() {
                   </h2>
                 </div>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -926,7 +1003,7 @@ export function CasePage() {
                   />
                 </div>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -958,7 +1035,7 @@ export function CasePage() {
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   JTBD
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] items-stretch" style={{ marginTop: 16 }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] items-stretch" style={{ marginTop: 16 }}>
                   {(
                     locale === 'ru'
                       ? [
@@ -1012,7 +1089,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Архитектура' : 'Architecture'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1031,7 +1108,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Экраны' : 'Screens'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 20, padding: 0, height: 'auto', lineHeight: 0 }}
                 >
                   <img
@@ -1056,12 +1133,12 @@ export function CasePage() {
                     : typograph('If the application form and bank communications are only available in Russian, some foreign users (especially those without strong language skills) may struggle to fill in the input fields, resulting in an increased drop-off rate from attempting to complete the form')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
                     <img
-                      src="/covers/T-bank/7.png"
+                      src="/covers/T-bank/1_1.webp"
                       alt={locale === 'ru' ? 'Локализация' : 'Localization'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
                       style={{ marginTop: 8 }}
@@ -1085,7 +1162,7 @@ export function CasePage() {
                     { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.png' },
                     { label: 'Belarusian', src: '/covers/T-bank/Belorussky.png' },
                   ].map(({ label, src }) => (
-                    <div key={label} className="w-full rounded-[32px] overflow-hidden">
+                    <div key={label} className="w-full rounded-[var(--radius-media)] overflow-hidden">
                       <div className="relative w-full overflow-hidden leading-none">
                         <img
                           src={src}
@@ -1111,7 +1188,7 @@ export function CasePage() {
                     : typograph('Currently, the conditions and likelihood of installment approval for foreign citizens with different document types remain insufficiently transparent. To learn more about the conditions at T-Bank, one needs to search for relevant articles manually. A dedicated section with links to official sources will help reduce the risk of misinformation and keep track of current conditions')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
@@ -1137,7 +1214,7 @@ export function CasePage() {
                     : typograph('Different document types require different data to fill in. If the form accommodates more document and country input options, users will be able to correctly complete the application on the first attempt')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img
@@ -1152,7 +1229,7 @@ export function CasePage() {
             {/* Экран 10 — T-Bank only */}
             {caseStudy.id === 't-bank' && (
               <div
-                className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                 style={{ marginTop: 24 }}
               >
                 <img
@@ -1175,7 +1252,7 @@ export function CasePage() {
                     : typograph('If the approval probability is shown dynamically based on document type and income, the user gets transparent feedback at every step — reducing uncertainty and increasing willingness to continue the application')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img
@@ -1200,7 +1277,7 @@ export function CasePage() {
                 </p>
 
                 <div
-                  className="w-full rounded-[32px] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img
@@ -1259,12 +1336,12 @@ export function CasePage() {
 
                 {/* Prototype result card */}
                 <div
-                  className="rounded-[32px] bg-[#F5F5F5] overflow-hidden"
+                  className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden"
                   style={{ marginTop: 24 }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr]">
                     {/* Left — text column with 16px padding */}
-                    <div className="flex flex-col gap-[8px]" style={{ padding: 16 }}>
+                    <div className="flex flex-col gap-[8px]" style={{ padding: '16px' }}>
                       <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                         {locale === 'ru' ? 'Контекст' : 'Context'}
                       </h3>
@@ -1355,21 +1432,24 @@ export function CasePage() {
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
                 </h2>
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1LRl-KDdeQimxpKBun8hETvOJCzPieYxeCYp-0cD6-xk/edit?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="case-link"
-                >
-                  {locale === 'ru' ? typograph('Полная таблица анализа конкурентов') : typograph('Full competitive analysis table')}
-                </a>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-[24px]">
-                {benchmarkingLogos.map((src) => (
+              <div className="grid grid-cols-6 gap-2 justify-items-center sm:flex sm:flex-wrap sm:justify-center sm:gap-[24px]">
+                {benchmarkingLogos.map((src, idx) => {
+                  const total = benchmarkingLogos.length;
+                  const isLastRow = idx >= 3;
+                  // total=5 → last row has 2 items → start first at col 2, second at col 4
+                  const mobileStart =
+                    isLastRow && idx === 3 && total === 5
+                      ? 'col-start-2'
+                      : isLastRow && idx === 4 && total === 5
+                        ? 'col-start-4'
+                        : '';
+
+                  return (
                   <div
                     key={src}
-                    className="w-[120px] h-[120px] rounded-[24px] overflow-hidden bg-white flex items-center justify-center"
+                    className={`col-span-2 ${mobileStart} w-[72px] h-[72px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] rounded-[16px] md:rounded-[24px] overflow-hidden bg-white flex items-center justify-center`}
                   >
                     <img
                       src={src}
@@ -1377,7 +1457,8 @@ export function CasePage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
@@ -1572,11 +1653,11 @@ export function CasePage() {
                   </p>
                 </div>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src={onboardingImg}
+                    src="/covers/YandexLavka materials/Onboarding.png"
                     alt="Onboarding"
                     className="w-full object-cover"
                   />
@@ -1591,7 +1672,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1610,11 +1691,11 @@ export function CasePage() {
                   {locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src={inviteImg}
+                    src="/covers/YandexLavka materials/Invite.png"
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                     className="w-full object-cover"
                   />
@@ -1634,7 +1715,7 @@ export function CasePage() {
                     : typograph('The organizer decides the payment method. Separate — each pays for their own. Joint — one pays for all. This makes the scenario financially flexible for different user group categories')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1653,7 +1734,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1677,7 +1758,7 @@ export function CasePage() {
                     : typograph('The solution helps avoid address errors while providing a choice — continue with separate payment or stay in the shared cart')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1701,7 +1782,7 @@ export function CasePage() {
                     : typograph('The order is processed only after all participants have paid their share')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1722,7 +1803,7 @@ export function CasePage() {
                     : typograph('When a user delays collection or payment, they receive a push reminder. If they\'re the last one unpaid, they get 20 minutes to complete before items are cancelled')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1746,7 +1827,7 @@ export function CasePage() {
                     : typograph('After the payment timer expires, the organizer can resend invitations to avoid recreating the shared cart')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1770,21 +1851,21 @@ export function CasePage() {
                     : typograph('Personalized offers for different group types encourage repeat shared cart usage and increase average order value')}
                 </p>
                 <div className="flex flex-col gap-[24px]" style={{ marginTop: 24 }}>
-                  <div className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img
                       src="/covers/YandexLavka materials/Friends.png"
                       alt="Спецпредложения — друзья"
                       className="w-full object-cover"
                     />
                   </div>
-                  <div className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img
                       src="/covers/YandexLavka materials/Family.png"
                       alt="Спецпредложения — семья"
                       className="w-full object-cover"
                     />
                   </div>
-                  <div className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img
                       src="/covers/YandexLavka materials/Collegues.png"
                       alt="Спецпредложения — коллеги"
@@ -1807,7 +1888,7 @@ export function CasePage() {
                     : typograph('Group cart creation. Users can form permanent groups for different categories, saving on delivery and time collecting participants')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1831,7 +1912,7 @@ export function CasePage() {
                     : typograph('After completing the first shared order, an offer to create a permanent group appears')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1855,7 +1936,7 @@ export function CasePage() {
                     : typograph('Adding a tasks section would increase total purchase volume, as game goals, progress and bonuses create additional motivation to buy together and return to the service')}
                 </p>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1874,7 +1955,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                 </h2>
                 <div
-                  className="w-full rounded-[32px] overflow-hidden bg-[#F5F5F5]"
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
@@ -1935,7 +2016,7 @@ export function CasePage() {
 
                 {/* Main result card */}
                 <div
-                  className="rounded-[32px] bg-[#F5F5F5] overflow-hidden"
+                  className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden"
                   style={{ marginTop: 24 }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
@@ -2021,12 +2102,15 @@ export function CasePage() {
                     </div>
 
                     {/* Right — visual column */}
-                    <div className="flex items-end justify-center px-[24px] pt-[24px] pb-0 md:pl-0 md:pr-[24px] md:pt-[24px] md:pb-0">
+                    <div
+                      className={`flex ${activeTestChip === 4 ? 'items-start pt-0' : 'items-end pt-[24px]'} justify-center px-[24px] pb-0 md:pl-0 md:pr-[24px] md:pt-[24px] md:pb-0`}
+                      style={activeTestChip === 4 ? { paddingTop: 0 } : undefined}
+                    >
                       <img
-                        src={activeTestChip === 1 ? '/covers/YandexLavka materials/2.png' : activeTestChip === 2 ? '/covers/YandexLavka materials/3.png' : activeTestChip === 3 ? '/covers/YandexLavka materials/4.png' : activeTestChip === 4 ? '/covers/YandexLavka materials/5.png' : activeTestChip === 5 ? '/covers/YandexLavka materials/6.png' : '/covers/YandexLavka materials/1.png'}
+                        src={activeTestChip === 1 ? '/covers/YandexLavka materials/2.webp' : activeTestChip === 2 ? '/covers/YandexLavka materials/3.webp' : activeTestChip === 3 ? '/covers/YandexLavka materials/4.webp' : activeTestChip === 4 ? '/covers/YandexLavka materials/5.webp' : activeTestChip === 5 ? '/covers/YandexLavka materials/6.webp' : '/covers/YandexLavka materials/1.webp'}
                         alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
                         className="h-auto object-contain"
-                        style={{ display: 'block', maxWidth: '85%', margin: '0 auto' }}
+                        style={{ display: 'block', maxWidth: '85%', margin: 0 }}
                       />
                     </div>
                   </div>
@@ -2041,7 +2125,7 @@ export function CasePage() {
                   {locale === 'ru' ? 'Ключевые тезисы от Discovery до тестирования' : 'Testing Results'}
                 </h2>
                 <div
-                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px]"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[24px]"
                   style={{ marginTop: 24 }}
                 >
                   {/* Row 1 */}
