@@ -24,7 +24,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
             alt={siteContent.name[locale]}
             className="w-[56px] h-[56px] rounded-full object-cover shrink-0"
           />
-          <div>
+          <div className="min-w-0">
             <h1 className="text-[20px] font-bold leading-tight tracking-[-0.01em]">
               {siteContent.name[locale]}
             </h1>
@@ -55,7 +55,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
           className="flex items-center justify-between w-full bg-white rounded-[16px] shadow-[0_0_6px_rgba(0,0,0,0.09)] no-underline"
           style={{ padding: '14px 16px' }}
         >
-          <div>
+          <div className="flex-1 min-w-0">
             <p className="text-[17px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
               {locale === 'ru' ? 'Резюме' : 'Resume'}
             </p>
@@ -76,7 +76,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
         <h2 className="text-[13px] font-semibold uppercase tracking-[0.06em] text-[var(--color-text-tertiary)] mb-3">
           {locale === 'ru' ? 'Контакты' : 'Contact'}
         </h2>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+        <div className="grid grid-cols-2 gap-x-12 gap-y-4">
           <ContactMobile
             label={locale === 'ru' ? 'Почта' : 'Email'}
             value="varyakolysh2003@gmail.ru"
@@ -180,7 +180,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
 
 function ContactMobile({ label, value, href }: { label: string; value: string; href?: string }) {
   return (
-    <div>
+    <div className="min-w-0">
       <p className="text-[13px] font-semibold text-[var(--color-text-primary)] mb-0.5">
         {label}
       </p>
@@ -189,12 +189,12 @@ function ContactMobile({ label, value, href }: { label: string; value: string; h
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline"
+          className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline break-words [overflow-wrap:anywhere]"
         >
           {value}
         </a>
       ) : (
-        <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3]">
+        <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] break-words [overflow-wrap:anywhere]">
           {value}
         </p>
       )}
