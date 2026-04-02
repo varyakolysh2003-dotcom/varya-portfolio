@@ -25,10 +25,10 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       <button
         type="button"
         onClick={() => setLangOpen(!langOpen)}
-        className="inline-flex items-center justify-center w-[44px] h-[44px] rounded-[14px] bg-white shadow-[0_2px_6px_rgba(0,0,0,0.08)]"
+        className="inline-flex items-center justify-center w-[36px] h-[36px] rounded-[10px] lg:w-[44px] lg:h-[44px] lg:rounded-[14px] bg-white shadow-[0_2px_6px_rgba(0,0,0,0.08)]"
         aria-label={locale === 'ru' ? 'Переключить язык' : 'Switch language'}
       >
-        <span className="font-medium text-[16px] text-[rgba(0,0,0,0.4)]">
+        <span className="font-medium text-[13px] lg:text-[16px] text-[rgba(0,0,0,0.4)]">
           {locale === 'ru' ? 'RU' : 'EN'}
         </span>
       </button>

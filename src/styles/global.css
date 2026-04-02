@@ -49,6 +49,10 @@
   html {
     @apply font-sans;
   }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 html {
@@ -72,8 +76,6 @@ body {
 p, li, dd, td, blockquote {
   line-height: 140%;
 }
-
-a { color: inherit; text-decoration: none; }
 
 a.case-link {
   font-family: 'Inter', var(--font-sans);
@@ -202,13 +204,13 @@ img { display: block; max-width: 100%; }
   }
 
   /* ── Mobile typography for case pages ── */
-  /* Scale headings down for mobile reading */
+  /* Scale matches homepage mobile type scale (MobileHome.tsx) */
   .case-container h1 {
-    font-size: 20px !important;
+    font-size: 18px !important;
     line-height: 1.25 !important;
   }
   .case-container h2 {
-    font-size: 18px !important;
+    font-size: 16px !important;
     line-height: 1.3 !important;
   }
   .case-container h3 {
@@ -216,16 +218,16 @@ img { display: block; max-width: 100%; }
     line-height: 1.3 !important;
   }
 
-  /* Body text: comfortable mobile reading size */
+  /* Body text: matches homepage body (14px medium) */
   .case-container p,
   .case-container span,
   .case-container a.case-link {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 
-  /* Section meta labels */
+  /* Section meta labels: matches card/secondary headings (16px) */
   .case-container .text-\[20px\] {
-    font-size: 17px !important;
+    font-size: 16px !important;
   }
 
   /* Reduce large section gaps */
@@ -268,9 +270,9 @@ img { display: block; max-width: 100%; }
     max-width: 100%;
   }
 
-  /* Case page back link */
+  /* Case page back link: matches secondary text scale */
   .case-container a[href="/"] {
-    font-size: 17px !important;
+    font-size: 16px !important;
   }
 }
 

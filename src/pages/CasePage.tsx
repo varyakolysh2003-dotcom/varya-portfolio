@@ -191,7 +191,7 @@ export function CasePage() {
           <div className="flex items-center justify-between gap-3">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-sans font-semibold text-[18px] text-[var(--color-text-primary)] no-underline"
+              className="inline-flex items-center gap-2 font-sans font-semibold text-[16px] text-[var(--color-text-primary)] no-underline"
             >
               <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
               {locale === 'ru' ? 'Назад' : 'Back'}
@@ -204,7 +204,7 @@ export function CasePage() {
               aria-label={locale === 'ru' ? 'Разделы' : 'Sections'}
               aria-expanded={mobileSectionsOpen}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'rgba(0,0,0,0.55)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-text-secondary)' }}>
                 <path d="M4 6h16" />
                 <path d="M4 12h16" />
                 <path d="M4 18h16" />
@@ -231,7 +231,7 @@ export function CasePage() {
                     fontFamily: 'Inter, sans-serif',
                     fontSize: 14,
                     fontWeight: activeSection === id ? 600 : 500,
-                    color: activeSection === id ? 'var(--color-text-primary)' : 'rgba(0, 0, 0, 0.55)',
+                    color: activeSection === id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                     backgroundColor: activeSection === id ? 'rgba(0,0,0,0.04)' : '#ffffff',
                   }}
                 >
@@ -266,7 +266,7 @@ export function CasePage() {
                 <img
                   src={caseStudy.logo}
                   alt=""
-                  className="w-[64px] h-[64px] object-contain shrink-0"
+                  className="w-[48px] h-[48px] object-contain shrink-0"
                 />
                 <h1 className="text-[24px] font-bold leading-[1.3]">
                   {typograph(caseStudy.title[locale])}
@@ -538,7 +538,7 @@ export function CasePage() {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-6 gap-2 justify-items-center sm:flex sm:flex-wrap sm:justify-center sm:gap-[24px]">
+              <div className="flex flex-wrap justify-center gap-[12px] max-w-[252px] mx-auto sm:max-w-none sm:mx-0 sm:gap-[24px]">
                 {okoloBenchmarkingLogos.map((src, idx) => {
                   const total = okoloBenchmarkingLogos.length;
                   const isLastRow = idx >= 3;
@@ -603,7 +603,7 @@ export function CasePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
                 {/* Left column — persona tab cards */}
-                <div className="flex flex-col gap-[24px]">
+                <div className="no-scrollbar flex flex-row gap-[8px] overflow-x-auto pb-[2px] md:flex-col md:overflow-visible md:pb-0 md:gap-[24px]">
                   {([
                     { id: 'families' as const, title: locale === 'ru' ? 'Семьи' : 'Families', desc: locale === 'ru' ? typograph('Семьи из 2+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases') },
                     { id: 'friends' as const, title: locale === 'ru' ? 'Парочки' : 'Couples', desc: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping') },
@@ -613,23 +613,36 @@ export function CasePage() {
                     <button
                       key={persona.id}
                       type="button"
-                      onClick={() => setActivePersona(persona.id)}
-                      className="rounded-[24px] text-left"
+                      onClick={(e) => { setActivePersona(persona.id); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
+                      className="rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
                       style={{
-                        padding: 24,
                         backgroundColor: activePersona === persona.id ? '#000000' : '#F8F8F8',
                         border: 'none',
                         cursor: 'pointer',
                       }}
                     >
                       <h3
-                        className="font-sans text-[20px] font-semibold leading-normal"
+                        className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
                         style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)' }}
                       >
                         {persona.title}
                       </h3>
                       <p
-                        className="text-[16px] font-medium"
+                        className="hidden text-[16px] font-medium md:block"
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
@@ -647,6 +660,14 @@ export function CasePage() {
                     {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
                   </h3>
                   <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+                      {({
+                        families: locale === 'ru' ? typograph('Семьи из\u00A02+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases'),
+                        friends: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping'),
+                        colleagues: locale === 'ru' ? typograph('Офисные сотрудники и команды, организаторы корпоративов и встреч') : typograph('Office workers, remote teams, corporate event organizers'),
+                        couples: locale === 'ru' ? typograph('Компании, которые часто собираются вместе на вечеринки, просмотр фильмов, настольные игры, пикники') : typograph('Groups of friends who often get together for parties, movie nights, board games, and picnics'),
+                      } as Record<string, string>)[activePersona] ?? ''}
+                    </p>
                     {activePersona === 'families' && (
                       <>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
@@ -904,7 +925,7 @@ export function CasePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] md:items-start">
                 {/* Left column — persona tab cards */}
-                <div className="flex flex-col gap-[24px]">
+                <div className="no-scrollbar flex flex-row gap-[8px] overflow-x-auto pb-[2px] md:flex-col md:overflow-visible md:pb-0 md:gap-[24px]">
                   {([
                     { id: 'rvp' as const, title: locale === 'ru' ? 'Иностранцы с РВП' : 'Foreigners with TRP', desc: locale === 'ru' ? typograph('Находятся в переходном статусе: уже работают, но ограничены в доступе к кредитным продуктам и долгосрочному финансовому планированию из-за временного характера разрешения') : typograph('In a transitional status: already employed, but limited in access to credit products and long-term financial planning due to the temporary nature of their permit') },
                     { id: 'vnzh' as const, title: locale === 'ru' ? 'Иностранцы с ВНЖ' : 'Foreigners with RP', desc: locale === 'ru' ? typograph('Наиболее интегрированный сегмент: имеют стабильный доход, пользуются банковскими продуктами, но сталкиваются с отказами и ограничениями, нетипичными для граждан') : typograph('The most integrated segment: have stable income, use banking products, but face rejections and restrictions atypical for citizens') },
@@ -912,23 +933,36 @@ export function CasePage() {
                     <button
                       key={persona.id}
                       type="button"
-                      onClick={() => setActivePersona(persona.id)}
-                      className="rounded-[24px] text-left"
+                      onClick={(e) => { setActivePersona(persona.id); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
+                      className="rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
                       style={{
-                        padding: 24,
                         backgroundColor: activePersona === persona.id ? '#000000' : '#F8F8F8',
                         border: 'none',
                         cursor: 'pointer',
                       }}
                     >
                       <h3
-                        className="font-sans text-[20px] font-semibold leading-normal"
+                        className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
                         style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)' }}
                       >
                         {persona.title}
                       </h3>
                       <p
-                        className="text-[16px] font-medium"
+                        className="hidden text-[16px] font-medium md:block"
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
@@ -946,6 +980,12 @@ export function CasePage() {
                     {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
                   </h3>
                   <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+                      {({
+                        rvp: locale === 'ru' ? typograph('Находятся в переходном статусе: уже работают, но ограничены в доступе к кредитным продуктам из-за временного характера разрешения') : typograph('In a transitional status: already employed, but limited in access to credit products due to the temporary nature of their permit'),
+                        vnzh: locale === 'ru' ? typograph('Наиболее интегрированный сегмент: имеют стабильный доход, пользуются банковскими продуктами, но сталкиваются с отказами и ограничениями') : typograph('The most integrated segment: have stable income, use banking products, but face rejections and restrictions atypical for citizens'),
+                      } as Record<string, string>)[activePersona] ?? ''}
+                    </p>
                     {activePersona === 'rvp' && (
                       <>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
@@ -1310,7 +1350,7 @@ export function CasePage() {
                 </h3>
 
                 {/* Filter chips */}
-                <div className="flex flex-wrap gap-[8px]" style={{ marginTop: 12 }}>
+                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
                   {([
                     { ru: 'Локализация интерфейса', en: 'Interface localization' },
                     { ru: 'Расширение документов', en: 'Document expansion' },
@@ -1320,7 +1360,21 @@ export function CasePage() {
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setActiveTbankTestChip(idx)}
+                      onClick={(e) => { setActiveTbankTestChip(idx); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
                       className="skill-pill whitespace-nowrap border-none cursor-pointer rounded-[24px] inline-flex items-center justify-center"
                       style={{
                         padding: '10px 12px',
@@ -1434,7 +1488,7 @@ export function CasePage() {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-6 gap-2 justify-items-center sm:flex sm:flex-wrap sm:justify-center sm:gap-[24px]">
+              <div className="flex flex-wrap justify-center gap-[12px] max-w-[252px] mx-auto sm:max-w-none sm:mx-0 sm:gap-[24px]">
                 {benchmarkingLogos.map((src, idx) => {
                   const total = benchmarkingLogos.length;
                   const isLastRow = idx >= 3;
@@ -1507,7 +1561,7 @@ export function CasePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
                 {/* Left column — persona tab cards */}
-                <div className="flex flex-col gap-[24px]">
+                <div className="no-scrollbar flex flex-row gap-[8px] overflow-x-auto pb-[2px] md:flex-col md:overflow-visible md:pb-0 md:gap-[24px]">
                   {([
                     { id: 'families' as const, title: locale === 'ru' ? 'Семьи' : 'Families', desc: locale === 'ru' ? typograph('Семьи из 2+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases') },
                     { id: 'friends' as const, title: locale === 'ru' ? 'Парочки' : 'Couples', desc: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping') },
@@ -1517,23 +1571,36 @@ export function CasePage() {
                     <button
                       key={persona.id}
                       type="button"
-                      onClick={() => setActivePersona(persona.id)}
-                      className="rounded-[24px] text-left"
+                      onClick={(e) => { setActivePersona(persona.id); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
+                      className="rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
                       style={{
-                        padding: 24,
                         backgroundColor: activePersona === persona.id ? '#000000' : '#F8F8F8',
                         border: 'none',
                         cursor: 'pointer',
                       }}
                     >
                       <h3
-                        className="font-sans text-[20px] font-semibold leading-normal"
+                        className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
                         style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)' }}
                       >
                         {persona.title}
                       </h3>
                       <p
-                        className="text-[16px] font-medium"
+                        className="hidden text-[16px] font-medium md:block"
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
@@ -1551,6 +1618,14 @@ export function CasePage() {
                     {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
                   </h3>
                   <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+                      {({
+                        families: locale === 'ru' ? typograph('Семьи из\u00A02+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases'),
+                        friends: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping'),
+                        colleagues: locale === 'ru' ? typograph('Офисные сотрудники и команды, организаторы корпоративов и встреч') : typograph('Office workers, remote teams, corporate event organizers'),
+                        couples: locale === 'ru' ? typograph('Компании, которые часто собираются вместе на вечеринки, просмотр фильмов, настольные игры, пикники') : typograph('Groups of friends who often get together for parties, movie nights, board games, and picnics'),
+                      } as Record<string, string>)[activePersona] ?? ''}
+                    </p>
                     {activePersona === 'families' && (
                       <>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
@@ -1988,7 +2063,7 @@ export function CasePage() {
                 </h3>
 
                 {/* Filter chips */}
-                <div className="flex flex-wrap gap-[8px]" style={{ marginTop: 12 }}>
+                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
                   {([
                     { ru: 'Точка входа в\u00A0сценарий', en: 'Scenario entry point' },
                     { ru: 'Разделение оплаты', en: 'Payment splitting' },
@@ -2000,7 +2075,21 @@ export function CasePage() {
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setActiveTestChip(idx)}
+                      onClick={(e) => { setActiveTestChip(idx); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
                       className="skill-pill whitespace-nowrap border-none cursor-pointer rounded-[24px] inline-flex items-center justify-center"
                       style={{
                         padding: '10px 12px',

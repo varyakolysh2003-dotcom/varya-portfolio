@@ -22,28 +22,19 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
           <img
             src="/avatar/Profile.svg"
             alt={siteContent.name[locale]}
-            className="w-[56px] h-[56px] rounded-full object-cover shrink-0"
+            className="w-[48px] h-[48px] rounded-full object-cover shrink-0"
           />
           <div className="min-w-0">
-            <h1 className="text-[20px] font-bold leading-tight tracking-[-0.01em]">
+            <h1 className="text-[18px] font-bold leading-tight tracking-[-0.01em]">
               {siteContent.name[locale]}
             </h1>
-            <p className="text-[15px] font-medium text-[var(--color-text-secondary)] leading-snug mt-0.5">
+            <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-snug mt-0.5">
               {siteContent.role[locale]}
             </p>
           </div>
         </div>
         <LanguageSwitcher className="relative shrink-0 mt-1" />
       </header>
-
-      {/* ── Intro ── */}
-      <section className="mt-5">
-        <p className="text-[15px] font-medium text-[var(--color-text-secondary)] leading-[1.5]">
-          {locale === 'ru'
-            ? typograph('Проектирую end to end сценарии и улучшаю визуальное качество цифровых продуктов')
-            : typograph('I design end-to-end scenarios and improve the visual quality of digital products')}
-        </p>
-      </section>
 
       {/* ── Resume link ── */}
       <section className="mt-6">
@@ -52,11 +43,11 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
           target="_blank"
           rel="noopener noreferrer"
           download
-          className="flex items-center justify-between w-full bg-white rounded-[16px] shadow-[0_0_6px_rgba(0,0,0,0.09)] no-underline"
+          className="flex items-center justify-between gap-3 w-full bg-white rounded-[16px] shadow-[0_0_6px_rgba(0,0,0,0.09)] no-underline"
           style={{ padding: '14px 16px' }}
         >
           <div className="flex-1 min-w-0">
-            <p className="text-[17px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
+            <p className="text-[16px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
               {locale === 'ru' ? 'Резюме' : 'Resume'}
             </p>
             <p className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] mt-0.5">
@@ -73,13 +64,10 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
 
       {/* ── Contact ── */}
       <section className="mt-6">
-        <h2 className="text-[13px] font-semibold uppercase tracking-[0.06em] text-[var(--color-text-tertiary)] mb-3">
-          {locale === 'ru' ? 'Контакты' : 'Contact'}
-        </h2>
-        <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+        <div className="grid grid-cols-[3fr_2fr] gap-x-4 gap-y-4">
           <ContactMobile
             label={locale === 'ru' ? 'Почта' : 'Email'}
-            value="varyakolysh2003@gmail.ru"
+            value="varyakolysh2003@gmail.com"
             href="mailto:varyakolysh2003@gmail.com"
           />
           <ContactMobile
@@ -101,10 +89,6 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
 
       {/* ── Cases ── */}
       <section className="flex flex-col gap-4 mt-7">
-        <h2 className="text-[13px] font-semibold uppercase tracking-[0.06em] text-[var(--color-text-tertiary)]">
-          {locale === 'ru' ? 'Работы' : 'Projects'}
-        </h2>
-
         {cases.map((cs) => {
           const isDisabled = cs.id === 'okolo';
           return (
@@ -147,7 +131,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
                     className="w-[32px] h-[32px] shrink-0 object-contain"
                   />
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[17px] font-semibold leading-[1.25] tracking-[-0.01em] text-[var(--color-text-primary)]">
+                    <h3 className="text-[16px] font-semibold leading-[1.25] tracking-[-0.01em] text-[var(--color-text-primary)]">
                       {cs.title[locale]}
                     </h3>
                   </div>
@@ -189,12 +173,12 @@ function ContactMobile({ label, value, href }: { label: string; value: string; h
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline break-words [overflow-wrap:anywhere]"
+          className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline break-words"
         >
           {value}
         </a>
       ) : (
-        <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] break-words [overflow-wrap:anywhere]">
+        <p className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] break-words">
           {value}
         </p>
       )}

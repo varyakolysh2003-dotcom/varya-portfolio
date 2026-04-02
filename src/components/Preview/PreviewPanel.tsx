@@ -100,7 +100,7 @@ function DefaultContent({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
               <ContactItem
                 label={locale === 'ru' ? 'Почта' : 'Email'}
-                value="varyakolysh2003@gmail.ru"
+                value="varyakolysh2003@gmail.com"
                 href="mailto:varyakolysh2003@gmail.com"
               />
               <ContactItem
