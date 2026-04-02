@@ -3,7 +3,6 @@ import type { CaseStudy, SiteContent } from '../types';
 import { TAG_LABELS } from '../types';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLocale } from '../context/LocaleContext';
-import { typograph } from '../utils/typograph';
 
 interface MobileHomeProps {
   siteContent: SiteContent;
