@@ -31,6 +31,7 @@ export function CasePage() {
   const { locale } = useLocale();
   const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
   const mobileSectionsRef = useRef<HTMLDivElement>(null);
+  const revealObserverRef = useRef<IntersectionObserver | null>(null);
 
   const benchmarkingLogos: string[] = [
     '/logos/Uber.png',
@@ -110,8 +111,53 @@ export function CasePage() {
 
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
+
+  // Scroll-reveal: animate sections in as they enter the viewport.
+  // Targets section-analysis / solutions / testing — section-context is
+  // always above the fold so it inherits the page-enter fade instead.
+  // Uses caseSlug (available at top of component) as the dependency so we
+  // avoid a temporal-dead-zone reference to `caseStudy` (declared below).
+  useEffect(() => {
+    const REVEAL_IDS = ['section-analysis', 'section-solutions', 'section-testing'];
+
+    // Wait one frame so all conditional JSX has mounted before querying IDs
+    const frameId = requestAnimationFrame(() => {
+      const elements = REVEAL_IDS
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => el !== null);
+
+      if (!elements.length) return;
+
+      elements.forEach((el) => el.classList.add('reveal-on-scroll'));
+
+      revealObserverRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserverRef.current?.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0, rootMargin: '0px 0px -4% 0px' },
+      );
+
+      elements.forEach((el) => revealObserverRef.current!.observe(el));
+    });
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      revealObserverRef.current?.disconnect();
+      revealObserverRef.current = null;
+      // Remove classes so a case-switch re-run starts clean
+      REVEAL_IDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('reveal-on-scroll', 'is-visible');
+      });
+    };
+  }, [caseSlug]); // re-run when the URL slug changes
 
   useEffect(() => {
     function onDocMouseDown(e: MouseEvent) {
@@ -244,7 +290,7 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="case-container min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
+    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
       <div className="max-w-[880px] w-full">
         <Link
           to="/"

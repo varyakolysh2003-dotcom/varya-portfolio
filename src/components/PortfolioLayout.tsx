@@ -58,7 +58,7 @@ export function PortfolioLayout() {
     <>
       {/* Desktop layout — hidden on mobile/tablet */}
       <div
-        className="portfolio-container min-h-dvh bg-[var(--color-bg)] hidden lg:flex items-center justify-center"
+        className="portfolio-container page-enter min-h-dvh bg-[var(--color-bg)] hidden lg:flex items-center justify-center"
         style={{ paddingLeft: 60, paddingRight: 60, paddingTop: 24, paddingBottom: 24 }}
       >
         <div
