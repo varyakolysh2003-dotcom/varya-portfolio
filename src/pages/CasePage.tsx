@@ -4,6 +4,7 @@ import { cases } from '../data/cases';
 import { ScrollToTop } from '../components/ScrollToTop';
 import { useLocale } from '../context/LocaleContext';
 import { typograph } from '../utils/typograph';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { CaseStudy } from '../types';
 
 const NAV_ITEMS = [
@@ -31,7 +32,9 @@ export function CasePage() {
   const { locale } = useLocale();
   const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
   const mobileSectionsRef = useRef<HTMLDivElement>(null);
-  const revealObserverRef = useRef<IntersectionObserver | null>(null);
+
+  // Scroll-reveal for all .case-sections children (see useScrollReveal hook).
+  useScrollReveal(caseSlug);
 
   const benchmarkingLogos: string[] = [
     '/logos/Uber.png',
@@ -45,13 +48,20 @@ export function CasePage() {
     '/covers/okolo/1.png',
     '/covers/okolo/2.png',
     '/covers/okolo/3.png',
-    '/covers/okolo/4.png',
+    '/covers/okolo/4.webp',
   ];
 
   const [activeSection, setActiveSection] = useState<string>(NAV_ITEMS[0].id);
   const [activePersona, setActivePersona] = useState<'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh'>('families');
   const [activeTestChip, setActiveTestChip] = useState(0);
   const [activeTbankTestChip, setActiveTbankTestChip] = useState(0);
+  const [mobileOnboardingSlide, setMobileOnboardingSlide] = useState(0);
+  const onboardingScrollRef = useRef<HTMLDivElement>(null);
+  const handleOnboardingScroll = useCallback(() => {
+    const el = onboardingScrollRef.current;
+    if (!el) return;
+    setMobileOnboardingSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
 
   const resolvedCaseIdForPersona = caseSlug ? (LEGACY_CASE_SLUG[caseSlug] ?? caseSlug) : undefined;
   useEffect(() => {
@@ -114,50 +124,6 @@ export function CasePage() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
-  // Scroll-reveal: animate sections in as they enter the viewport.
-  // Targets section-analysis / solutions / testing — section-context is
-  // always above the fold so it inherits the page-enter fade instead.
-  // Uses caseSlug (available at top of component) as the dependency so we
-  // avoid a temporal-dead-zone reference to `caseStudy` (declared below).
-  useEffect(() => {
-    const REVEAL_IDS = ['section-analysis', 'section-solutions', 'section-testing'];
-
-    // Wait one frame so all conditional JSX has mounted before querying IDs
-    const frameId = requestAnimationFrame(() => {
-      const elements = REVEAL_IDS
-        .map((id) => document.getElementById(id))
-        .filter((el): el is HTMLElement => el !== null);
-
-      if (!elements.length) return;
-
-      elements.forEach((el) => el.classList.add('reveal-on-scroll'));
-
-      revealObserverRef.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              revealObserverRef.current?.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0, rootMargin: '0px 0px -4% 0px' },
-      );
-
-      elements.forEach((el) => revealObserverRef.current!.observe(el));
-    });
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      revealObserverRef.current?.disconnect();
-      revealObserverRef.current = null;
-      // Remove classes so a case-switch re-run starts clean
-      REVEAL_IDS.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) el.classList.remove('reveal-on-scroll', 'is-visible');
-      });
-    };
-  }, [caseSlug]); // re-run when the URL slug changes
 
   useEffect(() => {
     function onDocMouseDown(e: MouseEvent) {
@@ -378,7 +344,7 @@ export function CasePage() {
                   loop
                   playsInline
                   preload="metadata"
-                  className="w-full object-cover h-[280px] sm:h-[400px] md:h-[540px] lg:h-[720px]"
+                  className="w-full object-cover h-[360px] sm:h-[500px] md:h-[660px] lg:h-[860px]"
                   style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
                 />
               </div>
@@ -812,7 +778,7 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src="/covers/T-bank/1.png"
+                    src="/covers/T-bank/1.webp"
                     alt={locale === 'ru' ? 'Проблемы формы — часть 1' : 'Form issues — part 1'}
                     className="block w-full h-auto"
                   />
@@ -822,7 +788,7 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src="/covers/T-bank/2.png"
+                    src="/covers/T-bank/2.webp"
                     alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
                     className="block w-full h-auto"
                   />
@@ -1083,7 +1049,7 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src="/covers/T-bank/4.png"
+                    src="/covers/T-bank/4.webp"
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 1' : 'Drop-off results — part 1'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                   />
@@ -1093,7 +1059,7 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src="/covers/T-bank/3.png"
+                    src="/covers/T-bank/3.webp"
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 2' : 'Drop-off results — part 2'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                   />
@@ -1179,7 +1145,7 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   <img
-                    src="/covers/T-bank/5.png"
+                    src="/covers/T-bank/5.webp"
                     alt={locale === 'ru' ? 'Архитектура' : 'Architecture'}
                     className="block w-full h-auto"
                   />
@@ -1198,7 +1164,7 @@ export function CasePage() {
                   style={{ marginTop: 20, padding: 0, height: 'auto', lineHeight: 0 }}
                 >
                   <img
-                    src="/covers/T-bank/6.png"
+                    src="/covers/T-bank/6.webp"
                     alt={locale === 'ru' ? 'Экраны' : 'Screens'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                     style={{ objectFit: 'contain' }}
@@ -1242,11 +1208,11 @@ export function CasePage() {
                 </h2>
                 <div className="flex flex-col gap-[24px]" style={{ marginTop: 24 }}>
                   {[
-                    { label: 'Kazakh', src: '/covers/T-bank/Kazakhskyu.png' },
-                    { label: 'Kyrgyz', src: '/covers/T-bank/Kyrgyzskyu.png' },
-                    { label: 'Tajik', src: '/covers/T-bank/Tadjitsky.png' },
-                    { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.png' },
-                    { label: 'Belarusian', src: '/covers/T-bank/Belorussky.png' },
+                    { label: 'Kazakh', src: '/covers/T-bank/Kazakhskyu.webp' },
+                    { label: 'Kyrgyz', src: '/covers/T-bank/Kyrgyzskyu.webp' },
+                    { label: 'Tajik', src: '/covers/T-bank/Tadjitsky.webp' },
+                    { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.webp' },
+                    { label: 'Belarusian', src: '/covers/T-bank/Belorussky.webp' },
                   ].map(({ label, src }) => (
                     <div key={label} className="w-full rounded-[var(--radius-media)] overflow-hidden">
                       <div className="relative w-full overflow-hidden leading-none">
@@ -1279,7 +1245,7 @@ export function CasePage() {
                 >
                   <div className="relative w-full overflow-hidden leading-none">
                     <img
-                      src="/covers/T-bank/8.png"
+                      src="/covers/T-bank/8.webp"
                       alt={locale === 'ru' ? 'Внести ясность получения рассрочки' : 'Clarifying Installment Approval'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
                     />
@@ -1304,7 +1270,7 @@ export function CasePage() {
                   style={{ marginTop: 16 }}
                 >
                   <img
-                    src="/covers/T-bank/9.png"
+                    src="/covers/T-bank/9.webp"
                     alt={locale === 'ru' ? 'Расширение типов документов в анкете' : 'Expanding Document Types'}
                     className="block w-full h-auto"
                   />
@@ -1319,7 +1285,7 @@ export function CasePage() {
                 style={{ marginTop: 24 }}
               >
                 <img
-                  src="/covers/T-bank/10.png"
+                  src="/covers/T-bank/10.webp"
                   alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
                   className="block w-full h-auto"
                 />
@@ -1342,7 +1308,7 @@ export function CasePage() {
                   style={{ marginTop: 16 }}
                 >
                   <img
-                    src="/covers/T-bank/11.png"
+                    src="/covers/T-bank/11.webp"
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
                   />
@@ -1367,7 +1333,7 @@ export function CasePage() {
                   style={{ marginTop: 16 }}
                 >
                   <img
-                    src="/covers/T-bank/12.png"
+                    src="/covers/T-bank/12.webp"
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
                   />
@@ -1773,8 +1739,60 @@ export function CasePage() {
                       : typograph("The 'share' icon without context is not intuitive. Custdev research showed that some users were unaware they could send a link to Lavka items. Onboarding lowers the entry barrier for the new scenario and develops the 'share cart' feature by adding the ability to create shared orders")}
                   </p>
                 </div>
+                {/* Mobile: one shared background container, one image visible at a time */}
+                <div className="md:hidden" style={{ marginTop: 24 }}>
+                  <div
+                    className="w-full bg-[#F5F5F5] overflow-hidden"
+                    style={{ height: '297px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={onboardingScrollRef}
+                      onScroll={handleOnboardingScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[1, 2, 3].map((n) => (
+                        <div
+                          key={n}
+                          className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
+                        >
+                          <img
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`Onboarding screen ${n}`}
+                            style={{
+                              width: '125px',
+                              height: '270px',
+                              objectFit: 'cover',
+                              borderRadius: '16px',
+                              display: 'block',
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Pagination dots */}
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: mobileOnboardingSlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet: full-width Onboarding banner */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                   style={{ marginTop: 24 }}
                 >
                   <img
