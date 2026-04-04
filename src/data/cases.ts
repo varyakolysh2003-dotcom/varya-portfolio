@@ -51,7 +51,7 @@ export const cases: CaseStudy[] = [
     },
     tools: { ru: 'Figma, Higgsfield, After Effects', en: 'Figma, Higgsfield, After Effects' },
     logo: '/logos/YandexLavka.svg',
-    cover: '/covers/YandexLavka.jpg',
+    cover: '/covers/YandexLavka.webp',
     coverVideo: '/covers/YandexLavka materials/YandexLavka video.mp4',
     accentColor: '#00B4E6',
   },

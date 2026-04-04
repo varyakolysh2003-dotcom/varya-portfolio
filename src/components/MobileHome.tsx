@@ -14,7 +14,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="page-enter min-h-dvh bg-[var(--color-bg)]" style={{ padding: '24px 20px 40px' }}>
+    <div className="page-enter min-h-dvh bg-[var(--color-bg)]" style={{ padding: '16px 16px 28px' }}>
       {/* ── Header ── */}
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-3">
@@ -36,14 +36,14 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </header>
 
       {/* ── Resume link ── */}
-      <section className="mt-6">
+      <section className="mt-4">
         <a
           href={siteContent.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
           download
           className="flex items-center justify-between gap-3 w-full bg-white rounded-[16px] shadow-[0_0_6px_rgba(0,0,0,0.09)] no-underline"
-          style={{ padding: '14px 16px' }}
+          style={{ padding: '12px 16px' }}
         >
           <div className="flex-1 min-w-0">
             <p className="text-[16px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
@@ -62,7 +62,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </section>
 
       {/* ── Contact ── */}
-      <section className="mt-6">
+      <section className="mt-4">
         <div className="grid grid-cols-[3fr_2fr] gap-x-4 gap-y-4">
           <ContactMobile
             label={locale === 'ru' ? 'Почта' : 'Email'}
@@ -87,7 +87,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </section>
 
       {/* ── Cases ── */}
-      <section className="flex flex-col gap-4 mt-7">
+      <section className="flex flex-col gap-3 mt-5">
         {cases.map((cs) => {
           const isDisabled = cs.id === 'okolo';
           return (
@@ -122,8 +122,8 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
               </div>
 
               {/* Card body */}
-              <div style={{ padding: '14px 16px 16px' }}>
-                <div className="flex items-center gap-2.5 mb-2">
+              <div style={{ padding: '16px' }}>
+                <div className="flex items-center gap-2 mb-2">
                   <img
                     src={cs.logo}
                     alt=""

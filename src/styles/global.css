@@ -102,8 +102,8 @@ img { display: block; max-width: 100%; }
 
 /* ── Page-enter transition: fade + subtle upward lift ── */
 @keyframes pageEnter {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0);   }
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 .page-enter {
@@ -224,7 +224,7 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 767px) {
   .case-container {
-    padding: 56px 16px 64px 16px !important;
+    padding: 56px 16px 48px 16px !important;
   }
 
   /* ── Mobile typography for case pages ── */
@@ -256,7 +256,7 @@ img { display: block; max-width: 100%; }
 
   /* Reduce large section gaps */
   .case-sections {
-    gap: 16px !important;
+    gap: 12px !important;
   }
 
   /* Tag pills on mobile */
@@ -297,6 +297,52 @@ img { display: block; max-width: 100%; }
   /* Case page back link: matches secondary text scale */
   .case-container a[href="/"] {
     font-size: 16px !important;
+  }
+}
+
+/* ── Case section: heading → content gap (system-level responsive spacing) ──
+   Two tokens cover all heading-to-content and text-to-content gaps in case pages.
+   Both collapse to the same 12px on mobile, giving a uniform rhythm.
+
+   .case-section-content    — used when the desktop gap is 24px
+   .case-section-content-sm — used when the desktop gap is 16px
+
+   Never use inline marginTop: 16 or marginTop: 24 for these purposes.          */
+.case-section-content {
+  margin-top: 24px;
+}
+
+.case-section-content-sm {
+  margin-top: 16px;
+}
+
+@media (max-width: 767px) {
+  .case-section-content,
+  .case-section-content-sm {
+    margin-top: 12px;
+  }
+}
+
+/* ── Chip → image gap (mobile: 16px, tablet/desktop: 24px) ──
+   Apply to any container that immediately follows a chip/filter row
+   and holds an image or media card.                                */
+.chip-image-gap {
+  margin-top: 24px;
+}
+
+@media (max-width: 767px) {
+  .chip-image-gap {
+    margin-top: 16px;
+  }
+}
+
+/* ── Mobile image shadow ──────────────────────────────────────────
+   Adds a subtle elevation shadow on mobile only.
+   Applied directly to <img> elements; uses filter: drop-shadow so it
+   is never clipped by a parent's overflow: hidden.                  */
+@media (max-width: 767px) {
+  .mobile-shadow {
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.08));
   }
 }
 

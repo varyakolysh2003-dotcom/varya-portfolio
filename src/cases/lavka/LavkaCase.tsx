@@ -1,621 +1,62 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { cases } from '../data/cases';
-import { ScrollToTop } from '../components/ScrollToTop';
-import { useLocale } from '../context/LocaleContext';
-import { typograph } from '../utils/typograph';
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import type { CaseStudy } from '../types';
-import TBankCase from '../cases/tbank/TBankCase';
-import OkoloCase from '../cases/okolo/OkoloCase';
+import { useState, useRef, useCallback } from 'react';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
+import type { Locale } from '../../types';
+import { typograph } from '../../utils/typograph';
 
-const NAV_ITEMS = [
-  { id: 'section-context', label: { ru: 'Контекст', en: 'Context' } },
-  { id: 'section-analysis', label: { ru: 'Анализ', en: 'Analysis' } },
-  { id: 'section-solutions', label: { ru: 'Гипотезы и решения', en: 'Hypotheses & Solutions' } },
-  { id: 'section-testing', label: { ru: 'Тестирование', en: 'Testing' } },
-] as const;
+export type LavkaPersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
 
-const LEGACY_CASE_SLUG: Record<string, string> = {
-  tbank: 't-bank',
-  'tbank-installment': 't-bank',
-};
-
-// ── Reusable mobile-only image carousel ──────────────────────────────────────
-// Same swipe + snap + pagination-dot behaviour as the onboarding block.
-// Renders nothing on md+ breakpoints; caller adds the desktop static image.
-function MobileCarousel({ images, altPrefix }: { images: number[]; altPrefix: string }) {
-  const [slide, setSlide] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const handleScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setSlide(Math.round(el.scrollLeft / el.clientWidth));
-  }, []);
-
+export function LavkaTaskContextBody({ locale }: { locale: Locale }) {
   return (
-    <div className="md:hidden chip-image-gap">
-      <div
-        className="w-full bg-[#F5F5F5] overflow-hidden"
-        style={{ height: '297px', borderRadius: 'var(--radius-media)' }}
-      >
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
-        >
-          {images.map((n) => (
-            <div
-              key={n}
-              className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
-            >
-              <img
-                src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
-                alt={`${altPrefix} ${n}`}
-                style={{
-                  width: '125px',
-                  height: '270px',
-                  objectFit: 'cover',
-                  borderRadius: '16px',
-                  display: 'block',
-                  filter: 'drop-shadow(0 4px 20px rgba(0, 0, 0, 0.08))',
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-        {images.map((_, i) => (
-          <div
-            key={i}
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: '50%',
-              backgroundColor: '#1a1a1a',
-              opacity: slide === i ? 1 : 0.2,
-              transition: 'opacity 200ms ease',
-              flexShrink: 0,
-            }}
-          />
-        ))}
-      </div>
+    <div className="flex flex-col gap-[8px]">
+      <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
+        {locale === 'ru'
+          ? typograph('В Лавке есть возможность отправить ссылкой товары из корзины другому пользователю. Получатель открывает ссылку и товары переходят в его корзину')
+          : typograph('Lavka allows sending cart items via link to another user. The recipient opens the link and items are added to their cart')}
+      </p>
+      <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
+        {locale === 'ru'
+          ? typograph('Такое решение не развивает логику совместного сбора товаров с другими пользователями, не поддерживает сценарии совместного планирования покупок и не создаёт ощущение общей корзины как единого пространства для взаимодействия и координации заказов')
+          : typograph("This solution doesn't develop the logic of collaborative item collection, doesn't support joint purchase planning scenarios, and doesn't create a sense of shared cart as a unified space for interaction and order coordination")}
+      </p>
     </div>
   );
 }
 
-export function CasePage() {
-  const { caseSlug } = useParams<{ caseSlug: string }>();
-  const { locale } = useLocale();
-  const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
-  const mobileSectionsRef = useRef<HTMLDivElement>(null);
+export type LavkaCaseProps = {
+  locale: Locale;
+  benchmarkingLogos: string[];
+  activePersona: LavkaPersonaId;
+  setActivePersona: Dispatch<SetStateAction<LavkaPersonaId>>;
+  mobileOnboardingSlide: number;
+  onboardingScrollRef: RefObject<HTMLDivElement | null>;
+  handleOnboardingScroll: () => void;
+  activeTestChip: number;
+  setActiveTestChip: Dispatch<SetStateAction<number>>;
+};
 
-  // Scroll-reveal for all .case-sections children (see useScrollReveal hook).
-  useScrollReveal(caseSlug);
-
-  const benchmarkingLogos: string[] = [
-    '/logos/Uber.png',
-    '/logos/Fresh.png',
-    '/logos/instacart.png',
-    '/logos/вкусвилл.png',
-    '/logos/samokat.png',
-  ];
-
-  const [activeSection, setActiveSection] = useState<string>(NAV_ITEMS[0].id);
-  const [activePersona, setActivePersona] = useState<'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh'>('families');
-  const [activeTestChip, setActiveTestChip] = useState(0);
-  const [activeTbankTestChip, setActiveTbankTestChip] = useState(0);
-  const [mobileOnboardingSlide, setMobileOnboardingSlide] = useState(0);
-  const onboardingScrollRef = useRef<HTMLDivElement>(null);
-  const handleOnboardingScroll = useCallback(() => {
-    const el = onboardingScrollRef.current;
+export default function LavkaCase({
+  locale,
+  benchmarkingLogos,
+  activePersona,
+  setActivePersona,
+  mobileOnboardingSlide,
+  onboardingScrollRef,
+  handleOnboardingScroll,
+  activeTestChip,
+  setActiveTestChip,
+}: LavkaCaseProps) {
+  const [mobileEntrySlide, setMobileEntrySlide] = useState(0);
+  const entryScrollRef = useRef<HTMLDivElement>(null);
+  const handleEntryScroll = useCallback(() => {
+    const el = entryScrollRef.current;
     if (!el) return;
-    setMobileOnboardingSlide(Math.round(el.scrollLeft / el.clientWidth));
+    setMobileEntrySlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
-
-  const resolvedCaseIdForPersona = caseSlug ? (LEGACY_CASE_SLUG[caseSlug] ?? caseSlug) : undefined;
-  useEffect(() => {
-    if (resolvedCaseIdForPersona === 't-bank') {
-      setActivePersona('rvp');
-    } else {
-      setActivePersona('families');
-    }
-  }, [resolvedCaseIdForPersona]);
-
-  useEffect(() => {
-    const lastSectionId = NAV_ITEMS[NAV_ITEMS.length - 1].id;
-
-    // Scroll-spy: find the last section whose top has scrolled past the
-    // activation line (20% from viewport top). This guarantees strict
-    // ordering — a later section can never activate before an earlier one.
-    const handleScroll = () => {
-      const activationLine = window.innerHeight * 0.2;
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      // Near bottom of page → activate last section
-      if (docHeight - scrollBottom < 150) {
-        setActiveSection(lastSectionId);
-        return;
-      }
-
-      // Collect sections with their real vertical positions and sort by DOM order
-      const sections = NAV_ITEMS
-        .map(({ id }) => {
-          const el = document.getElementById(id);
-          return el ? { id, top: el.getBoundingClientRect().top } : null;
-        })
-        .filter(Boolean) as { id: string; top: number }[];
-      sections.sort((a, b) => a.top - b.top);
-
-      let current = sections[0]?.id ?? NAV_ITEMS[0].id;
-      for (const { id, top } of sections) {
-        if (top <= activationLine) {
-          current = id;
-        }
-      }
-      setActiveSection(current);
-    };
-
-    // Initial calculation after conditional sections mount
-    const frameId = requestAnimationFrame(handleScroll);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  const scrollTo = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
-
-
-  useEffect(() => {
-    function onDocMouseDown(e: MouseEvent) {
-      if (!mobileSectionsOpen) return;
-      const root = mobileSectionsRef.current;
-      if (root && !root.contains(e.target as Node)) {
-        setMobileSectionsOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', onDocMouseDown);
-    return () => document.removeEventListener('mousedown', onDocMouseDown);
-  }, [mobileSectionsOpen]);
-
-  const resolvedCaseId = caseSlug ? (LEGACY_CASE_SLUG[caseSlug] ?? caseSlug) : undefined;
-  const caseStudy: CaseStudy | undefined = resolvedCaseId
-    ? cases.find((c) => c.id === resolvedCaseId)
-    : undefined;
-
-  if (!caseStudy) {
-    return (
-      <div className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center px-4 md:px-8 lg:px-[60px]">
-        <div className="max-w-[960px] w-full">
-          <Link to="/" className="inline-flex items-center text-[16px] font-medium text-[var(--color-text-secondary)] mb-4">
-            ← {locale === 'ru' ? 'Назад к работам' : 'Back to projects'}
-          </Link>
-          <h1 className="text-[28px] font-bold mb-2">
-            {locale === 'ru' ? 'Кейс не найден' : 'Case not found'}
-          </h1>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
-    <ScrollToTop />
-
-    {/* Sticky side navigation — visible only on wide screens */}
-    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-      <nav
-        className="hidden xl:flex flex-col gap-[12px] fixed z-50"
-        style={{
-          top: 120,
-          left: 56,
-          width: 230,
-        }}
-      >
-        {NAV_ITEMS.map(({ id, label }) => (
-          <button
-            key={id}
-            type="button"
-            onClick={() => scrollTo(id)}
-            className="text-left whitespace-nowrap bg-transparent border-none cursor-pointer p-0 m-0 w-full min-w-0"
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 20,
-              fontWeight: activeSection === id ? 600 : 500,
-              lineHeight: 1.3,
-              color: activeSection === id
-                ? 'var(--color-text-primary)'
-                : 'var(--color-text-secondary)',
-            }}
-          >
-            {label[locale]}
-          </button>
-        ))}
-      </nav>
-    )}
-
-    {/* Mobile sticky sections menu */}
-    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-      <nav
-        className="xl:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
-        style={{ padding: '10px 16px' }}
-      >
-        <div className="relative" ref={mobileSectionsRef}>
-          <div className="flex items-center justify-between gap-3">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 font-sans font-semibold text-[16px] text-[var(--color-text-primary)] no-underline"
-            >
-              <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
-              {locale === 'ru' ? 'Назад' : 'Back'}
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setMobileSectionsOpen((v) => !v)}
-              className="shrink-0 inline-flex items-center justify-center w-[40px] h-[40px] rounded-[14px] bg-[#F1F1F1]"
-              aria-label={locale === 'ru' ? 'Разделы' : 'Sections'}
-              aria-expanded={mobileSectionsOpen}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-text-secondary)' }}>
-                <path d="M4 6h16" />
-                <path d="M4 12h16" />
-                <path d="M4 18h16" />
-              </svg>
-            </button>
-          </div>
-
-          {mobileSectionsOpen && (
-            <div
-              className="absolute right-0 mt-2 w-[220px] rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.10)] border border-[var(--color-border)] overflow-hidden"
-            >
-              {NAV_ITEMS.map(({ id, label }) => (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => {
-                    const el = document.getElementById(id);
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    setMobileSectionsOpen(false);
-                  }}
-                  className="w-full text-left"
-                  style={{
-                    padding: '12px 14px',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 14,
-                    fontWeight: activeSection === id ? 600 : 500,
-                    color: activeSection === id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                    backgroundColor: activeSection === id ? 'rgba(0,0,0,0.04)' : '#ffffff',
-                  }}
-                >
-                  {label[locale]}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </nav>
-    )}
-
-    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
-      <div className="max-w-[880px] w-full">
-        <Link
-          to="/"
-          className="hidden xl:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
-        >
-          <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
-          {locale === 'ru' ? 'Назад' : 'Back'}
-        </Link>
-
-        {/* Case content — spacing system: 64px between major sections, 8px title→desc, 24px inner blocks, 32px text→media */}
-        <div className="flex flex-col" style={{ marginTop: 32 }}>
-          {/* Header: meta line + logo + title (8px internal gap) */}
-          <div className="flex flex-col gap-[8px]">
-            <p className="text-[16px] font-medium text-[var(--color-text-tertiary)]">
-              {caseStudy.industry} • {caseStudy.year}
-            </p>
-            <header>
-              <div className="flex items-center gap-4">
-                <img
-                  src={caseStudy.logo}
-                  alt=""
-                  className="w-[48px] h-[48px] object-contain shrink-0"
-                />
-                <h1 className="text-[24px] font-bold leading-[1.3]">
-                  {typograph(caseStudy.title[locale])}
-                </h1>
-              </div>
-            </header>
-          </div>
-
-          {/* Info grid — 24px below header, 24px internal row spacing */}
-          <section
-            className="grid grid-cols-1 md:grid-cols-2 gap-y-[24px] gap-x-[24px] md:gap-x-[48px]"
-            style={{ marginTop: 24 }}
-          >
-            <div className="flex flex-col gap-1">
-              <p className="text-[20px] font-semibold text-[var(--color-text-primary)]">
-                {locale === 'ru' ? 'Период выполнения' : 'Timeline'}
-              </p>
-              <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                {caseStudy.year === 'coming soon'
-                  ? (locale === 'ru' ? 'скоро' : 'coming soon')
-                  : locale === 'ru'
-                    ? `${caseStudy.year} год`
-                    : caseStudy.year}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="text-[20px] font-semibold text-[var(--color-text-primary)]">
-                {locale === 'ru' ? 'Платформы' : 'Platforms'}
-              </p>
-              <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                {caseStudy.platforms[locale]}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="text-[20px] font-semibold text-[var(--color-text-primary)]">
-                {locale === 'ru' ? 'Моя роль' : 'My role'}
-              </p>
-              <p className="text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.5]">
-                {typograph(caseStudy.role[locale])}
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="text-[20px] font-semibold text-[var(--color-text-primary)]">
-                {locale === 'ru' ? 'Софты' : 'Tools'}
-              </p>
-              <p className="text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.5]">
-                {typograph(caseStudy.tools[locale])}
-              </p>
-            </div>
-          </section>
-
-          {/* Cover — 24px from info grid */}
-          <section style={{ marginTop: 24 }}>
-            {caseStudy.coverVideo ? (
-              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-bg-secondary)]">
-                <video
-                  src={caseStudy.coverVideo}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-full object-cover h-[360px] sm:h-[500px] md:h-[660px] lg:h-[860px]"
-                  style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
-                />
-              </div>
-            ) : (
-              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#EFEFEF] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
-                <img
-                  src={caseStudy.cover}
-                  alt={caseStudy.title[locale]}
-                  className="block w-full h-full object-cover"
-                  style={caseStudy.id === 'okolo' ? { transform: 'scale(1.04)', transformOrigin: 'center' } : undefined}
-                />
-              </div>
-            )}
-          </section>
-
-          {/* Контекст задачи — standalone block */}
-          <section id="section-context" style={{ marginTop: 24, scrollMarginTop: 32 }}>
-            <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24 }}>
-              <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
-                {locale === 'ru' ? 'Контекст задачи' : 'Task Context'}
-              </h2>
-              {caseStudy.id === 'yandex-lavka' ? (
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    {locale === 'ru'
-                      ? typograph('В Лавке есть возможность отправить ссылкой товары из корзины другому пользователю. Получатель открывает ссылку и товары переходят в его корзину')
-                      : typograph('Lavka allows sending cart items via link to another user. The recipient opens the link and items are added to their cart')}
-                  </p>
-                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    {locale === 'ru'
-                      ? typograph('Такое решение не развивает логику совместного сбора товаров с другими пользователями, не поддерживает сценарии совместного планирования покупок и не создаёт ощущение общей корзины как единого пространства для взаимодействия и координации заказов')
-                      : typograph("This solution doesn't develop the logic of collaborative item collection, doesn't support joint purchase planning scenarios, and doesn't create a sense of shared cart as a unified space for interaction and order coordination")}
-                  </p>
-                </div>
-              ) : caseStudy.id === 't-bank' ? (
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    {locale === 'ru'
-                      ? typograph('Согласно законодательству РФ, иностранные граждане могут оформлять кредиты и рассрочки при наличии документов, подтверждающих легальное пребывание (ВНЖ, РВП, миграционная регистрация и\u00A0т.д.). При этом на практике значительная часть банков по-прежнему требует личного визита в отделение для подтверждения личности и документов.')
-                      : typograph('According to Russian legislation, foreign citizens can apply for loans and installments with documents confirming legal residence (residence permit, temporary residence permit, migration registration, etc.). In practice, however, a significant number of banks still require an in-person visit to a branch for identity and document verification.')}
-                  </p>
-                  <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    <p className="m-0">{locale === 'ru' ? typograph('1. около 60–70% банков РФ требуют очную идентификацию нерезидентов при оформлении кредитных продуктов') : typograph('1. approximately 60–70% of Russian banks require in-person identification of non-residents when applying for credit products')}</p>
-                    <p className="m-0">{locale === 'ru' ? typograph('2. дистанционная выдача кредитов и рассрочек доступна преимущественно гражданам РФ через ЕСИА и биометрию') : typograph('2. remote issuance of loans and installments is primarily available to Russian citizens via ESIA and biometrics')}</p>
-                    <p className="m-0">{locale === 'ru' ? typograph('3. иностранные клиенты чаще сталкиваются с разрывом цифрового сценария') : typograph('3. foreign clients more often face a break in the digital scenario')}</p>
-                  </div>
-                </div>
-              ) : caseStudy.id === 'okolo' ? (
-                <div className="flex flex-col gap-[8px]">
-                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    {locale === 'ru'
-                      ? typograph('Большинство тревел-сервисов предлагают бесконечные списки мест и\u00A0рейтинги, оставляя пользователю задачу самостоятельно выстроить маршрут. Это создаёт когнитивную перегрузку и\u00A0снижает мотивацию к\u00A0исследованию города')
-                      : typograph('Most travel services offer endless lists of places and ratings, leaving the user to build a route on their own. This creates cognitive overload and reduces motivation to explore the city.')}
-                  </p>
-                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                    {locale === 'ru'
-                      ? typograph('okolo формирует ограниченное количество готовых маршрутов с\u00A0логикой передвижения, учитывая локальный контекст и\u00A0пользовательские предпочтения')
-                      : typograph('okolo creates a limited number of ready-made routes with movement logic, taking into account local context and user preferences.')}
-                  </p>
-                </div>
-              ) : (
-                <p className="text-[16px] font-medium text-[var(--color-text-secondary)] whitespace-pre-line">
-                  {typograph(caseStudy.description[locale])}
-                </p>
-              )}
-            </div>
-          </section>
-
-          {/* Content group — 112px from Контекст задачи, 24px between sections */}
-          <section className="case-sections flex flex-col" style={{ marginTop: 96, gap: 24 }}>
-            {/* Вводные */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-              <div className="flex flex-col gap-[8px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Вводные' : 'Brief'}
-                </h2>
-                <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {caseStudy.id === 'yandex-lavka'
-                    ? (locale === 'ru'
-                      ? typograph('Внедрить функцию группового заказа — возможность формирования одной общей корзины несколькими пользователями')
-                      : typograph('Implement group ordering — the ability for multiple users to form a single shared cart'))
-                    : caseStudy.id === 'okolo'
-                    ? (locale === 'ru'
-                      ? typograph('Спроектировать веб-сервис подбора маршрутов по локальным местам города с\u00A0фокусом на\u00A0Discovery-фазу, пользовательские сценарии и\u00A0дизайн-систему')
-                      : typograph('Design a web service for curating city routes through local places, focusing on the Discovery phase, user scenarios, and design system'))
-                    : (locale === 'ru'
-                      ? typograph('Разработать сценарий онлайн-оформления рассрочки, адаптированный под пользователей с иностранными документами')
-                      : typograph('Design an online installment application flow adapted for users with foreign documents'))
-                  }
-                </p>
-              </div>
-            )}
-
-            {/* Миссия */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-              <div className="flex flex-col gap-[8px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Миссия' : 'Mission'}
-                </h2>
-                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {caseStudy.id === 'yandex-lavka' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Облегчить взаимодействие между пользователями в процессе совместных покупок') : typograph('Facilitate user interaction during joint purchases')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Дать возможность пользователям создавать постоянные корзины для экономии времени и получения бонусов и скидок') : typograph('Enable users to create permanent carts to save time and earn bonuses')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Снизить количество затрат на доставку') : typograph('Reduce delivery costs')}</p>
-                    </>
-                  ) : caseStudy.id === 'okolo' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Снизить когнитивную нагрузку при планировании прогулок и\u00A0поездок по\u00A0городу') : typograph('Reduce cognitive load when planning walks and city trips')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Предложить альтернативу бесконечным спискам мест — готовые маршруты с\u00A0логикой передвижения') : typograph('Offer an alternative to endless place lists — ready-made routes with movement logic')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Помочь пользователям открывать локальные места, о\u00A0которых они не\u00A0узнали\u00A0бы через стандартные агрегаторы') : typograph('Help users discover local places they wouldn\'t find through standard aggregators')}</p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Снизить барьер получения финансовых продуктов для иностранных граждан') : typograph('Lower the barrier to financial products for foreign citizens')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Сделать процесс оформления рассрочки понятным, прозрачным и доступным (в рамках отсутствия офлайн-офисов банка)') : typograph('Make the installment process clear, transparent and accessible (given the absence of offline bank offices)')}</p>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Цель */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-              <div className="flex flex-col gap-[8px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Цель' : 'Goal'}
-                </h2>
-                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {caseStudy.id === 'yandex-lavka' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Привлечь больше пользователей в приложение через совместную корзину') : typograph('Attract more users through shared cart')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Увеличить время удержания пользователей и средний чек через уникальные предложения для группы пользователей') : typograph('Increase retention and average check through unique group offers')}</p>
-                    </>
-                  ) : caseStudy.id === 'okolo' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Провести полный цикл Discovery и\u00A0валидировать ключевые гипотезы через Custdev-интервью') : typograph('Conduct a full Discovery cycle and validate key hypotheses through Custdev interviews')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Спроектировать пользовательские сценарии и\u00A0дизайн-систему для MVP веб-сервиса') : typograph('Design user scenarios and a design system for the web service MVP')}</p>
-                    </>
-                  ) : (
-                    <p className="m-0">{locale === 'ru' ? typograph('Адаптировать существующий онлайн-процесс оформления рассрочки под особенности идентификации и проверки иностранных клиентов') : typograph('Adapt the existing online installment process for the identification and verification specifics of foreign clients')}</p>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Аудитория */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-              <div className="flex flex-col gap-[8px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Аудитория' : 'Audience'}
-                </h2>
-                <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {caseStudy.id === 'yandex-lavka'
-                    ? (locale === 'ru'
-                      ? typograph('Семейные пары, компании друзей, партнёры (группа от 2+ человек)')
-                      : typograph('Couples, friend groups, partners (groups of 2+ people)'))
-                    : caseStudy.id === 'okolo'
-                    ? (locale === 'ru'
-                      ? typograph('Путешественники и\u00A0локальные жители, которые хотят исследовать город через готовые маршруты вместо самостоятельного поиска и\u00A0планирования')
-                      : typograph('Travelers and locals who want to explore the city through curated routes instead of searching and planning on their own'))
-                    : (locale === 'ru'
-                      ? typograph('Иностранные граждане с РВП и ВНЖ')
-                      : typograph('Foreign citizens with a temporary residence permit (TRP) or permanent residence permit (RP)'))
-                  }
-                </p>
-              </div>
-            )}
-
-            {/* Критерии успеха */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-              <div className="flex flex-col gap-[8px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Критерии успеха' : 'Success Criteria'}
-                </h2>
-                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {caseStudy.id === 'yandex-lavka' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Повторное пользование после нововведения') : typograph('Repeat usage after feature launch')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Увеличить время удержания пользователей и средний чек через уникальные предложения для группы пользователей') : typograph('Increase retention and average check through unique group offers')}</p>
-                    </>
-                  ) : caseStudy.id === 'okolo' ? (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Валидация гипотез через Custdev: подтверждение потребности в\u00A0готовых маршрутах у\u00A0целевой аудитории') : typograph('Hypothesis validation through Custdev: confirming demand for curated routes among the target audience')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Готовая дизайн-система и\u00A0пользовательские сценарии для передачи в\u00A0разработку MVP') : typograph('Complete design system and user scenarios ready to hand off for MVP development')}</p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Рост доли успешно завершённых заявок среди иностранных пользователей') : typograph('Increase in the share of successfully completed applications among foreign users')}</p>
-                      <p className="m-0">— {locale === 'ru' ? typograph('Снижение количества отказов и брошенных заявок на этапе заполнения формы') : typograph('Reduction in rejections and abandoned applications at the form completion stage')}</p>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Okolo case — extracted to OkoloCase component */}
-            {caseStudy.id === 'okolo' && (
-              <OkoloCase
-                locale={locale}
-                activePersona={activePersona}
-                setActivePersona={setActivePersona}
-              />
-            )}
-
-            {/* T-Bank case — extracted to TBankCase component */}
-            {caseStudy.id === 't-bank' && (
-              <TBankCase
-                locale={locale}
-                activePersona={activePersona}
-                setActivePersona={setActivePersona}
-                activeTbankTestChip={activeTbankTestChip}
-                setActiveTbankTestChip={setActiveTbankTestChip}
-              />
-            )}
-
-
             {/* Бенчмаркинг — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            {caseStudy.id === 'yandex-lavka' && (
-            <div id="section-analysis" className="flex flex-col gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+            <div id="section-analysis" className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
@@ -672,11 +113,9 @@ export function CasePage() {
                 </div>
               </div>
             </div>
-            )}
 
             {/* Cust-dev и анализ персон — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            {caseStudy.id === 'yandex-lavka' && (
-            <div className="flex flex-col gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+            <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Custdev и анализ персон' : 'Custdev and Persona Analysis'}
@@ -693,7 +132,7 @@ export function CasePage() {
                 </a>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px]">
+              <div className="contents md:grid md:grid-cols-2 md:gap-[24px]">
                 {/* Left column — persona tab cards */}
                 <div className="no-scrollbar flex flex-row gap-[8px] overflow-x-auto pb-[2px] md:flex-col md:overflow-visible md:pb-0 md:gap-[24px]">
                   {([
@@ -846,10 +285,8 @@ export function CasePage() {
                 </div>
               </div>
             </div>
-            )}
 
             {/* Онбординг обновления — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div id="section-solutions" className="flex flex-col" style={{ marginTop: 88, scrollMarginTop: 32 }}>
                 <div className="flex flex-col gap-[8px]">
                   <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
@@ -862,7 +299,7 @@ export function CasePage() {
                   </p>
                 </div>
                 {/* Mobile: one shared background container, one image visible at a time */}
-                <div className="md:hidden chip-image-gap">
+                <div className="case-section-content md:hidden">
                   <div
                     className="w-full bg-[#F5F5F5] overflow-hidden"
                     style={{ height: '297px', borderRadius: 'var(--radius-media)' }}
@@ -886,7 +323,6 @@ export function CasePage() {
                               objectFit: 'cover',
                               borderRadius: '16px',
                               display: 'block',
-                              filter: 'drop-shadow(0 4px 20px rgba(0, 0, 0, 0.08))',
                             }}
                           />
                         </div>
@@ -915,8 +351,7 @@ export function CasePage() {
 
                 {/* Desktop/tablet: full-width Onboarding banner */}
                 <div
-                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                  style={{ marginTop: 24 }}
+                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img
                     src="/covers/YandexLavka materials/Onboarding.png"
@@ -925,19 +360,68 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Точка входа в сценарий */}
-            {caseStudy.id === 'yandex-lavka' && (
-              <div className="flex flex-col" style={{ marginTop: 48 }}>
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 48 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
                 </h2>
-                <MobileCarousel
-                  images={[4, 5, 6]}
-                  altPrefix={locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+
+                {/* Mobile: one shared background container, one image visible at a time */}
+                <div className="case-section-content md:hidden">
+                  <div
+                    className="w-full bg-[#F5F5F5] overflow-hidden"
+                    style={{ height: '297px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={entryScrollRef}
+                      onScroll={handleEntryScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[4, 5, 6].map((n) => (
+                        <div
+                          key={n}
+                          className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
+                        >
+                          <img
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'} ${n - 3}`}
+                            style={{
+                              width: '125px',
+                              height: '270px',
+                              objectFit: 'cover',
+                              borderRadius: '16px',
+                              display: 'block',
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Pagination dots */}
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: mobileEntrySlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet: full-width banner */}
+                <div
+                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Scenario start.png"
                     alt={locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
@@ -945,19 +429,15 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Приглашение присоединиться к сбору корзины */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col" style={{ marginTop: 48 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                 </h2>
-                <MobileCarousel
-                  images={[21, 22]}
-                  altPrefix={locale === 'ru' ? 'Приглашение' : 'Invitation'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Invite.png"
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
@@ -965,10 +445,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Выбор способа оплаты */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
@@ -978,11 +456,9 @@ export function CasePage() {
                     ? typograph('Организатор решает, каким способом будет происходить оплата. Раздельная — каждый платит за своё. Единая — один оплачивает за всех. Решение делает сценарий финансово гибким под разные категории групп пользователей')
                     : typograph('The organizer decides the payment method. Separate — each pays for their own. Joint — one pays for all. This makes the scenario financially flexible for different user group categories')}
                 </p>
-                <MobileCarousel
-                  images={[23, 24]}
-                  altPrefix={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Pay method.png"
                     alt={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
@@ -990,19 +466,15 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Состояния экранов при единой оплате у приглашенного пользователя */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                 </h2>
-                <MobileCarousel
-                  images={[25, 26]}
-                  altPrefix={locale === 'ru' ? 'Состояния экранов' : 'Screen States'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Common user screen.png"
                     alt={locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
@@ -1010,10 +482,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Проверка адреса перед оплатой */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
@@ -1023,11 +493,9 @@ export function CasePage() {
                     ? typograph('Решение помогает пользователю избежать ошибки при указании адреса, одновременно предоставляя ему выбор — продолжить оплату отдельно или остаться в совместной корзине')
                     : typograph('The solution helps avoid address errors while providing a choice — continue with separate payment or stay in the shared cart')}
                 </p>
-                <MobileCarousel
-                  images={[17, 18]}
-                  altPrefix={locale === 'ru' ? 'Проверка адреса' : 'Address Verification'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Adress.png"
                     alt={locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
@@ -1035,10 +503,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Подтверждение заказа после полной оплаты участников */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
@@ -1048,11 +514,9 @@ export function CasePage() {
                     ? typograph('Заказ отправляется в обработку только после того, как все участники оплатят свою часть')
                     : typograph('The order is processed only after all participants have paid their share')}
                 </p>
-                <MobileCarousel
-                  images={[27, 28, 29]}
-                  altPrefix={locale === 'ru' ? 'Подтверждение заказа' : 'Order Confirmation'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Delivery.png"
                     alt={locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
@@ -1060,10 +524,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Пуш-напоминание при задержке оплаты или сбора */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col" style={{ marginTop: 64 }}>
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
@@ -1071,20 +533,17 @@ export function CasePage() {
                     : typograph('When a user delays collection or payment, they receive a push reminder. If they\'re the last one unpaid, they get 20 minutes to complete before items are cancelled')}
                 </p>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                  style={{ marginTop: 24 }}
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img
                     src="/covers/YandexLavka materials/Notification.png"
                     alt={locale === 'ru' ? 'Пуш-напоминание при задержке оплаты или сбора' : 'Push Reminder on Payment Delay'}
-                    className="mobile-shadow w-full object-cover"
+                    className="w-full object-cover"
                   />
                 </div>
               </div>
-            )}
 
             {/* Возобновление совместного заказа */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
@@ -1094,11 +553,9 @@ export function CasePage() {
                     ? typograph('После истечения таймера оплаты организатор, оплачивающий весь заказ может повторно отправить приглашение участникам, чтобы не создавать совместную корзину заново')
                     : typograph('After the payment timer expires, the organizer can resend invitations to avoid recreating the shared cart')}
                 </p>
-                <MobileCarousel
-                  images={[7, 8, 9]}
-                  altPrefix={locale === 'ru' ? 'Возобновление заказа' : 'Resuming Order'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Try again.png"
                     alt={locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
@@ -1106,10 +563,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Продвижение спецпредложений в группе */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Продвижение спецпредложений в группе' : 'Promoting Special Offers in Group'}
@@ -1119,11 +574,7 @@ export function CasePage() {
                     ? typograph('Персональные предложения для разных типов групп стимулируют повторное использование совместной корзины и увеличивают средний чек')
                     : typograph('Personalized offers for different group types encourage repeat shared cart usage and increase average order value')}
                 </p>
-                <MobileCarousel
-                  images={[30, 31, 32, 33, 34, 35, 36, 37, 38]}
-                  altPrefix={locale === 'ru' ? 'Спецпредложения' : 'Special Offers'}
-                />
-                <div className="chip-image-gap hidden md:block flex flex-col gap-[24px]">
+                <div className="case-section-content flex flex-col gap-[24px]">
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img
                       src="/covers/YandexLavka materials/Friends.png"
@@ -1147,10 +598,8 @@ export function CasePage() {
                   </div>
                 </div>
               </div>
-            )}
 
             {/* Создание постоянных групп */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
@@ -1160,11 +609,9 @@ export function CasePage() {
                     ? typograph('Создание групповых корзин. Пользователи могут формировать постоянные группы под разные категории, экономя деньги на доставке и время на сбор других участников')
                     : typograph('Group cart creation. Users can form permanent groups for different categories, saving on delivery and time collecting participants')}
                 </p>
-                <MobileCarousel
-                  images={[39, 40]}
-                  altPrefix={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Group.png"
                     alt={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
@@ -1172,10 +619,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Автосоздание групповой корзины */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
@@ -1186,20 +631,17 @@ export function CasePage() {
                     : typograph('After completing the first shared order, an offer to create a permanent group appears')}
                 </p>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                  style={{ marginTop: 24 }}
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img
                     src="/covers/YandexLavka materials/Suggestion.png"
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                    className="mobile-shadow w-full object-cover"
+                    className="w-full object-cover"
                   />
                 </div>
               </div>
-            )}
 
             {/* Раздел заданий для совместных групп в Лавке */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
@@ -1209,11 +651,9 @@ export function CasePage() {
                     ? typograph('Если добавить раздел заданий, совместные заказы увеличат общий объем покупок, потому что игровые цели, прогресс и бонусы создают дополнительную мотивацию покупать вместе и возвращаться в сервис')
                     : typograph('Adding a tasks section would increase total purchase volume, as game goals, progress and bonuses create additional motivation to buy together and return to the service')}
                 </p>
-                <MobileCarousel
-                  images={[16, 17]}
-                  altPrefix={locale === 'ru' ? 'Раздел заданий' : 'Tasks Section'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Challenges.png"
                     alt={locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
@@ -1221,19 +661,15 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Статусы заданий */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col" style={{ marginTop: 64 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                 </h2>
-                <MobileCarousel
-                  images={[11, 12, 13]}
-                  altPrefix={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
-                />
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                >
                   <img
                     src="/covers/YandexLavka materials/Card.png"
                     alt={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
@@ -1241,10 +677,8 @@ export function CasePage() {
                   />
                 </div>
               </div>
-            )}
 
             {/* Тестирование */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div id="section-testing" className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Тестирование' : 'Testing'}
@@ -1257,8 +691,7 @@ export function CasePage() {
 
                 {/* Что было протестировано */}
                 <h3
-                  className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]"
-                  style={{ marginTop: 24 }}
+                  className="case-section-content font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]"
                 >
                   {locale === 'ru' ? 'Что было протестировано' : 'What was tested'}
                 </h3>
@@ -1306,7 +739,7 @@ export function CasePage() {
 
                 {/* Main result card */}
                 <div
-                  className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden chip-image-gap"
+                  className="case-section-content rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
                     {/* Left — text column */}
@@ -1405,17 +838,14 @@ export function CasePage() {
                   </div>
                 </div>
               </div>
-            )}
 
             {/* Результаты тестирования */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Ключевые тезисы от Discovery до тестирования' : 'Testing Results'}
                 </h2>
                 <div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[24px]"
-                  style={{ marginTop: 24 }}
+                  className="case-section-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[24px]"
                 >
                   {/* Row 1 */}
                   <div className="rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
@@ -1464,10 +894,8 @@ export function CasePage() {
                   </div>
                 </div>
               </div>
-            )}
 
             {/* Рефлексия */}
-            {caseStudy.id === 'yandex-lavka' && (
               <div id="section-reflection" className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Рефлексия' : 'Reflection'}
@@ -1478,12 +906,6 @@ export function CasePage() {
                     : typograph('After developing the solution, the next step would be to launch the MVP to a broad audience and analyze key metrics. The collected data helps identify the strengths and weaknesses of the solution and determine the most effective offerings for users. From there, designs and hypotheses are refined, retested, and the improvement cycle begins again.')}
                 </p>
               </div>
-            )}
-
-          </section>
-        </div>
-      </div>
-    </div>
     </>
   );
 }
