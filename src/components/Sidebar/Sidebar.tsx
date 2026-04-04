@@ -29,7 +29,7 @@ export function Sidebar({
   const navigate = useNavigate();
 
   return (
-    <aside className="w-full lg:flex-[606_1_0%] min-w-0 flex flex-col gap-[16px] lg:max-w-[606px]">
+    <aside className="w-full lg:flex-[606_1_0%] min-w-0 flex flex-col gap-[24px] lg:max-w-[606px]">
       {/* Header: avatar + name + language */}
       <div className="flex items-start justify-between mb-0.5">
         <div className="flex items-center gap-3.5">
@@ -76,7 +76,7 @@ export function Sidebar({
       </div>
 
       {/* Case cards */}
-      <div className="flex flex-col gap-[16px]">
+      <div className="flex flex-col gap-[24px]">
         {cases.map((cs) => {
           const isActive = activeCaseId === cs.id;
           const isDisabled = cs.id === 'okolo';

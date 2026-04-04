@@ -688,7 +688,7 @@ export default function TBankCase({
                     </div>
 
                     {/* Right — image column, touches top/right/bottom edges */}
-                    <div className="flex items-stretch overflow-hidden" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)', borderRadius: '24px' }}>
+                    <div className="flex items-stretch overflow-hidden" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}>
                       <img
                         src={TBANK_TESTING_PROTOTYPE_IMAGES[activeTbankTestChip] ?? TBANK_TESTING_PROTOTYPE_IMAGES[0]}
                         alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}

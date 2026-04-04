@@ -36,7 +36,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </header>
 
       {/* ── Resume link ── */}
-      <section className="mt-4">
+      <section className="mt-6">
         <a
           href={siteContent.resumeUrl}
           target="_blank"
@@ -62,7 +62,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </section>
 
       {/* ── Contact ── */}
-      <section className="mt-4">
+      <section className="mt-6">
         <div className="grid grid-cols-[3fr_2fr] gap-x-4 gap-y-4">
           <ContactMobile
             label={locale === 'ru' ? 'Почта' : 'Email'}
@@ -87,7 +87,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       </section>
 
       {/* ── Cases ── */}
-      <section className="flex flex-col gap-3 mt-5">
+      <section className="flex flex-col gap-4 mt-6">
         {cases.map((cs) => {
           const isDisabled = cs.id === 'okolo';
           return (
