@@ -1,3 +1,4 @@
+import { useCallback, useRef, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
@@ -8,6 +9,14 @@ const TBANK_TESTING_PROTOTYPE_IMAGES = [
   '/covers/T-bank/1_2.webp',
   '/covers/T-bank/1_3.webp',
   '/covers/T-bank/1_4.webp',
+] as const;
+
+const TBANK_TRANSLATION_VARIANTS = [
+  { label: 'Kazakh', src: '/covers/T-bank/Kazakhskyu.webp' },
+  { label: 'Kyrgyz', src: '/covers/T-bank/Kyrgyzskyu.webp' },
+  { label: 'Tajik', src: '/covers/T-bank/Tadjitsky.webp' },
+  { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.webp' },
+  { label: 'Belarusian', src: '/covers/T-bank/Belorussky.webp' },
 ] as const;
 
 type PersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
@@ -27,6 +36,14 @@ export default function TBankCase({
   activeTbankTestChip,
   setActiveTbankTestChip,
 }: TBankCaseProps) {
+  const [translationVariantSlide, setTranslationVariantSlide] = useState(0);
+  const translationVariantsScrollRef = useRef<HTMLDivElement>(null);
+  const handleTranslationVariantsScroll = useCallback(() => {
+    const el = translationVariantsScrollRef.current;
+    if (!el) return;
+    setTranslationVariantSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
   return (
     <>
             {/* Текущие проблемы формы — T-Bank only */}
@@ -442,14 +459,50 @@ export default function TBankCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Варианты перевода' : 'Translation Variants'}
                 </h2>
-                <div className="flex flex-col gap-[24px] chip-image-gap">
-                  {[
-                    { label: 'Kazakh', src: '/covers/T-bank/Kazakhskyu.webp' },
-                    { label: 'Kyrgyz', src: '/covers/T-bank/Kyrgyzskyu.webp' },
-                    { label: 'Tajik', src: '/covers/T-bank/Tadjitsky.webp' },
-                    { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.webp' },
-                    { label: 'Belarusian', src: '/covers/T-bank/Belorussky.webp' },
-                  ].map(({ label, src }) => (
+                {/* Mobile: horizontal carousel */}
+                <div className="chip-image-gap md:hidden">
+                  <div
+                    ref={translationVariantsScrollRef}
+                    onScroll={handleTranslationVariantsScroll}
+                    className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory"
+                    style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
+                  >
+                    {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
+                      <div key={label} className="snap-center shrink-0 min-w-full">
+                        <div className="w-full rounded-[var(--radius-media)] overflow-hidden">
+                          <div className="relative w-full overflow-hidden leading-none bg-[#F5F5F5]">
+                            <img
+                              src={src}
+                              alt={label}
+                              draggable={false}
+                              className="block w-full h-auto max-w-none origin-center scale-[1.02]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {TBANK_TRANSLATION_VARIANTS.map((_, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: translationVariantSlide === idx ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet: original static non-carousel layout */}
+                <div className="hidden md:flex md:flex-col md:gap-[24px] chip-image-gap">
+                  {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
                     <div key={label} className="w-full rounded-[var(--radius-media)] overflow-hidden">
                       <div className="relative w-full overflow-hidden leading-none">
                         <img

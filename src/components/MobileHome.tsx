@@ -100,25 +100,12 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
             >
               {/* Cover image */}
               <div className="w-full aspect-[16/10] overflow-hidden bg-[#F0F0F0]">
-                {cs.coverVideo ? (
-                  <video
-                    src={cs.coverVideo}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: '70% center', transform: 'scale(1.04)', transformOrigin: 'center' }}
-                  />
-                ) : (
-                  <img
-                    src={cs.cover}
-                    alt={cs.title[locale]}
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: '70% center', transform: 'scale(1.04)', transformOrigin: 'center' }}
-                  />
-                )}
+                <img
+                  src={cs.cover}
+                  alt={cs.title[locale]}
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '70% center', transform: 'scale(1.04)', transformOrigin: 'center' }}
+                />
               </div>
 
               {/* Card body */}
