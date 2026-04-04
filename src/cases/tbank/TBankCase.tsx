@@ -460,41 +460,59 @@ export default function TBankCase({
                   {locale === 'ru' ? 'Варианты перевода' : 'Translation Variants'}
                 </h2>
                 <div className="chip-image-gap">
-                  <div
-                    ref={translationVariantsScrollRef}
-                    onScroll={handleTranslationVariantsScroll}
-                    className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory"
-                    style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
-                  >
-                    {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
-                      <div key={label} className="snap-center shrink-0 min-w-full">
-                        <div className="w-full rounded-[var(--radius-media)] overflow-hidden">
-                          <div className="relative w-full overflow-hidden leading-none bg-[#F5F5F5]">
-                            <img
-                              src={src}
-                              alt={label}
-                              draggable={false}
-                              className="block w-full h-auto max-w-none origin-center scale-[1.02]"
-                            />
+                  {/* Mobile: horizontal carousel */}
+                  <div className="md:hidden">
+                    <div
+                      ref={translationVariantsScrollRef}
+                      onScroll={handleTranslationVariantsScroll}
+                      className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory"
+                      style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
+                    >
+                      {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
+                        <div key={label} className="snap-center shrink-0 min-w-full">
+                          <div className="w-full rounded-[var(--radius-media)] overflow-hidden">
+                            <div className="relative w-full overflow-hidden leading-none bg-[#F5F5F5]">
+                              <img
+                                src={src}
+                                alt={label}
+                                draggable={false}
+                                className="block w-full h-auto max-w-none origin-center scale-[1.02]"
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                      {TBANK_TRANSLATION_VARIANTS.map((_, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: '#1a1a1a',
+                            opacity: translationVariantSlide === idx ? 1 : 0.2,
+                            transition: 'opacity 200ms ease',
+                            flexShrink: 0,
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {TBANK_TRANSLATION_VARIANTS.map((_, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: translationVariantSlide === idx ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
+
+                  {/* Desktop/tablet: static non-carousel layout */}
+                  <div className="hidden md:flex md:flex-col md:gap-[24px]">
+                    {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
+                      <div key={label} className="w-full rounded-[var(--radius-media)] overflow-hidden">
+                        <div className="relative w-full overflow-hidden leading-none bg-[#F5F5F5]">
+                          <img
+                            src={src}
+                            alt={label}
+                            className="block w-full h-auto max-w-none origin-center scale-[1.02]"
+                          />
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
