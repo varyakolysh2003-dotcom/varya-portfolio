@@ -1418,21 +1418,21 @@ export function CasePage() {
                   style={{ marginTop: 24 }}
                 >
                   {/* Row 1 */}
-                  <div className="rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-1 sm:order-none rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-white break-words">
                       {locale === 'ru'
                         ? typograph('Совместная корзина снижает барьеры оформления покупки в группе')
                         : typograph('Shared cart reduces barriers to group checkout')}
                     </p>
                   </div>
-                  <div className="rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-3 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Респонденты отметили новизну решения для рынка России')
                         : typograph("Respondents noted the solution's novelty for the Russian market")}
                     </p>
                   </div>
-                  <div className="rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-4 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Функция воспринимается как конкурентное преимущество сервиса')
@@ -1441,21 +1441,21 @@ export function CasePage() {
                   </div>
 
                   {/* Row 2 */}
-                  <div className="rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-2 sm:order-none rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-white break-words">
                       {locale === 'ru'
                         ? typograph('Респонденты готовы использовать функцию в реальных покупках')
                         : typograph('Respondents are ready to use the feature in real purchases')}
                     </p>
                   </div>
-                  <div className="rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-5 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Решение показало высокий уровень пользовательского интереса')
                         : typograph('The solution showed high user interest')}
                     </p>
                   </div>
-                  <div className="rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-6 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Гипотезы получили качественное и количественное подтверждение')
