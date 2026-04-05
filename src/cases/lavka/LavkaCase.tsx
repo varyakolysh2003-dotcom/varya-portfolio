@@ -644,11 +644,11 @@ export default function LavkaCase({
                 <div className="case-section-content md:hidden">
                   <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
                     <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
-                      {[17, 18].map((n) => (
+                      {[17, 19].map((n, i) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
-                            alt={`${locale === 'ru' ? 'Проверка адреса' : 'Address check'} ${n - 16}`}
+                            alt={`${locale === 'ru' ? 'Проверка адреса' : 'Address check'} ${i + 1}`}
                             style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
                           />
                         </div>
