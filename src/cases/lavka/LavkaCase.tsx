@@ -53,6 +53,86 @@ export default function LavkaCase({
     setMobileEntrySlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
+  const [mobileInviteSlide, setMobileInviteSlide] = useState(0);
+  const inviteScrollRef = useRef<HTMLDivElement>(null);
+  const handleInviteScroll = useCallback(() => {
+    const el = inviteScrollRef.current;
+    if (!el) return;
+    setMobileInviteSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobilePaymentSlide, setMobilePaymentSlide] = useState(0);
+  const paymentScrollRef = useRef<HTMLDivElement>(null);
+  const handlePaymentScroll = useCallback(() => {
+    const el = paymentScrollRef.current;
+    if (!el) return;
+    setMobilePaymentSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileJointPaySlide, setMobileJointPaySlide] = useState(0);
+  const jointPayScrollRef = useRef<HTMLDivElement>(null);
+  const handleJointPayScroll = useCallback(() => {
+    const el = jointPayScrollRef.current;
+    if (!el) return;
+    setMobileJointPaySlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileAddressSlide, setMobileAddressSlide] = useState(0);
+  const addressScrollRef = useRef<HTMLDivElement>(null);
+  const handleAddressScroll = useCallback(() => {
+    const el = addressScrollRef.current;
+    if (!el) return;
+    setMobileAddressSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileConfirmSlide, setMobileConfirmSlide] = useState(0);
+  const confirmScrollRef = useRef<HTMLDivElement>(null);
+  const handleConfirmScroll = useCallback(() => {
+    const el = confirmScrollRef.current;
+    if (!el) return;
+    setMobileConfirmSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileResumeSlide, setMobileResumeSlide] = useState(0);
+  const resumeScrollRef = useRef<HTMLDivElement>(null);
+  const handleResumeScroll = useCallback(() => {
+    const el = resumeScrollRef.current;
+    if (!el) return;
+    setMobileResumeSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobilePromoSlide, setMobilePromoSlide] = useState(0);
+  const promoScrollRef = useRef<HTMLDivElement>(null);
+  const handlePromoScroll = useCallback(() => {
+    const el = promoScrollRef.current;
+    if (!el) return;
+    setMobilePromoSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileGroupsSlide, setMobileGroupsSlide] = useState(0);
+  const groupsScrollRef = useRef<HTMLDivElement>(null);
+  const handleGroupsScroll = useCallback(() => {
+    const el = groupsScrollRef.current;
+    if (!el) return;
+    setMobileGroupsSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileTasksSlide, setMobileTasksSlide] = useState(0);
+  const tasksScrollRef = useRef<HTMLDivElement>(null);
+  const handleTasksScroll = useCallback(() => {
+    const el = tasksScrollRef.current;
+    if (!el) return;
+    setMobileTasksSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileStatusesSlide, setMobileStatusesSlide] = useState(0);
+  const statusesScrollRef = useRef<HTMLDivElement>(null);
+  const handleStatusesScroll = useCallback(() => {
+    const el = statusesScrollRef.current;
+    if (!el) return;
+    setMobileStatusesSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
   return (
     <>
             {/* Бенчмаркинг — 112px from previous block (88px margin + 24px parent gap = 112px) */}
@@ -435,9 +515,31 @@ export default function LavkaCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                 </h2>
-                <div
-                  className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="chip-image-gap md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={inviteScrollRef} onScroll={handleInviteScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[21, 22].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Приглашение' : 'Invitation'} ${n - 20}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileInviteSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Invite.png"
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
@@ -456,9 +558,31 @@ export default function LavkaCase({
                     ? typograph('Организатор решает, каким способом будет происходить оплата. Раздельная — каждый платит за своё. Единая — один оплачивает за всех. Решение делает сценарий финансово гибким под разные категории групп пользователей')
                     : typograph('The organizer decides the payment method. Separate — each pays for their own. Joint — one pays for all. This makes the scenario financially flexible for different user group categories')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={paymentScrollRef} onScroll={handlePaymentScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[23, 24].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Способ оплаты' : 'Payment method'} ${n - 22}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePaymentSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Pay method.png"
                     alt={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
@@ -472,9 +596,31 @@ export default function LavkaCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                 </h2>
-                <div
-                  className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="chip-image-gap md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={jointPayScrollRef} onScroll={handleJointPayScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[25, 26].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Единая оплата' : 'Joint payment'} ${n - 24}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileJointPaySlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Common user screen.png"
                     alt={locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
@@ -493,9 +639,31 @@ export default function LavkaCase({
                     ? typograph('Решение помогает пользователю избежать ошибки при указании адреса, одновременно предоставляя ему выбор — продолжить оплату отдельно или остаться в совместной корзине')
                     : typograph('The solution helps avoid address errors while providing a choice — continue with separate payment or stay in the shared cart')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[17, 18].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Проверка адреса' : 'Address check'} ${n - 16}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileAddressSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Adress.png"
                     alt={locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
@@ -514,9 +682,31 @@ export default function LavkaCase({
                     ? typograph('Заказ отправляется в обработку только после того, как все участники оплатят свою часть')
                     : typograph('The order is processed only after all participants have paid their share')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={confirmScrollRef} onScroll={handleConfirmScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[27, 28, 29].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Подтверждение заказа' : 'Order confirmation'} ${n - 26}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileConfirmSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Delivery.png"
                     alt={locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
@@ -553,9 +743,31 @@ export default function LavkaCase({
                     ? typograph('После истечения таймера оплаты организатор, оплачивающий весь заказ может повторно отправить приглашение участникам, чтобы не создавать совместную корзину заново')
                     : typograph('After the payment timer expires, the organizer can resend invitations to avoid recreating the shared cart')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={resumeScrollRef} onScroll={handleResumeScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[7, 8, 9].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Возобновление заказа' : 'Resume order'} ${n - 6}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileResumeSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Try again.png"
                     alt={locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
@@ -574,7 +786,31 @@ export default function LavkaCase({
                     ? typograph('Персональные предложения для разных типов групп стимулируют повторное использование совместной корзины и увеличивают средний чек')
                     : typograph('Personalized offers for different group types encourage repeat shared cart usage and increase average order value')}
                 </p>
-                <div className="case-section-content flex flex-col gap-[24px]">
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={promoScrollRef} onScroll={handlePromoScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[30, 31, 32, 33, 34, 35, 36, 37, 38].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Спецпредложения' : 'Special offers'} ${n - 29}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePromoSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet: three stacked banners */}
+                <div className="case-section-content hidden md:flex flex-col gap-[24px]">
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img loading="lazy"
                       src="/covers/YandexLavka materials/Friends.png"
@@ -609,9 +845,31 @@ export default function LavkaCase({
                     ? typograph('Создание групповых корзин. Пользователи могут формировать постоянные группы под разные категории, экономя деньги на доставке и время на сбор других участников')
                     : typograph('Group cart creation. Users can form permanent groups for different categories, saving on delivery and time collecting participants')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={groupsScrollRef} onScroll={handleGroupsScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[39, 40].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Постоянные группы' : 'Permanent groups'} ${n - 38}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileGroupsSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Group.png"
                     alt={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
@@ -651,9 +909,31 @@ export default function LavkaCase({
                     ? typograph('Если добавить раздел заданий, совместные заказы увеличат общий объем покупок, потому что игровые цели, прогресс и бонусы создают дополнительную мотивацию покупать вместе и возвращаться в сервис')
                     : typograph('Adding a tasks section would increase total purchase volume, as game goals, progress and bonuses create additional motivation to buy together and return to the service')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={tasksScrollRef} onScroll={handleTasksScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[16, 17].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Раздел заданий' : 'Tasks section'} ${n - 15}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileTasksSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Challenges.png"
                     alt={locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
@@ -667,9 +947,31 @@ export default function LavkaCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                 </h2>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '297px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={statusesScrollRef} onScroll={handleStatusesScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[11, 12, 13].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
+                            alt={`${locale === 'ru' ? 'Статус задания' : 'Task status'} ${n - 10}`}
+                            style={{ width: '125px', height: '270px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileStatusesSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
                     src="/covers/YandexLavka materials/Card.png"
                     alt={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
