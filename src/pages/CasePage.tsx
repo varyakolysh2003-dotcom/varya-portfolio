@@ -215,7 +215,7 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col nav:flex-row nav:items-start nav:gap-[48px] pt-[64px] nav:pt-0 pb-[84px] px-4 md:px-8 nav:px-[60px]">
+    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col items-center nav:flex-row nav:justify-center nav:items-start nav:gap-[48px] pt-[64px] nav:pt-0 pb-[84px] px-4 md:px-8 nav:px-[60px]">
 
       {/* In-flow side navigation — only rendered at 1320px+ */}
       {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
@@ -245,7 +245,7 @@ export function CasePage() {
         </nav>
       )}
 
-      <div className="max-w-[880px] w-full mx-auto nav:mx-0 nav:pt-[32px]">
+      <div className="max-w-[880px] w-full nav:pt-[32px]">
         <Link
           to="/"
           className="hidden nav:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
