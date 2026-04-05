@@ -159,7 +159,7 @@ export function CasePage() {
     {/* Sticky side navigation — visible only on wide screens */}
     {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
       <nav
-        className="hidden xl:flex flex-col gap-[12px] fixed z-50"
+        className="hidden 2xl:flex flex-col gap-[12px] fixed z-50"
         style={{
           top: 120,
           left: 56,
@@ -191,7 +191,7 @@ export function CasePage() {
     {/* Mobile sticky sections menu */}
     {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
       <nav
-        className="xl:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
+        className="2xl:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
         style={{ padding: '10px 16px' }}
       >
         <div className="relative" ref={mobileSectionsRef}>
@@ -247,11 +247,11 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
+    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex justify-center items-start pt-[64px] 2xl:pt-[32px] pb-[84px] px-4 md:px-8 xl:px-[60px]">
       <div className="max-w-[880px] w-full">
         <Link
           to="/"
-          className="hidden xl:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
+          className="hidden 2xl:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
         >
           <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
           {locale === 'ru' ? 'Назад' : 'Back'}
