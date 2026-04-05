@@ -349,50 +349,76 @@ export default function TBankCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   JTBD
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] items-stretch" style={{ marginTop: 16 }}>
-                  {(
-                    locale === 'ru'
-                      ? [
-                          { prefix: 'Когда я', text: 'оформляю рассрочку через интернет магазин,' },
-                          { prefix: 'я хочу', text: 'заполнить форму, имеющую ввод иностранных данных,' },
-                          { prefix: 'чтобы', text: 'завершить процесс оформления покупки' },
-                          { prefix: 'Когда я', text: 'заполняю форму на онлайн рассрочку,' },
-                          { prefix: 'я хочу', text: 'знать проценты одобрения под свою форму документов,' },
-                          { prefix: 'чтобы', text: 'оценить риск отказа' },
-                          { prefix: 'Когда я', text: 'оформлю кредитную карту для иностранцев в Т-банке' },
-                          { prefix: 'я хочу', text: 'знать, как это повлияет на процент одобрения моей рассрочки' },
-                          { prefix: 'чтобы', text: 'у меня была мотивация улучшать свою КИ по выделенному лимиту и повысить шанс одобрения' },
-                          { prefix: 'Когда я', text: 'открываю форму заполнения данных перед оформлением рассрочки' },
-                          { prefix: 'я хочу', text: 'чтобы она поддерживала больше двух языков' },
-                          { prefix: 'чтобы', text: 'я мог заполнить поля ввода правильно' },
-                        ]
-                      : [
-                          { prefix: 'When I', text: 'apply for installment through an online store,' },
-                          { prefix: 'I want', text: 'to fill a form that accepts foreign document input,' },
-                          { prefix: 'so that', text: 'I can complete the purchase process' },
-                          { prefix: 'When I', text: 'fill in an online installment form,' },
-                          { prefix: 'I want', text: 'to know approval rates for my document type,' },
-                          { prefix: 'so that', text: 'I can estimate rejection risk' },
-                          { prefix: 'When I', text: 'open a T-Bank credit card for foreigners,' },
-                          { prefix: 'I want', text: 'to understand how it affects my installment approval rate' },
-                          { prefix: 'so that', text: 'I stay motivated to improve my credit history and increase approval chances' },
-                          { prefix: 'When I', text: 'open the data entry form before installment application,' },
-                          { prefix: 'I want', text: 'it to support more than two languages' },
-                          { prefix: 'so that', text: 'I can fill in the fields correctly' },
-                        ]
-                  ).map((item, index) => (
-                    <div
-                      key={index}
-                      className="bg-[#F4F4F4] rounded-[20px] h-auto text-left"
-                      style={{ padding: '16px 20px', boxSizing: 'border-box' }}
-                    >
-                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.45]">
-                        <span className="font-semibold text-[var(--color-text-primary)]">{typograph(item.prefix)}</span>{' '}
-                        {typograph(item.text)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                {(() => {
+                  const items = locale === 'ru'
+                    ? [
+                        { prefix: 'Когда я', text: 'оформляю рассрочку через интернет магазин,' },
+                        { prefix: 'я хочу', text: 'заполнить форму, имеющую ввод иностранных данных,' },
+                        { prefix: 'чтобы', text: 'завершить процесс оформления покупки' },
+                        { prefix: 'Когда я', text: 'заполняю форму на онлайн рассрочку,' },
+                        { prefix: 'я хочу', text: 'знать проценты одобрения под свою форму документов,' },
+                        { prefix: 'чтобы', text: 'оценить риск отказа' },
+                        { prefix: 'Когда я', text: 'оформлю кредитную карту для иностранцев в Т-банке' },
+                        { prefix: 'я хочу', text: 'знать, как это повлияет на процент одобрения моей рассрочки' },
+                        { prefix: 'чтобы', text: 'у меня была мотивация улучшать свою КИ по выделенному лимиту и повысить шанс одобрения' },
+                        { prefix: 'Когда я', text: 'открываю форму заполнения данных перед оформлением рассрочки' },
+                        { prefix: 'я хочу', text: 'чтобы она поддерживала больше двух языков' },
+                        { prefix: 'чтобы', text: 'я мог заполнить поля ввода правильно' },
+                      ]
+                    : [
+                        { prefix: 'When I', text: 'apply for installment through an online store,' },
+                        { prefix: 'I want', text: 'to fill a form that accepts foreign document input,' },
+                        { prefix: 'so that', text: 'I can complete the purchase process' },
+                        { prefix: 'When I', text: 'fill in an online installment form,' },
+                        { prefix: 'I want', text: 'to know approval rates for my document type,' },
+                        { prefix: 'so that', text: 'I can estimate rejection risk' },
+                        { prefix: 'When I', text: 'open a T-Bank credit card for foreigners,' },
+                        { prefix: 'I want', text: 'to understand how it affects my installment approval rate' },
+                        { prefix: 'so that', text: 'I stay motivated to improve my credit history and increase approval chances' },
+                        { prefix: 'When I', text: 'open the data entry form before installment application,' },
+                        { prefix: 'I want', text: 'it to support more than two languages' },
+                        { prefix: 'so that', text: 'I can fill in the fields correctly' },
+                      ];
+
+                  const groups = [items.slice(0,3), items.slice(3,6), items.slice(6,9), items.slice(9,12)];
+
+                  return (
+                    <>
+                      {/* Mobile: each JTBD triplet as one grouped card */}
+                      <div className="flex flex-col gap-[12px] md:hidden" style={{ marginTop: 16 }}>
+                        {groups.map((group, gi) => (
+                          <div key={gi} className="bg-[#F4F4F4] rounded-[16px] box-border" style={{ padding: 16 }}>
+                            {group.map((item, idx) => (
+                              <div key={idx}>
+                                {idx > 0 && <div className="h-px bg-black/[0.06]" style={{ marginTop: 10, marginBottom: 10 }} />}
+                                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.45]">
+                                  <span className="font-semibold text-[var(--color-text-primary)]">{typograph(item.prefix)}</span>{' '}
+                                  {typograph(item.text)}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Desktop: original 3-column grid */}
+                      <div className="hidden md:grid grid-cols-3 gap-[16px] items-stretch" style={{ marginTop: 16 }}>
+                        {items.map((item, index) => (
+                          <div
+                            key={index}
+                            className="bg-[#F4F4F4] rounded-[20px] h-auto text-left box-border"
+                            style={{ padding: '16px 20px' }}
+                          >
+                            <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.45]">
+                              <span className="font-semibold text-[var(--color-text-primary)]">{typograph(item.prefix)}</span>{' '}
+                              {typograph(item.text)}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
 
             {/* Архитектура — T-Bank only */}
@@ -464,20 +490,19 @@ export default function TBankCase({
                   <div
                     ref={translationVariantsScrollRef}
                     onScroll={handleTranslationVariantsScroll}
-                    className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory"
-                    style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
+                    className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory gap-[12px]"
+                    style={{ padding: '0 16px', WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
                   >
                     {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
-                      <div key={label} className="snap-center shrink-0 min-w-full">
-                        <div className="w-full rounded-[var(--radius-media)] overflow-hidden">
-                          <div className="relative w-full overflow-hidden leading-none bg-[#F5F5F5]">
-                            <img
-                              src={src}
-                              alt={label}
-                              draggable={false}
-                              className="block w-full h-auto max-w-none origin-center scale-[1.02]"
-                            />
-                          </div>
+                      <div key={label} className="snap-center shrink-0" style={{ width: 'calc(100vw - 64px)' }}>
+                        <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5] h-[210px] flex items-center justify-center">
+                          <img
+                            src={src}
+                            alt={label}
+                            draggable={false}
+                            className="block object-contain"
+                            style={{ maxWidth: '90%', maxHeight: '100%' }}
+                          />
                         </div>
                       </div>
                     ))}
@@ -678,12 +703,10 @@ export default function TBankCase({
                 </div>
 
                 {/* Prototype result card */}
-                <div
-                  className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden chip-image-gap"
-                >
+                <div className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden chip-image-gap">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr]">
-                    {/* Left — text column with 16px padding */}
-                    <div className="flex flex-col gap-[8px]" style={{ padding: '16px' }}>
+                    {/* Left — text column (below image on mobile, left on desktop) */}
+                    <div className="order-2 md:order-1 flex flex-col gap-[8px]" style={{ padding: '16px' }}>
                       <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                         {locale === 'ru' ? 'Контекст' : 'Context'}
                       </h3>
@@ -740,12 +763,12 @@ export default function TBankCase({
                       </div>
                     </div>
 
-                    {/* Right — image column, touches top/right/bottom edges */}
-                    <div className="flex items-stretch overflow-hidden" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}>
+                    {/* Right — image column: on top on mobile (order-1), right on desktop */}
+                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-stretch overflow-hidden md:rounded-none" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}>
                       <img
                         src={TBANK_TESTING_PROTOTYPE_IMAGES[activeTbankTestChip] ?? TBANK_TESTING_PROTOTYPE_IMAGES[0]}
                         alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
-                        className="w-full h-full object-cover object-left-top"
+                        className="w-full h-full object-cover object-top md:object-left-top"
                       />
                     </div>
                   </div>
