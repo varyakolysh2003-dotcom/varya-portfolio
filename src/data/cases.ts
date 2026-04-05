@@ -75,7 +75,7 @@ export const cases: CaseStudy[] = [
     },
     tools: { ru: 'Figma', en: 'Figma' },
     logo: '/logos/Tbank.svg',
-    cover: '/covers/Tbank.jpg',
+    cover: '/covers/Tbank.webp',
     accentColor: '#FFDD2D',
   },
   {

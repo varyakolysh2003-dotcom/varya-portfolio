@@ -1,9 +1,11 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DocumentLocale } from './components/DocumentLocale';
 import { DynamicFavicon } from './components/DynamicFavicon';
 import { LocaleProvider } from './context/LocaleContext';
 import { PortfolioLayout } from './components/PortfolioLayout';
-import { CasePage } from './pages/CasePage';
+
+const CasePage = lazy(() => import('./pages/CasePage').then((m) => ({ default: m.CasePage })));
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
         <DocumentLocale />
         <Routes>
           <Route path="/" element={<PortfolioLayout />} />
-          <Route path="/cases/:caseSlug" element={<CasePage />} />
+          <Route path="/cases/:caseSlug" element={<Suspense><CasePage /></Suspense>} />
         </Routes>
       </LocaleProvider>
     </BrowserRouter>

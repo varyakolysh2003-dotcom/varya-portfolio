@@ -56,7 +56,7 @@ export default function TBankCase({
                 <div
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] chip-image-gap"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/1.webp"
                     alt={locale === 'ru' ? 'Проблемы формы — часть 1' : 'Form issues — part 1'}
                     className="block w-full h-auto"
@@ -66,7 +66,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/2.webp"
                     alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
                     className="block w-full h-auto"
@@ -314,7 +314,7 @@ export default function TBankCase({
                 <div
                   className="w-full rounded-[var(--radius-media)] overflow-hidden chip-image-gap"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/4.webp"
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 1' : 'Drop-off results — part 1'}
                     className="block w-full h-auto origin-center scale-[1.007]"
@@ -324,7 +324,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 24 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/3.webp"
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 2' : 'Drop-off results — part 2'}
                     className="block w-full h-auto origin-center scale-[1.007]"
@@ -429,7 +429,7 @@ export default function TBankCase({
                 <div
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] chip-image-gap"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/5.webp"
                     alt={locale === 'ru' ? 'Архитектура' : 'Architecture'}
                     className="block w-full h-auto"
@@ -446,7 +446,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 20, padding: 0, height: 'auto', lineHeight: 0 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/6.webp"
                     alt={locale === 'ru' ? 'Экраны' : 'Screens'}
                     className="block w-full h-auto origin-center scale-[1.007]"
@@ -470,7 +470,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
-                    <img
+                    <img loading="lazy"
                       src="/covers/T-bank/1_1.webp"
                       alt={locale === 'ru' ? 'Локализация' : 'Localization'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
@@ -496,7 +496,7 @@ export default function TBankCase({
                     {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
                       <div key={label} className="snap-center shrink-0" style={{ width: 'calc(100vw - 64px)' }}>
                         <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5] h-[210px] flex items-center justify-center">
-                          <img
+                          <img loading="lazy"
                             src={src}
                             alt={label}
                             draggable={false}
@@ -530,7 +530,7 @@ export default function TBankCase({
                   {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
                     <div key={label} className="w-full rounded-[var(--radius-media)] overflow-hidden">
                       <div className="relative w-full overflow-hidden leading-none">
-                        <img
+                        <img loading="lazy"
                           src={src}
                           alt={label}
                           className="block w-full h-auto max-w-none origin-center scale-[1.02]"
@@ -556,7 +556,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
-                    <img
+                    <img loading="lazy"
                       src="/covers/T-bank/8.webp"
                       alt={locale === 'ru' ? 'Внести ясность получения рассрочки' : 'Clarifying Installment Approval'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
@@ -579,7 +579,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/9.webp"
                     alt={locale === 'ru' ? 'Расширение типов документов в анкете' : 'Expanding Document Types'}
                     className="block w-full h-auto"
@@ -592,7 +592,7 @@ export default function TBankCase({
                 className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                 style={{ marginTop: 24 }}
               >
-                <img
+                <img loading="lazy"
                   src="/covers/T-bank/10.webp"
                   alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
                   className="block w-full h-auto"
@@ -613,7 +613,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/11.webp"
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
@@ -636,7 +636,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/T-bank/12.webp"
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
@@ -765,7 +765,7 @@ export default function TBankCase({
 
                     {/* Right — image column: on top on mobile (order-1), right on desktop */}
                     <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-stretch overflow-hidden md:rounded-none" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}>
-                      <img
+                      <img loading="lazy"
                         src={TBANK_TESTING_PROTOTYPE_IMAGES[activeTbankTestChip] ?? TBANK_TESTING_PROTOTYPE_IMAGES[0]}
                         alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
                         className="w-full h-full object-cover object-top md:object-left-top"

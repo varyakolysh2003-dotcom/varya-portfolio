@@ -200,7 +200,7 @@ export function CasePage() {
               to="/"
               className="inline-flex items-center gap-2 font-sans font-semibold text-[16px] text-[var(--color-text-primary)] no-underline"
             >
-              <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
+              <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
               {locale === 'ru' ? 'Назад' : 'Back'}
             </Link>
 
@@ -211,7 +211,7 @@ export function CasePage() {
               aria-label={locale === 'ru' ? 'Разделы' : 'Sections'}
               aria-expanded={mobileSectionsOpen}
             >
-              <img src="/Icons/menu.svg" alt="" className="w-[18px] h-[18px] block shrink-0" width={18} height={18} />
+              <img loading="eager" src="/Icons/menu.svg" alt="" className="w-[18px] h-[18px] block shrink-0" width={18} height={18} />
             </button>
           </div>
 
@@ -253,7 +253,7 @@ export function CasePage() {
           to="/"
           className="hidden xl:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
         >
-          <img src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
+          <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
           {locale === 'ru' ? 'Назад' : 'Back'}
         </Link>
 
@@ -266,7 +266,7 @@ export function CasePage() {
             </p>
             <header>
               <div className="flex items-center gap-4">
-                <img
+                <img loading="eager"
                   src={caseStudy.logo}
                   alt=""
                   className="w-[48px] h-[48px] object-contain shrink-0"
@@ -341,7 +341,7 @@ export function CasePage() {
               </div>
             ) : (
               <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#EFEFEF] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
-                <img
+                <img loading="lazy"
                   src={caseStudy.cover}
                   alt={caseStudy.title[locale]}
                   className="block w-full h-full object-cover"
@@ -556,7 +556,7 @@ export function CasePage() {
                     key={src}
                     className={`col-span-2 ${mobileStart} w-[72px] h-[72px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] rounded-[16px] md:rounded-[24px] overflow-hidden bg-white flex items-center justify-center`}
                   >
-                    <img
+                    <img loading="lazy"
                       src={src}
                       alt=""
                       className="w-full h-full object-cover"

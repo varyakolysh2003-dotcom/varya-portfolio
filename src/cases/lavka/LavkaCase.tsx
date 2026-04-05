@@ -80,7 +80,7 @@ export default function LavkaCase({
                     key={src}
                     className={`col-span-2 ${mobileStart} w-[72px] h-[72px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] rounded-[16px] md:rounded-[24px] overflow-hidden bg-white flex items-center justify-center`}
                   >
-                    <img
+                    <img loading="lazy"
                       src={src}
                       alt=""
                       className="w-full h-full object-cover"
@@ -314,7 +314,7 @@ export default function LavkaCase({
                           key={n}
                           className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
                         >
-                          <img
+                          <img loading="lazy"
                             src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
                             alt={`Onboarding screen ${n}`}
                             style={{
@@ -353,7 +353,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Onboarding.png"
                     alt="Onboarding"
                     className="w-full object-cover"
@@ -383,7 +383,7 @@ export default function LavkaCase({
                           key={n}
                           className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
                         >
-                          <img
+                          <img loading="lazy"
                             src={`/covers/YandexLavka materials/Mobile/${n}.webp`}
                             alt={`${locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'} ${n - 3}`}
                             style={{
@@ -422,7 +422,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Scenario start.png"
                     alt={locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
                     className="w-full object-cover"
@@ -438,7 +438,7 @@ export default function LavkaCase({
                 <div
                   className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Invite.png"
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                     className="w-full object-cover"
@@ -459,7 +459,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Pay method.png"
                     alt={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
                     className="w-full object-cover"
@@ -475,7 +475,7 @@ export default function LavkaCase({
                 <div
                   className="chip-image-gap w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Common user screen.png"
                     alt={locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                     className="w-full object-cover"
@@ -496,7 +496,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Adress.png"
                     alt={locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
                     className="w-full object-cover"
@@ -517,7 +517,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Delivery.png"
                     alt={locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
                     className="w-full object-cover"
@@ -535,7 +535,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Notification.png"
                     alt={locale === 'ru' ? 'Пуш-напоминание при задержке оплаты или сбора' : 'Push Reminder on Payment Delay'}
                     className="w-full object-cover"
@@ -556,7 +556,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Try again.png"
                     alt={locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
                     className="w-full object-cover"
@@ -576,21 +576,21 @@ export default function LavkaCase({
                 </p>
                 <div className="case-section-content flex flex-col gap-[24px]">
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
-                    <img
+                    <img loading="lazy"
                       src="/covers/YandexLavka materials/Friends.png"
                       alt="Спецпредложения — друзья"
                       className="w-full object-cover"
                     />
                   </div>
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
-                    <img
+                    <img loading="lazy"
                       src="/covers/YandexLavka materials/Family.png"
                       alt="Спецпредложения — семья"
                       className="w-full object-cover"
                     />
                   </div>
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
-                    <img
+                    <img loading="lazy"
                       src="/covers/YandexLavka materials/Collegues.png"
                       alt="Спецпредложения — коллеги"
                       className="w-full object-cover"
@@ -612,7 +612,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Group.png"
                     alt={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
                     className="w-full object-cover"
@@ -633,7 +633,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Suggestion.png"
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
                     className="w-full object-cover"
@@ -654,7 +654,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Challenges.png"
                     alt={locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
                     className="w-full object-cover"
@@ -670,7 +670,7 @@ export default function LavkaCase({
                 <div
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
-                  <img
+                  <img loading="lazy"
                     src="/covers/YandexLavka materials/Card.png"
                     alt={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                     className="w-full object-cover"
@@ -828,7 +828,7 @@ export default function LavkaCase({
                       className={`flex ${activeTestChip === 4 ? 'items-start pt-0' : 'items-end pt-[24px]'} justify-center px-[24px] pb-0 md:pl-0 md:pr-[24px] md:pt-[24px] md:pb-0`}
                       style={activeTestChip === 4 ? { paddingTop: 0 } : undefined}
                     >
-                      <img
+                      <img loading="lazy"
                         src={activeTestChip === 1 ? '/covers/YandexLavka materials/2.webp' : activeTestChip === 2 ? '/covers/YandexLavka materials/3.webp' : activeTestChip === 3 ? '/covers/YandexLavka materials/4.webp' : activeTestChip === 4 ? '/covers/YandexLavka materials/5.webp' : activeTestChip === 5 ? '/covers/YandexLavka materials/6.webp' : '/covers/YandexLavka materials/1.webp'}
                         alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
                         className="h-auto object-contain"
