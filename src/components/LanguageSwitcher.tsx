@@ -5,7 +5,7 @@ import { useLocale } from '../context/LocaleContext';
  *  and paint immediately when the dropdown opens (no network fetch). */
 function FlagRU() {
   return (
-    <svg width="20" height="14" viewBox="0 0 32 21" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 3, flexShrink: 0 }}>
+    <svg height="20" viewBox="0 0 32 21" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 'auto', borderRadius: 4, flexShrink: 0 }}>
       <clipPath id="ru-clip"><rect width="32" height="21" fill="white" /></clipPath>
       <g clipPath="url(#ru-clip)">
         <path d="M0 -0.000488281V20.9994H32V-0.000488281H0Z" fill="white"/>
@@ -19,7 +19,7 @@ function FlagRU() {
 
 function FlagGB() {
   return (
-    <svg width="20" height="14" viewBox="0 0 32 21" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 3, flexShrink: 0 }}>
+    <svg height="20" viewBox="0 0 32 21" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 'auto', borderRadius: 4, flexShrink: 0 }}>
       <clipPath id="gb-clip"><rect width="32" height="21" fill="white" /></clipPath>
       <g clipPath="url(#gb-clip)">
         <path d="M0 0H32V21.0002H0V0Z" fill="white"/>
