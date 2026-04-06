@@ -652,7 +652,7 @@ export default function TBankCase({
                 </h2>
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
-                    ? typograph('Для проверки гипотез я разработала обновлённой формы подачи заявки на\u00A0рассрочку и использовала метод опроса по экранам уже готовых решений. Сценарий включал заполнение анкеты, выбор типа документа, предварительную оценку одобрения и\u00A0оформление кредитной карты. Прототип был протестирован на\u00A0респондентах из\u00A0сегментов РВП и\u00A0ВНЖ')
+                    ? typograph('Для проверки гипотез я разработала макеты обновлённой формы подачи заявки на рассрочку и использовала метод опроса на респондентах из Custdev интервью из сегментов иностранцев с РВП и ВНЖ. Сценарий включал заполнение анкеты, выбор типа документа, предварительную оценку одобрения и оформление кредитной карты')
                     : typograph('To validate hypotheses, an interactive prototype of the updated installment application form was developed. The scenario included filling out the form, selecting document type, receiving a preliminary approval estimate, and applying for a credit card. The prototype was tested on respondents from the TRP and RP segments.')}
                 </p>
 
