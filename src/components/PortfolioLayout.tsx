@@ -63,7 +63,7 @@ export function PortfolioLayout() {
       >
         <div
           className="portfolio-inner flex gap-[20px] w-full max-w-[1362px]"
-          style={{ height: 'min(771px, calc(100dvh - 48px))' }}
+          style={{ height: 771 }}
         >
           <Sidebar
             siteContent={siteContent}
