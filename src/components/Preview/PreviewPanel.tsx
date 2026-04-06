@@ -83,7 +83,8 @@ function DefaultContent({
   return (
     <div className="flex flex-col h-full min-h-0 relative overflow-hidden pb-6 lg:pb-0">
       {/* Text block: title + description + metadata grid */}
-      <div ref={textBlockRef} className="mb-4 shrink-0">
+      {/* z-index 30 keeps text above the cover stack (max z-index 20) at all viewport heights */}
+      <div ref={textBlockRef} className="mb-4 shrink-0" style={{ position: 'relative', zIndex: 30 }}>
         {activeCase ? (
           <DefaultContentCaseBlock caseStudy={activeCase} locale={locale} />
         ) : (
@@ -130,7 +131,10 @@ function DefaultContent({
           position: 'absolute',
           left: 20,
           right: 20,
-          bottom: -140,
+          /* At viewport heights below 819px the panel shrinks, so the stack
+             would rise toward the text block. We push it back down by the same
+             amount the panel lost, keeping the stack's viewport position fixed. */
+          bottom: 'calc(-140px - max(0px, 819px - 100dvh))',
         }}
       >
         {reversed.map((cs, index) => {
