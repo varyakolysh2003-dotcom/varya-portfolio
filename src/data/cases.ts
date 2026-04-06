@@ -98,7 +98,7 @@ export const cases: CaseStudy[] = [
     },
     tools: { ru: 'Figma', en: 'Figma' },
     logo: '/logos/okolo.svg',
-    cover: '/covers/okolo.png',
+    cover: '/covers/okolo.webp',
     accentColor: '#7CB9E8',
   },
 ];

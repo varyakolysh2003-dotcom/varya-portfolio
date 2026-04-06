@@ -42,9 +42,9 @@ export function CasePage() {
   ];
 
   const okoloBenchmarkingLogos: string[] = [
-    '/covers/okolo/1.png',
-    '/covers/okolo/2.png',
-    '/covers/okolo/3.png',
+    '/covers/okolo/1.webp',
+    '/covers/okolo/2.webp',
+    '/covers/okolo/3.webp',
     '/covers/okolo/4.webp',
   ];
 
@@ -334,6 +334,7 @@ export function CasePage() {
                   loop
                   playsInline
                   preload="none"
+                  poster={caseStudy.cover}
                   className="w-full object-cover h-[360px] sm:h-[500px] md:h-[660px] lg:h-[860px]"
                   style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
                 />
