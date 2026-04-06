@@ -7,6 +7,7 @@ import { typograph } from '../utils/typograph';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { CaseStudy } from '../types';
 import { lazy, Suspense } from 'react';
+import { publicUrl } from '../utils/publicUrl';
 
 const LavkaCase = lazy(() => import('../cases/lavka/LavkaCase'));
 const TBankCase = lazy(() => import('../cases/tbank/TBankCase'));
@@ -34,18 +35,18 @@ export function CasePage() {
   useScrollReveal(caseSlug);
 
   const benchmarkingLogos: string[] = [
-    '/logos/Uber.png',
-    '/logos/Fresh.png',
-    '/logos/instacart.png',
-    '/logos/вкусвилл.png',
-    '/logos/samokat.png',
+    publicUrl('/logos/Uber.png'),
+    publicUrl('/logos/Fresh.png'),
+    publicUrl('/logos/instacart.png'),
+    publicUrl('/logos/вкусвилл.png'),
+    publicUrl('/logos/samokat.png'),
   ];
 
   const okoloBenchmarkingLogos: string[] = [
-    '/covers/okolo/1.webp',
-    '/covers/okolo/2.webp',
-    '/covers/okolo/3.webp',
-    '/covers/okolo/4.webp',
+    publicUrl('/covers/okolo/1.webp'),
+    publicUrl('/covers/okolo/2.webp'),
+    publicUrl('/covers/okolo/3.webp'),
+    publicUrl('/covers/okolo/4.webp'),
   ];
 
   const [activeSection, setActiveSection] = useState<string>(NAV_ITEMS[0].id);
@@ -170,7 +171,7 @@ export function CasePage() {
               to="/"
               className="inline-flex items-center gap-2 font-sans font-semibold text-[16px] text-[var(--color-text-primary)] no-underline"
             >
-              <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
+              <img loading="eager" src={publicUrl('/Icons/arrow-sm-left.svg')} alt="" className="w-5 h-5" />
               {locale === 'ru' ? 'Назад' : 'Back'}
             </Link>
 
@@ -181,7 +182,7 @@ export function CasePage() {
               aria-label={locale === 'ru' ? 'Разделы' : 'Sections'}
               aria-expanded={mobileSectionsOpen}
             >
-              <img loading="eager" src="/Icons/menu.svg" alt="" className="w-[18px] h-[18px] block shrink-0" width={18} height={18} />
+              <img loading="eager" src={publicUrl('/Icons/menu.svg')} alt="" className="w-[18px] h-[18px] block shrink-0" width={18} height={18} />
             </button>
           </div>
 
@@ -252,7 +253,7 @@ export function CasePage() {
           to="/"
           className="hidden min-[1500px]:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
         >
-          <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
+          <img loading="eager" src={publicUrl('/Icons/arrow-sm-left.svg')} alt="" className="w-5 h-5" />
           {locale === 'ru' ? 'Назад' : 'Back'}
         </Link>
 

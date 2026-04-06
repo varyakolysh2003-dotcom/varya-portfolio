@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { CaseStudy, SiteContent } from '../types';
 import { TAG_LABELS } from '../types';
+import { publicUrl } from '../utils/publicUrl';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLocale } from '../context/LocaleContext';
 
@@ -19,7 +20,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <img
-            src="/avatar/Profile.svg"
+            src={publicUrl('/avatar/Profile.svg')}
             alt={siteContent.name[locale]}
             className="w-[48px] h-[48px] rounded-full object-cover shrink-0"
           />
@@ -56,7 +57,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
           <div
             className="shrink-0 w-[40px] h-[40px] rounded-[14px] bg-black flex items-center justify-center"
           >
-            <img src="/Icons/download.svg" alt="" className="w-[18px] h-[18px]" />
+            <img src={publicUrl('/Icons/download.svg')} alt="" className="w-[18px] h-[18px]" />
           </div>
         </a>
       </section>

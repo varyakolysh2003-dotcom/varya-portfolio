@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { publicUrl } from '../utils/publicUrl';
 
-const HOMEPAGE_ICON = '/avatar/Profile.svg';
+const HOMEPAGE_ICON = publicUrl('/avatar/Profile.svg');
 
 /** Same as CasePage — favicon must match the resolved case. */
 const LEGACY_CASE_SLUG: Record<string, string> = {
@@ -11,9 +12,9 @@ const LEGACY_CASE_SLUG: Record<string, string> = {
 
 /** Case ids → icons under /public/logos (see `src/data/cases.ts`). */
 const CASE_FAVICON: Record<string, string> = {
-  'yandex-lavka': '/logos/YandexLavka.svg',
-  't-bank': '/logos/Tbank.svg',
-  okolo: '/logos/okolo.svg',
+  'yandex-lavka': publicUrl('/logos/YandexLavka.svg'),
+  't-bank': publicUrl('/logos/Tbank.svg'),
+  okolo: publicUrl('/logos/okolo.svg'),
 };
 
 function faviconHrefForPathname(pathname: string): string {

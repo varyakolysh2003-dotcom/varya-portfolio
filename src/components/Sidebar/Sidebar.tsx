@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { CaseStudy, SiteContent } from '../../types';
 import { TAG_LABELS } from '../../types';
+import { publicUrl } from '../../utils/publicUrl';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { useLocale } from '../../context/LocaleContext';
 
@@ -34,7 +35,7 @@ export function Sidebar({
       <div className="flex items-start justify-between mb-0.5">
         <div className="flex items-center gap-3.5">
           <img
-            src="/avatar/Profile.svg"
+            src={publicUrl('/avatar/Profile.svg')}
             alt={siteContent.name[locale]}
             className="w-[72px] h-[72px] rounded-full object-cover shrink-0"
           />

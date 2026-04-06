@@ -1,4 +1,5 @@
 import type { CaseStudy, SiteContent } from '../types';
+import { publicUrl } from '../utils/publicUrl';
 
 export const siteContent: SiteContent = {
   name: {
@@ -21,7 +22,7 @@ export const siteContent: SiteContent = {
     ru: 'Образование, опыт, навыки, достижения',
     en: 'Education, experience, skills, achievements',
   },
-  resumeUrl: '/Resume/Kolysh%20Varvara%20Resume.pdf',
+  resumeUrl: publicUrl('/Resume/Kolysh%20Varvara%20Resume.pdf'),
   contactLabel: {
     ru: 'Написать мне',
     en: 'Contact me',
@@ -50,9 +51,9 @@ export const cases: CaseStudy[] = [
       en: 'Full Discovery cycle and Custdev interviews. Designing shared order logic',
     },
     tools: { ru: 'Figma, Higgsfield, After Effects', en: 'Figma, Higgsfield, After Effects' },
-    logo: '/logos/YandexLavka.svg',
-    cover: '/covers/YandexLavka.webp',
-    coverVideo: '/covers/YandexLavka materials/YandexLavka video.mp4',
+    logo: publicUrl('/logos/YandexLavka.svg'),
+    cover: publicUrl('/covers/YandexLavka.webp'),
+    coverVideo: publicUrl('/covers/YandexLavka materials/YandexLavka video.mp4'),
     accentColor: '#00B4E6',
   },
   {
@@ -74,8 +75,8 @@ export const cases: CaseStudy[] = [
       en: 'Desk research on credit terms for foreigners and Custdev with Drop-off analysis',
     },
     tools: { ru: 'Figma', en: 'Figma' },
-    logo: '/logos/Tbank.svg',
-    cover: '/covers/Tbank.webp',
+    logo: publicUrl('/logos/Tbank.svg'),
+    cover: publicUrl('/covers/Tbank.webp'),
     accentColor: '#FFDD2D',
   },
   {
@@ -97,8 +98,8 @@ export const cases: CaseStudy[] = [
       en: 'Full-cycle Discovery and conducting Custdev interviews. Designing user scenarios and system design, participation in business model analysis',
     },
     tools: { ru: 'Figma', en: 'Figma' },
-    logo: '/logos/okolo.svg',
-    cover: '/covers/okolo.webp',
+    logo: publicUrl('/logos/okolo.svg'),
+    cover: publicUrl('/covers/okolo.webp'),
     accentColor: '#7CB9E8',
   },
 ];

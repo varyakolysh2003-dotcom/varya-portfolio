@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
+import { publicUrl } from '../../utils/publicUrl';
 
 type PersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
 
@@ -11,10 +12,10 @@ type OkoloCaseProps = {
 };
 
 const okoloBenchmarkingLogos: string[] = [
-  '/covers/okolo/1.png',
-  '/covers/okolo/2.png',
-  '/covers/okolo/3.png',
-  '/covers/okolo/4.webp',
+  publicUrl('/covers/okolo/1.webp'),
+  publicUrl('/covers/okolo/2.webp'),
+  publicUrl('/covers/okolo/3.webp'),
+  publicUrl('/covers/okolo/4.webp'),
 ];
 
 export default function OkoloCase({ locale, activePersona, setActivePersona }: OkoloCaseProps) {

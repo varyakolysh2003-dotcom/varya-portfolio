@@ -2,21 +2,22 @@ import { useCallback, useRef, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
+import { publicUrl } from '../../utils/publicUrl';
 
 /** T-Bank testing block: prototype screens in filename order (same for RU/EN). */
 const TBANK_TESTING_PROTOTYPE_IMAGES = [
-  '/covers/T-bank/1_1.webp',
-  '/covers/T-bank/1_2.webp',
-  '/covers/T-bank/1_3.webp',
-  '/covers/T-bank/1_4.webp',
+  publicUrl('/covers/T-bank/1_1.webp'),
+  publicUrl('/covers/T-bank/1_2.webp'),
+  publicUrl('/covers/T-bank/1_3.webp'),
+  publicUrl('/covers/T-bank/1_4.webp'),
 ] as const;
 
 const TBANK_TRANSLATION_VARIANTS = [
-  { label: 'Kazakh', src: '/covers/T-bank/Kazakhskyu.webp' },
-  { label: 'Kyrgyz', src: '/covers/T-bank/Kyrgyzskyu.webp' },
-  { label: 'Tajik', src: '/covers/T-bank/Tadjitsky.webp' },
-  { label: 'Uzbek', src: '/covers/T-bank/Uzbekskyu.webp' },
-  { label: 'Belarusian', src: '/covers/T-bank/Belorussky.webp' },
+  { label: 'Kazakh', src: publicUrl('/covers/T-bank/Kazakhskyu.webp') },
+  { label: 'Kyrgyz', src: publicUrl('/covers/T-bank/Kyrgyzskyu.webp') },
+  { label: 'Tajik', src: publicUrl('/covers/T-bank/Tadjitsky.webp') },
+  { label: 'Uzbek', src: publicUrl('/covers/T-bank/Uzbekskyu.webp') },
+  { label: 'Belarusian', src: publicUrl('/covers/T-bank/Belorussky.webp') },
 ] as const;
 
 type PersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
@@ -57,7 +58,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] chip-image-gap"
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/1.webp"
+                    src={publicUrl('/covers/T-bank/1.webp')}
                     alt={locale === 'ru' ? 'Проблемы формы — часть 1' : 'Form issues — part 1'}
                     className="block w-full h-auto"
                   />
@@ -67,7 +68,7 @@ export default function TBankCase({
                   style={{ marginTop: 24 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/2.webp"
+                    src={publicUrl('/covers/T-bank/2.webp')}
                     alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
                     className="block w-full h-auto"
                   />
@@ -315,7 +316,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden chip-image-gap"
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/4.webp"
+                    src={publicUrl('/covers/T-bank/4.webp')}
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 1' : 'Drop-off results — part 1'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                   />
@@ -325,7 +326,7 @@ export default function TBankCase({
                   style={{ marginTop: 24 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/3.webp"
+                    src={publicUrl('/covers/T-bank/3.webp')}
                     alt={locale === 'ru' ? 'Результаты Drop-off — часть 2' : 'Drop-off results — part 2'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                   />
@@ -430,7 +431,7 @@ export default function TBankCase({
                   className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] chip-image-gap"
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/5.webp"
+                    src={publicUrl('/covers/T-bank/5.webp')}
                     alt={locale === 'ru' ? 'Архитектура' : 'Architecture'}
                     className="block w-full h-auto"
                   />
@@ -447,7 +448,7 @@ export default function TBankCase({
                   style={{ marginTop: 20, padding: 0, height: 'auto', lineHeight: 0 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/6.webp"
+                    src={publicUrl('/covers/T-bank/6.webp')}
                     alt={locale === 'ru' ? 'Экраны' : 'Screens'}
                     className="block w-full h-auto origin-center scale-[1.007]"
                     style={{ objectFit: 'contain' }}
@@ -471,7 +472,7 @@ export default function TBankCase({
                 >
                   <div className="relative w-full overflow-hidden leading-none">
                     <img loading="lazy"
-                      src="/covers/T-bank/1_1.webp"
+                      src={publicUrl('/covers/T-bank/1_1.webp')}
                       alt={locale === 'ru' ? 'Локализация' : 'Localization'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
                       style={{ marginTop: 8 }}
@@ -557,7 +558,7 @@ export default function TBankCase({
                 >
                   <div className="relative w-full overflow-hidden leading-none">
                     <img loading="lazy"
-                      src="/covers/T-bank/8.webp"
+                      src={publicUrl('/covers/T-bank/8.webp')}
                       alt={locale === 'ru' ? 'Внести ясность получения рассрочки' : 'Clarifying Installment Approval'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
                     />
@@ -580,7 +581,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/9.webp"
+                    src={publicUrl('/covers/T-bank/9.webp')}
                     alt={locale === 'ru' ? 'Расширение типов документов в анкете' : 'Expanding Document Types'}
                     className="block w-full h-auto"
                   />
@@ -593,7 +594,7 @@ export default function TBankCase({
                 style={{ marginTop: 24 }}
               >
                 <img loading="lazy"
-                  src="/covers/T-bank/10.webp"
+                  src={publicUrl('/covers/T-bank/10.webp')}
                   alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
                   className="block w-full h-auto"
                 />
@@ -614,7 +615,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/11.webp"
+                    src={publicUrl('/covers/T-bank/11.webp')}
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
                   />
@@ -637,7 +638,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
-                    src="/covers/T-bank/12.webp"
+                    src={publicUrl('/covers/T-bank/12.webp')}
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
                   />

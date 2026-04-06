@@ -2,6 +2,7 @@ import { useRef, useState, useLayoutEffect } from 'react';
 import type { CaseStudy, Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
 import { useLocale } from '../../context/LocaleContext';
+import { publicUrl } from '../../utils/publicUrl';
 
 /** Hard constraint: gap (px) between text block bottom and active card top. */
 const TEXT_TO_CARD_GAP_PX = 32;
@@ -223,13 +224,13 @@ function ResumeContent({ locale }: { locale: Locale }) {
               {locale === 'ru' ? 'Резюме' : 'Resume'}
             </h2>
             <a
-              href="/Resume/Kolysh%20Varvara%20Resume.pdf"
+              href={publicUrl('/Resume/Kolysh%20Varvara%20Resume.pdf')}
               target="_blank"
               rel="noopener noreferrer"
               download="Kolysh Varvara Resume.pdf"
               className="resume-download"
             >
-              <img src="/Icons/download.svg" alt={locale === 'ru' ? 'Скачать резюме' : 'Download resume'} />
+              <img src={publicUrl('/Icons/download.svg')} alt={locale === 'ru' ? 'Скачать резюме' : 'Download resume'} />
             </a>
           </div>
 
@@ -241,7 +242,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
 
             <div className="flex items-start gap-3">
               <img
-                src="/logos/Логотип_НИУ_ВШЭ 1.svg"
+                src={publicUrl('/logos/Логотип_НИУ_ВШЭ 1.svg')}
                 alt={locale === 'ru' ? 'НИУ ВШЭ' : 'HSE University'}
                 className="w-[44px] h-[44px] rounded-full object-contain shrink-0"
               />
@@ -262,7 +263,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
 
             <div className="flex items-start gap-3">
               <img
-                src="/logos/Логотип_СПбГУПТД 1.svg"
+                src={publicUrl('/logos/Логотип_СПбГУПТД 1.svg')}
                 alt={locale === 'ru' ? 'СПбГУПТД' : 'SPbSUITD'}
                 className="w-[44px] h-[44px] rounded-full object-contain shrink-0"
               />
