@@ -434,7 +434,7 @@ export default function LavkaCase({
                   className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Onboarding.png"
+                    src="/covers/YandexLavka materials/Onboarding.webp"
                     alt="Onboarding"
                     className="w-full object-cover"
                   />
@@ -503,7 +503,7 @@ export default function LavkaCase({
                   className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Scenario start.png"
+                    src="/covers/YandexLavka materials/Scenario start.webp"
                     alt={locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
                     className="w-full object-cover"
                   />
@@ -541,7 +541,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Invite.png"
+                    src="/covers/YandexLavka materials/Invite.webp"
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                     className="w-full object-cover"
                   />
@@ -584,7 +584,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Pay method.png"
+                    src="/covers/YandexLavka materials/Pay method.webp"
                     alt={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
                     className="w-full object-cover"
                   />
@@ -622,7 +622,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Common user screen.png"
+                    src="/covers/YandexLavka materials/Common user screen.webp"
                     alt={locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                     className="w-full object-cover"
                   />
@@ -665,7 +665,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Adress.png"
+                    src="/covers/YandexLavka materials/Adress.webp"
                     alt={locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
                     className="w-full object-cover"
                   />
@@ -708,7 +708,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Delivery.png"
+                    src="/covers/YandexLavka materials/Delivery.webp"
                     alt={locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
                     className="w-full object-cover"
                   />
@@ -726,7 +726,7 @@ export default function LavkaCase({
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Notification.png"
+                    src="/covers/YandexLavka materials/Notification.webp"
                     alt={locale === 'ru' ? 'Пуш-напоминание при задержке оплаты или сбора' : 'Push Reminder on Payment Delay'}
                     className="w-full object-cover"
                   />
@@ -769,7 +769,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Try again.png"
+                    src="/covers/YandexLavka materials/Try again.webp"
                     alt={locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
                     className="w-full object-cover"
                   />
@@ -813,21 +813,21 @@ export default function LavkaCase({
                 <div className="case-section-content hidden md:flex flex-col gap-[24px]">
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img loading="lazy"
-                      src="/covers/YandexLavka materials/Friends.png"
+                      src="/covers/YandexLavka materials/Friends.webp"
                       alt="Спецпредложения — друзья"
                       className="w-full object-cover"
                     />
                   </div>
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img loading="lazy"
-                      src="/covers/YandexLavka materials/Family.png"
+                      src="/covers/YandexLavka materials/Family.webp"
                       alt="Спецпредложения — семья"
                       className="w-full object-cover"
                     />
                   </div>
                   <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                     <img loading="lazy"
-                      src="/covers/YandexLavka materials/Collegues.png"
+                      src="/covers/YandexLavka materials/Collegues.webp"
                       alt="Спецпредложения — коллеги"
                       className="w-full object-cover"
                     />
@@ -871,7 +871,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Group.png"
+                    src="/covers/YandexLavka materials/Group.webp"
                     alt={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
                     className="w-full object-cover"
                   />
@@ -892,7 +892,7 @@ export default function LavkaCase({
                   className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
                 >
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Suggestion.png"
+                    src="/covers/YandexLavka materials/Suggestion.webp"
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
                     className="w-full object-cover"
                   />
@@ -935,7 +935,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Challenges.png"
+                    src="/covers/YandexLavka materials/Challenges.webp"
                     alt={locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
                     className="w-full object-cover"
                   />
@@ -973,7 +973,7 @@ export default function LavkaCase({
                 {/* Desktop/tablet */}
                 <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
                   <img loading="lazy"
-                    src="/covers/YandexLavka materials/Card.png"
+                    src="/covers/YandexLavka materials/Card.webp"
                     alt={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                     className="w-full object-cover"
                   />

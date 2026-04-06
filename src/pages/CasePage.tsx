@@ -6,8 +6,10 @@ import { useLocale } from '../context/LocaleContext';
 import { typograph } from '../utils/typograph';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { CaseStudy } from '../types';
-import LavkaCase from '../cases/lavka/LavkaCase';
-import TBankCase from '../cases/tbank/TBankCase';
+import { lazy, Suspense } from 'react';
+
+const LavkaCase = lazy(() => import('../cases/lavka/LavkaCase'));
+const TBankCase = lazy(() => import('../cases/tbank/TBankCase'));
 
 const NAV_ITEMS = [
   { id: 'section-context', label: { ru: 'Контекст', en: 'Context' } },
@@ -331,14 +333,14 @@ export function CasePage() {
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   className="w-full object-cover h-[360px] sm:h-[500px] md:h-[660px] lg:h-[860px]"
                   style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
                 />
               </div>
             ) : (
               <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#EFEFEF] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
-                <img loading="lazy"
+                <img loading="eager"
                   src={caseStudy.cover}
                   alt={caseStudy.title[locale]}
                   className="block w-full h-full object-cover"
@@ -584,27 +586,31 @@ export function CasePage() {
 
             {/* Онбординг обновления — 112px from previous block (88px margin + 24px parent gap = 112px) */}
             {caseStudy.id === 'yandex-lavka' && (
-              <LavkaCase
-                locale={locale}
-                benchmarkingLogos={benchmarkingLogos}
-                activePersona={activePersona}
-                setActivePersona={setActivePersona}
-                mobileOnboardingSlide={mobileOnboardingSlide}
-                onboardingScrollRef={onboardingScrollRef}
-                handleOnboardingScroll={handleOnboardingScroll}
-                activeTestChip={activeTestChip}
-                setActiveTestChip={setActiveTestChip}
-              />
+              <Suspense>
+                <LavkaCase
+                  locale={locale}
+                  benchmarkingLogos={benchmarkingLogos}
+                  activePersona={activePersona}
+                  setActivePersona={setActivePersona}
+                  mobileOnboardingSlide={mobileOnboardingSlide}
+                  onboardingScrollRef={onboardingScrollRef}
+                  handleOnboardingScroll={handleOnboardingScroll}
+                  activeTestChip={activeTestChip}
+                  setActiveTestChip={setActiveTestChip}
+                />
+              </Suspense>
             )}
 
             {caseStudy.id === 't-bank' && (
-              <TBankCase
-                locale={locale}
-                activePersona={activePersona}
-                setActivePersona={setActivePersona}
-                activeTbankTestChip={activeTbankTestChip}
-                setActiveTbankTestChip={setActiveTbankTestChip}
-              />
+              <Suspense>
+                <TBankCase
+                  locale={locale}
+                  activePersona={activePersona}
+                  setActivePersona={setActivePersona}
+                  activeTbankTestChip={activeTbankTestChip}
+                  setActiveTbankTestChip={setActiveTbankTestChip}
+                />
+              </Suspense>
             )}
 
           </section>
