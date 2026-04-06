@@ -188,7 +188,8 @@ export function CasePage() {
 
           {mobileSectionsOpen && (
             <div
-              className="absolute right-0 mt-2 w-[220px] rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.10)] border border-[var(--color-border)] overflow-hidden"
+              style={{ padding: '12px' }}
+              className="dropdown-enter absolute right-0 mt-2 flex flex-col gap-[8px] bg-white rounded-[14px] shadow-[0_4px_24px_rgba(0,0,0,0.12)] z-50 min-w-[220px] box-border"
             >
               {NAV_ITEMS.map(({ id, label }) => (
                 <button
@@ -199,15 +200,7 @@ export function CasePage() {
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     setMobileSectionsOpen(false);
                   }}
-                  className="w-full text-left"
-                  style={{
-                    padding: '12px 14px',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 14,
-                    fontWeight: activeSection === id ? 600 : 500,
-                    color: activeSection === id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                    backgroundColor: activeSection === id ? 'rgba(0,0,0,0.04)' : '#ffffff',
-                  }}
+                  className={`flex items-center w-full min-w-0 px-3 py-2 rounded-[10px] text-[13px] transition-colors duration-100 hover:bg-[var(--color-bg)] text-left ${activeSection === id ? 'font-semibold text-[var(--color-text-primary)] bg-[var(--color-bg)]' : 'font-medium text-[var(--color-text-secondary)]'}`}
                 >
                   {label[locale]}
                 </button>
