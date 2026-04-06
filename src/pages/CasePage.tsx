@@ -333,8 +333,7 @@ export function CasePage() {
                   muted
                   loop
                   playsInline
-                  preload="none"
-                  poster={caseStudy.cover}
+                  preload="metadata"
                   className="w-full object-cover h-[360px] sm:h-[500px] md:h-[660px] lg:h-[860px]"
                   style={{ transform: 'scale(1.06)', objectPosition: 'center' }}
                 />
