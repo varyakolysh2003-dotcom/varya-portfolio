@@ -58,8 +58,17 @@ export function PortfolioLayout() {
     <>
       {/* Desktop layout — hidden on mobile/tablet */}
       <div
-        className="portfolio-container page-enter min-h-dvh bg-[var(--color-bg)] hidden lg:flex items-center justify-center"
-        style={{ paddingLeft: 60, paddingRight: 60, paddingTop: 24, paddingBottom: 24 }}
+        className="portfolio-container page-enter bg-[var(--color-bg)] hidden lg:flex justify-center"
+        style={{
+          paddingLeft: 60,
+          paddingRight: 60,
+          /* Dynamic vertical padding: centers the 771px inner block at tall viewports
+             (≥ 819px) and collapses to 24px minimum at short ones so the page scrolls
+             instead of squeezing — flex items-center is intentionally NOT used here
+             because it repositions content as the viewport changes (the "pulling" effect). */
+          paddingTop: 'max(24px, (100dvh - 771px) / 2)',
+          paddingBottom: 'max(24px, (100dvh - 771px) / 2)',
+        }}
       >
         <div
           className="portfolio-inner flex gap-[20px] w-full max-w-[1362px]"
