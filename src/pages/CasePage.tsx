@@ -156,10 +156,10 @@ export function CasePage() {
     <>
     <ScrollToTop />
 
-    {/* Mobile sticky sections menu — hidden at the nav breakpoint (1320px+) */}
+    {/* Mobile sticky sections menu — hidden at 1500px+ where fixed side nav appears */}
     {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
       <nav
-        className="nav:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
+        className="min-[1500px]:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
         style={{ padding: '10px 16px' }}
       >
         <div className="relative" ref={mobileSectionsRef}>
@@ -215,40 +215,40 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col items-center nav:flex-row nav:justify-center nav:items-start nav:gap-[48px] pt-[64px] nav:pt-0 pb-[84px] px-4 md:px-8 nav:px-[60px]">
+    {/* Fixed side navigation — only visible at 1500px+ where content clears it naturally */}
+    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+      <nav
+        className="hidden min-[1500px]:flex flex-col gap-[12px] fixed z-40"
+        style={{ top: 120, left: 56, width: 230 }}
+      >
+        {NAV_ITEMS.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            onClick={() => scrollTo(id)}
+            className="text-left whitespace-nowrap bg-transparent border-none cursor-pointer p-0 m-0 w-full min-w-0"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 20,
+              fontWeight: activeSection === id ? 600 : 500,
+              lineHeight: 1.3,
+              color: activeSection === id
+                ? 'var(--color-text-primary)'
+                : 'var(--color-text-secondary)',
+            }}
+          >
+            {label[locale]}
+          </button>
+        ))}
+      </nav>
+    )}
 
-      {/* In-flow side navigation — only rendered at 1320px+ */}
-      {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
-        <nav
-          className="hidden nav:flex flex-col gap-[12px] sticky shrink-0 self-start"
-          style={{ width: 230, top: 120, paddingTop: 32 }}
-        >
-          {NAV_ITEMS.map(({ id, label }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => scrollTo(id)}
-              className="text-left whitespace-nowrap bg-transparent border-none cursor-pointer p-0 m-0 w-full min-w-0"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 20,
-                fontWeight: activeSection === id ? 600 : 500,
-                lineHeight: 1.3,
-                color: activeSection === id
-                  ? 'var(--color-text-primary)'
-                  : 'var(--color-text-secondary)',
-              }}
-            >
-              {label[locale]}
-            </button>
-          ))}
-        </nav>
-      )}
+    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col items-center pt-[64px] min-[1500px]:pt-0 pb-[84px] px-4 md:px-8 xl:px-[60px]">
 
-      <div className="max-w-[880px] w-full nav:pt-[32px]">
+      <div className="max-w-[880px] w-full min-[1500px]:pt-[32px]">
         <Link
           to="/"
-          className="hidden nav:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
+          className="hidden min-[1500px]:inline-flex items-center gap-2 font-sans font-semibold text-[20px] text-[var(--color-text-primary)] no-underline hover:underline"
         >
           <img loading="eager" src="/Icons/arrow-sm-left.svg" alt="" className="w-5 h-5" />
           {locale === 'ru' ? 'Назад' : 'Back'}
