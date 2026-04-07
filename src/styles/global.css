@@ -21,20 +21,20 @@
 }
 
 /* Responsive media radius token:
-   mobile: 24px
-   tablet: 32px
-   desktop: 52px
+   mobile: 16px
+   tablet: 20px
+   desktop: 28px
 */
 :root {
-  --radius-media: 24px;
+  --radius-media: 16px;
 }
 
 @media (min-width: 768px) and (max-width: 1023.98px) {
-  :root { --radius-media: 32px; }
+  :root { --radius-media: 20px; }
 }
 
 @media (min-width: 1024px) {
-  :root { --radius-media: 52px; }
+  :root { --radius-media: 28px; }
 }
 
 @layer base {
