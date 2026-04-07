@@ -134,6 +134,14 @@ export default function LavkaCase({
     setMobileStatusesSlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
+  const [mobileSuggestionSlide, setMobileSuggestionSlide] = useState(0);
+  const suggestionScrollRef = useRef<HTMLDivElement>(null);
+  const handleSuggestionScroll = useCallback(() => {
+    const el = suggestionScrollRef.current;
+    if (!el) return;
+    setMobileSuggestionSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
   return (
     <>
             {/* Бенчмаркинг — 112px from previous block (88px margin + 24px parent gap = 112px) */}
@@ -889,13 +897,34 @@ export default function LavkaCase({
                     ? typograph('После завершения первого совместного заказа появляется предложение создать постоянную группу')
                     : typograph('After completing the first shared order, an offer to create a permanent group appears')}
                 </p>
-                <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
-                >
+                {/* Mobile: swipeable carousel */}
+                <div className="case-section-content md:hidden">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
+                    <div ref={suggestionScrollRef} onScroll={handleSuggestionScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                      {[41].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img loading="lazy"
+                            src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
+                            style={{ height: '460px', width: 'auto', borderRadius: '20px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0].map((i) => (
+                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileSuggestionSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop/tablet */}
+                <div className="case-section-content hidden md:flex items-center justify-center w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]" style={{ minHeight: '500px' }}>
                   <img loading="lazy"
-                    src={publicUrl('/covers/YandexLavka materials/Suggestion.webp')}
+                    src={publicUrl('/covers/YandexLavka materials/Mobile/41.webp')}
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                    className="w-full object-cover"
+                    style={{ height: '460px', width: 'auto', borderRadius: '20px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                   />
                 </div>
               </div>
