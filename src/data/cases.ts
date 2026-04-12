@@ -7,8 +7,8 @@ export const siteContent: SiteContent = {
     en: 'Varvara Kolysh',
   },
   role: {
-    ru: 'Продуктовый и веб дизайнер',
-    en: 'Product & Web Designer',
+    ru: 'Продуктовый дизайнер',
+    en: 'Product Designer',
   },
   tagline: {
     ru: 'Проектирую end-to-end продуктовые сценарии для финтеха и фудтеха',
@@ -22,7 +22,10 @@ export const siteContent: SiteContent = {
     ru: 'Образование, опыт, навыки, достижения',
     en: 'Education, experience, skills, achievements',
   },
-  resumeUrl: publicUrl('/Resume/Kolysh%20Varvara%20Resume.pdf'),
+  resumeUrl: {
+    ru: publicUrl('/Resume/%D0%9A%D0%BE%D0%BB%D1%8B%D1%88%20%D0%92%D0%B0%D1%80%D0%B2%D0%B0%D1%80%D0%B0%20%D0%A0%D0%B5%D0%B7%D1%8E%D0%BC%D0%B5_ru.pdf'),
+    en: publicUrl('/Resume/Kolysh%20Varvara%20Resume_eng.pdf'),
+  },
   contactLabel: {
     ru: 'Написать мне',
     en: 'Contact me',

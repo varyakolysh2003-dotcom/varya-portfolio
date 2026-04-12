@@ -50,7 +50,7 @@ export function CasePage() {
   ];
 
   const [activeSection, setActiveSection] = useState<string>(NAV_ITEMS[0].id);
-  const [activePersona, setActivePersona] = useState<'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh'>('families');
+  const [activePersona, setActivePersona] = useState<'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh' | 'patterns'>('families');
   const [activeTestChip, setActiveTestChip] = useState(0);
   const [activeTbankTestChip, setActiveTbankTestChip] = useState(0);
   const [mobileOnboardingSlide, setMobileOnboardingSlide] = useState(0);
@@ -344,6 +344,29 @@ export function CasePage() {
             )}
           </section>
 
+          {/* Ситуация — T-Bank only */}
+          {caseStudy.id === 't-bank' && (
+            <section style={{ display: 'none' }}>
+              <div className="flex flex-col gap-[8px]">
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Ситуация' : 'Situation'}
+                </h2>
+                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Моя подруга-иностранка хотела оплатить товар в рассрочку через Т-банк, но, открыв форму заполнения личных данных, не увидела возможности внести удобный для неё формат документов или получить информацию об условиях рассрочки для иностранцев.')
+                      : typograph('My foreign friend wanted to pay for a product in installments through T-Bank, but when she opened the personal data form, she did not find an option to enter her document format or get information about installment terms for foreigners.')}
+                  </p>
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Как позже выяснилось, форма подачи заявки не предусматривает сценарий для иностранцев, легально пребывающих на территории РФ, поэтому мне захотелось переосмыслить процесс получения рассрочки с учётом условий, наличия кредитной карты и особенностей формы заполнения заявки.')
+                      : typograph('As it turned out, the application form does not account for the scenario of foreigners legally residing in Russia — which made me want to rethink the installment process with consideration for the terms, credit card availability, and the specifics of the application form.')}
+                  </p>
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Контекст задачи — standalone block */}
           <section id="section-context" style={{ marginTop: 24, scrollMarginTop: 32 }}>
             <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24 }}>
@@ -367,8 +390,8 @@ export function CasePage() {
                 <div className="flex flex-col gap-[8px]">
                   <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                     {locale === 'ru'
-                      ? typograph('Согласно законодательству РФ, иностранные граждане могут оформлять кредиты и рассрочки при наличии документов, подтверждающих легальное пребывание (ВНЖ, РВП, миграционная регистрация и\u00A0т.д.). При этом на практике значительная часть банков по-прежнему требует личного визита в отделение для подтверждения личности и документов.')
-                      : typograph('According to Russian legislation, foreign citizens can apply for loans and installments with documents confirming legal residence (residence permit, temporary residence permit, migration registration, etc.). In practice, however, a significant number of banks still require an in-person visit to a branch for identity and document verification.')}
+                      ? typograph('Согласно законодательству РФ, иностранные граждане могут оформлять кредиты и рассрочки при наличии документов, подтверждающих легальное пребывание на территории страны. Но на практике выясняется, что:')
+                      : typograph('According to Russian legislation, foreign citizens can apply for loans and installments with documents confirming legal residence in the country. In practice, however:')}
                   </p>
                   <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                     <p className="m-0">{locale === 'ru' ? typograph('1. около 60–70% банков РФ требуют очную идентификацию нерезидентов при оформлении кредитных продуктов') : typograph('1. approximately 60–70% of Russian banks require in-person identification of non-residents when applying for credit products')}</p>

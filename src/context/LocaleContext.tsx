@@ -3,13 +3,19 @@ import type { Locale } from '../types';
 
 const STORAGE_KEY = 'portfolio-locale';
 
+function detectLocale(): Locale {
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language];
+  return langs.some(l => l.toLowerCase().startsWith('ru')) ? 'ru' : 'en';
+}
+
 function readStoredLocale(): Locale {
   try {
-    if (localStorage.getItem(STORAGE_KEY) === 'en') return 'en';
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'ru' || stored === 'en') return stored;
   } catch {
     /* ignore */
   }
-  return 'ru';
+  return detectLocale();
 }
 
 type LocaleContextValue = {

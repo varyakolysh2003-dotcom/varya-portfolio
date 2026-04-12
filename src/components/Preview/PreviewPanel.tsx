@@ -22,7 +22,7 @@ export function PreviewPanel({ activeCase, cases, showResume, onResumeEnter, onR
   const { locale } = useLocale();
   return (
     <main
-      className="portfolio-section w-full lg:flex-[736_1_0%] min-w-0 lg:max-w-[736px] h-auto lg:h-full bg-[var(--color-preview)] rounded-[var(--radius-media)] overflow-hidden relative flex flex-col shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+      className="portfolio-section w-full lg:flex-[736_1_0%] min-w-0 lg:max-w-[736px] h-auto lg:h-full bg-[var(--color-preview)] rounded-[var(--radius-media)] overflow-hidden relative flex flex-col shadow-[0_0_4px_rgba(0,0,0,0.08)] isolate"
       onMouseEnter={showResume ? onResumeEnter : undefined}
       onMouseLeave={showResume ? onResumeLeave : undefined}
     >
@@ -216,7 +216,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
   return (
     <div className="flex flex-col min-h-0 absolute inset-0">
       {/* Scrollable resume content — fills entire card so scroll clips at visual boundary */}
-      <div className="flex-1 overflow-y-auto min-h-0" style={{ padding: '24px 23px 0 24px', scrollbarWidth: 'thin', scrollbarColor: '#d4d4d4 transparent' }}>
+      <div className="no-scrollbar flex-1 overflow-y-auto min-h-0" style={{ padding: '24px 23px 0 24px' }}>
         <div className="flex flex-col pb-16">
           {/* Title + download button */}
           <div className="relative">
@@ -224,10 +224,12 @@ function ResumeContent({ locale }: { locale: Locale }) {
               {locale === 'ru' ? 'Резюме' : 'Resume'}
             </h2>
             <a
-              href={publicUrl('/Resume/Kolysh%20Varvara%20Resume.pdf')}
+              href={locale === 'ru'
+                ? publicUrl('/Resume/%D0%9A%D0%BE%D0%BB%D1%8B%D1%88%20%D0%92%D0%B0%D1%80%D0%B2%D0%B0%D1%80%D0%B0%20%D0%A0%D0%B5%D0%B7%D1%8E%D0%BC%D0%B5_ru.pdf')
+                : publicUrl('/Resume/Kolysh%20Varvara%20Resume_eng.pdf')}
               target="_blank"
               rel="noopener noreferrer"
-              download="Kolysh Varvara Resume.pdf"
+              download={locale === 'ru' ? 'Колыш Варвара Резюме_ru.pdf' : 'Kolysh Varvara Resume_eng.pdf'}
               className="resume-download"
             >
               <img src={publicUrl('/Icons/download.svg')} alt={locale === 'ru' ? 'Скачать резюме' : 'Download resume'} />

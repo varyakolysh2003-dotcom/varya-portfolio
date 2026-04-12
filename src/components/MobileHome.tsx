@@ -39,11 +39,11 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
       {/* ── Resume link ── */}
       <section className="mt-6">
         <a
-          href={siteContent.resumeUrl}
+          href={siteContent.resumeUrl[locale] ?? siteContent.resumeUrl.en}
           target="_blank"
           rel="noopener noreferrer"
           download
-          className="flex items-center justify-between gap-3 w-full bg-white rounded-[16px] shadow-[0_0_6px_rgba(0,0,0,0.09)] no-underline"
+          className="flex items-center justify-between gap-3 w-full bg-white rounded-[16px] shadow-[0_0_4px_rgba(0,0,0,0.08)] no-underline"
           style={{ padding: '12px 16px' }}
         >
           <div className="flex-1 min-w-0">
@@ -97,7 +97,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
               type="button"
               disabled={isDisabled}
               onClick={() => !isDisabled && navigate(`/cases/${cs.id}`)}
-              className="w-full text-left bg-white rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.09)] transition-transform duration-150 active:scale-[0.98] disabled:opacity-100"
+              className="w-full text-left bg-white rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_4px_rgba(0,0,0,0.08)] transition-transform duration-150 active:scale-[0.98] disabled:opacity-100"
             >
               {/* Cover image */}
               <div className="w-full aspect-[16/10] overflow-hidden bg-[#F0F0F0]">

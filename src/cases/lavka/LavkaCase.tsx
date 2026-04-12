@@ -4,7 +4,17 @@ import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
 import { publicUrl } from '../../utils/publicUrl';
 
-export type LavkaPersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
+/** Lavka testing block: prototype screens per chip index (0–5). */
+const LAVKA_TESTING_IMAGES = [
+  publicUrl('/covers/YandexLavka materials/1.webp'),
+  publicUrl('/covers/YandexLavka materials/2.webp'),
+  publicUrl('/covers/YandexLavka materials/3.webp'),
+  publicUrl('/covers/YandexLavka materials/4.webp'),
+  publicUrl('/covers/YandexLavka materials/5.webp'),
+  publicUrl('/covers/YandexLavka materials/6.webp'),
+] as const;
+
+export type LavkaPersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh' | 'patterns';
 
 export function LavkaTaskContextBody({ locale }: { locale: Locale }) {
   return (
@@ -207,7 +217,7 @@ export default function LavkaCase({
             <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Custdev и анализ персон' : 'Custdev and Persona Analysis'}
+                  {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
                 </h2>
                 {/* Link temporarily hidden — table not ready yet */}
                 <a
@@ -728,7 +738,7 @@ export default function LavkaCase({
               <div className="flex flex-col" style={{ marginTop: 64 }}>
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
-                    ? (<>Как только пользователь задерживает сбор или оплату заказа, ему приходит пуш-напоминание.<br />Если он остается последним без оплаты, дается 20 минут на завершение перед отменой позиций</>)
+                    ? (<>Как только пользователь задерживает сбор или оплату заказа, ему приходит пуш-напоминание.<br />Если он остается последним неоплатившим участником, у него есть 20 минут на завершение оплаты, после чего его позиции в заказе отменяются.</>)
                     : typograph('When a user delays collection or payment, they receive a push reminder. If they\'re the last one unpaid, they get 20 minutes to complete before items are cancelled')}
                 </p>
                 <div
@@ -1017,7 +1027,7 @@ export default function LavkaCase({
                 </h2>
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
-                    ? typograph('Для проверки гипотез был разработан интерактивный прототип функции совместной корзины. Пользовательский сценарий включал добавление товаров, отправку ссылки участникам и\u00A0совместное оформление заказа. Прототип был протестирован на\u00A0респондентах, участвовавших в\u00A0CustDev-исследовании')
+                    ? typograph('Для проверки гипотез был разработан интерактивный прототип функции совместной корзины. Прототип был протестирован на респондентах, участвовавших в CustDev-исследовании')
                     : typograph('To validate hypotheses, an interactive prototype of the shared cart feature was developed. The user scenario included adding items, sending a link to participants, and placing a joint order. The prototype was tested on respondents who participated in the CustDev study.')}
                 </p>
 
@@ -1160,12 +1170,15 @@ export default function LavkaCase({
                       className={`flex ${activeTestChip === 4 ? 'items-start pt-0' : 'items-end pt-[24px]'} justify-center px-[24px] pb-0 md:pl-0 md:pr-[24px] md:pt-[24px] md:pb-0`}
                       style={activeTestChip === 4 ? { paddingTop: 0 } : undefined}
                     >
-                      <img loading="lazy"
-                        src={activeTestChip === 1 ? publicUrl('/covers/YandexLavka materials/2.webp') : activeTestChip === 2 ? publicUrl('/covers/YandexLavka materials/3.webp') : activeTestChip === 3 ? publicUrl('/covers/YandexLavka materials/4.webp') : activeTestChip === 4 ? publicUrl('/covers/YandexLavka materials/5.webp') : activeTestChip === 5 ? publicUrl('/covers/YandexLavka materials/6.webp') : publicUrl('/covers/YandexLavka materials/1.webp')}
-                        alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
-                        className="h-auto object-contain"
-                        style={{ display: 'block', maxWidth: '85%', margin: 0 }}
-                      />
+                      {LAVKA_TESTING_IMAGES.map((src, idx) => (
+                        <img
+                          key={src}
+                          src={src}
+                          alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
+                          className="h-auto object-contain"
+                          style={{ display: activeTestChip === idx ? 'block' : 'none', maxWidth: '85%', margin: 0 }}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>

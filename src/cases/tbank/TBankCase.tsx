@@ -13,14 +13,12 @@ const TBANK_TESTING_PROTOTYPE_IMAGES = [
 ] as const;
 
 const TBANK_TRANSLATION_VARIANTS = [
-  { label: 'Kazakh', src: publicUrl('/covers/T-bank/Kazakhskyu.webp') },
   { label: 'Kyrgyz', src: publicUrl('/covers/T-bank/Kyrgyzskyu.webp') },
   { label: 'Tajik', src: publicUrl('/covers/T-bank/Tadjitsky.webp') },
   { label: 'Uzbek', src: publicUrl('/covers/T-bank/Uzbekskyu.webp') },
-  { label: 'Belarusian', src: publicUrl('/covers/T-bank/Belorussky.webp') },
 ] as const;
 
-type PersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh';
+type PersonaId = 'families' | 'friends' | 'colleagues' | 'couples' | 'students' | 'rvp' | 'vnzh' | 'patterns';
 
 type TBankCaseProps = {
   locale: Locale;
@@ -75,22 +73,8 @@ export default function TBankCase({
                 </div>
               </div>
 
-            {/* Пути решения — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Пути решения' : 'Solution Paths'}
-                </h2>
-                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  <p className="m-0">1. {locale === 'ru' ? typograph('Выбор типа документа: иностранный паспорт, РВП, ВНЖ') : typograph('Document type selection: foreign passport, temporary residence permit, permanent residence permit, arrival registration')}</p>
-                  <p className="m-0">2. {locale === 'ru' ? typograph('Если у иностранного гражданина уже имеется кредитная карта Т-Банка, она может помочь в проведении скоринга анализа транзакционной активности по карте, личности и статуса') : typograph('If a foreign citizen already has a T-Bank credit card, it can help with scoring analysis of card transaction activity, identity and status')}</p>
-                  <p className="m-0">3. {locale === 'ru' ? typograph('Указать, что на шанс повышения одобрения рассрочки может повлиять открытие кредитной карты и положительная КИ') : typograph('Indicate that opening a credit card and a positive credit history can increase the chance of installment approval')}</p>
-                  <p className="m-0">4. {locale === 'ru' ? typograph('Указать, что шанс одобрения рассрочки повышается, если у потребителя имеется ВНЖ') : typograph('Indicate that the chance of installment approval increases if the consumer has a permanent or temporary residence permit')}</p>
-                  <p className="m-0">5. {locale === 'ru' ? typograph('Уконкретить условия оформления рассрочки для иностранцев') : typograph('Specify the installment terms for foreign citizens')}</p>
-                </div>
-              </div>
-
             {/* Основные ограничения — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 48 }}>
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Основные ограничения' : 'Key Limitations'}
                 </h2>
@@ -99,21 +83,6 @@ export default function TBankCase({
                     {locale === 'ru'
                       ? typograph('Иностранцы проходят ручное или полуавтоматизированное подтверждение: загранпаспорт, документ о легальности пребывания и SIM-карта РФ — без таких документов рассрочка не подключится')
                       : typograph('Foreign citizens go through manual or semi-automated verification: foreign passport, legal residency document and Russian SIM card — without these documents, installment cannot be activated')}
-                  </p>
-                  <p className="m-0">
-                    {locale === 'ru'
-                      ? typograph('В поддержке ответили, что именно нужно, чтобы у\u00A0иностранца была возможность оформить такую же карту, мне ответили почти дословно так:')
-                      : typograph('Support replied what exactly is needed for a foreign citizen to apply for a similar card, they responded almost verbatim:')}
-                  </p>
-                  <p className="m-0">
-                    {locale === 'ru'
-                      ? typograph('— кредитную карту для иностранца вероятнее одобрят при наличии дебетовой карты с\u00A0оборотом покупок и\u00A0прочих операций — то есть, чтобы просто было видно, что клиент-иностранец пользуется картой и\u00A0она не\u00A0пылится на\u00A0полке')
-                      : typograph('— a credit card for a foreigner is more likely to be approved with an active debit card with purchase and transaction turnover — meaning it should simply be visible that the foreign client uses the card')}
-                  </p>
-                  <p className="m-0">
-                    {locale === 'ru'
-                      ? typograph('— актуальные данные всех документов, причем это все можно проверить в\u00A0профиле приложения')
-                      : typograph('— up-to-date data of all documents, which can all be verified in the app profile')}
                   </p>
                   <p className="m-0">
                     {locale === 'ru'
@@ -165,13 +134,8 @@ export default function TBankCase({
                 <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <p className="m-0">
                     {locale === 'ru'
-                      ? typograph('«Теперь про саму кредитную карту для иностранных граждан. Мне одобрили лимит 60\u00A0000\u00A0рублей. Беспроцентный период до\u00A055\u00A0дней и\u00A0работает это так: покупаешь в\u00A0течение месяца после выписки, и\u00A0потом у\u00A0тебя есть 25\u00A0дней на\u00A0погашение до\u00A0даты платежа. Тут еще раз спасибо поддержке за\u00A0понятные объяснения. Интересно, что перевод денег с\u00A0кредитки на\u00A0дебетовую или любым другим людям в\u00A0другие банки по\u00A0СБП — тоже входит в\u00A0беспроцентный период как и\u00A0покупки, в\u00A0том числе за\u00A0границу. То есть, с\u00A0кредитки можно в\u00A0беспроцентный период перевести деньги на\u00A0родину. Знаю что коллеги из\u00A0других стран так тоже делают»')
-                      : typograph('"Now about the credit card itself for foreign citizens. I was approved for a 60,000 ruble limit. Interest-free period up to 55 days and it works like this: you buy within a month after the statement, and then you have 25 days to repay before the payment date. Thanks again to support for clear explanations. Interestingly, transferring money from the credit card to a debit card or to anyone else via SBP is also included in the interest-free period, just like purchases, including abroad. That is, you can transfer money home during the interest-free period. I know colleagues from other countries do the same."')}
-                  </p>
-                  <p className="m-0">
-                    {locale === 'ru'
-                      ? typograph('«Банку тогда предоставил паспорт и\u00A0миграционку, потому что сразу знал, что срок пребывания будет дольше 90\u00A0дней (вообще не\u00A0знаю как у\u00A0всех иностранных граждан, но\u00A0белорусам можно без\u00A0проблем находиться в\u00A0России без\u00A0миграционки, но\u00A0до\u00A0определенного срока пребывания).»')
-                      : typograph('"I provided the bank with my passport and migration card, because I knew right away that my stay would be longer than 90 days (I don\'t know about all foreign citizens, but Belarusians can stay in Russia without a migration card, but up to a certain period of stay)."')}
+                      ? typograph('«Мне одобрили кредитную карту с\u00A0лимитом 60\u00A0000\u00A0рублей и\u00A0льготным периодом до\u00A055\u00A0дней. В\u00A0течение этого срока можно пользоваться деньгами без\u00A0процентов. Условия распространяются на\u00A0покупки по\u00A0карте. Важно вовремя погашать задолженность, чтобы не\u00A0начислялись проценты»')
+                      : typograph('"I was approved for a credit card with a 60,000 ruble limit and an interest-free period of up to 55 days. During this period, you can use the funds without paying interest. The terms apply to card purchases. It is important to repay the debt on time to avoid interest charges."')}
                   </p>
                   <a
                     href="https://vc.ru/life/2132957-kredit-dlya-inostrannyh-grazhdan-v-tinkoff?utm_source=chatgpt.com"
@@ -187,11 +151,49 @@ export default function TBankCase({
                 </div>
               </div>
 
+            {/* Важность развития услуг иностранцам — T-Bank only */}
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88 }}>
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Преимущество развития иностранных услуг кредитования для бизнеса' : 'Why developing services for foreigners matters for business'}
+                </h2>
+                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Сегмент иностранных граждан в\u00A0России остается недоохваченным в\u00A0цифровых банковских сценариях, несмотря на\u00A0его заметный размер и\u00A0платежеспособность. Для части пользователей с\u00A0легальным статусом пребывания банковские продукты уже доступны, но\u00A0часто не\u00A0адаптирован под особенности документов, языка и\u00A0требований к\u00A0данным')
+                      : typograph('The segment of foreign nationals in Russia remains underserved in digital banking scenarios, despite its notable size and purchasing power. For users with legal residency status, banking products are already available, but are often not adapted to the specifics of their documents, language, and data requirements.')}
+                  </p>
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Адаптация сценария оформления под иностранных пользователей может дать бизнесу несколько эффектов:')
+                      : typograph('Adapting the onboarding flow for foreign users can deliver several business outcomes:')}
+                  </p>
+                  <div className="flex flex-col gap-[4px]">
+                    {(locale === 'ru' ? [
+                      '— Снизить drop-off на\u00A0этапе заполнения заявки;',
+                      '— Сократить количество невалидных и\u00A0брошенных анкет;',
+                      '— Повысить заинтересованность в\u00A0развитии кредитной истории через кредитную карту для иностранцев',
+                      '— Сделать маршрутизацию в\u00A0релевантный продукт более точной (только проверенные источники)',
+                      '— Повысить конверсию в\u00A0доступные кредитные сценарии внутри экосистемы банка',
+                      '— Увеличить доверие и\u00A0лояльность',
+                    ] : [
+                      '— Reduce drop-off at the application stage;',
+                      '— Decrease the number of invalid and abandoned applications;',
+                      '— Increase interest in building credit history through a credit card for foreigners',
+                      '— Make routing to the relevant product more precise (verified sources only)',
+                      "— Improve conversion into available credit scenarios within the bank's ecosystem",
+                      '— Build trust and loyalty',
+                    ]).map((item, i) => (
+                      <p key={i} className="m-0">{typograph(item)}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             {/* Custdev и анализ персон — T-Bank only */}
             <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 84 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Custdev и анализ персон' : 'Custdev and Persona Analysis'}
+                  {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
                 </h2>
                 {/* Link temporarily hidden — table not ready yet
                 <a
@@ -205,7 +207,7 @@ export default function TBankCase({
                 */}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px] md:items-start">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px]">
                 {/* Left column — persona tab cards */}
                 <div className="no-scrollbar flex flex-row gap-[8px] overflow-x-auto pb-[2px] md:flex-col md:overflow-visible md:pb-0 md:gap-[24px]">
                   {([
@@ -254,50 +256,95 @@ export default function TBankCase({
                       </p>
                     </button>
                   ))}
+                  {/* Общие паттерны — third interactive card */}
+                  <button
+                    type="button"
+                    onClick={(e) => { setActivePersona('patterns'); if (window.innerWidth < 768) {
+          const btn = e.currentTarget;
+          const c = btn.parentElement;
+          if (c) {
+            const peek = 44;
+            const bL = btn.offsetLeft;
+            const bR = bL + btn.offsetWidth;
+            const goRight = (bL + btn.offsetWidth / 2) >= (c.scrollLeft + c.clientWidth / 2);
+            const max = c.scrollWidth - c.clientWidth;
+            let next = c.scrollLeft;
+            if (goRight) { const t = bR + peek - c.clientWidth; if (t > next) next = t; }
+            else { const t = bL - peek; if (t < next) next = t; }
+            c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
+          }
+        } }}
+                    className="rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
+                    style={{
+                      backgroundColor: activePersona === 'patterns' ? '#000000' : '#F8F8F8',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <h3
+                      className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
+                      style={{ color: activePersona === 'patterns' ? '#ffffff' : 'var(--color-text-primary)' }}
+                    >
+                      {locale === 'ru' ? 'Общие паттерны' : 'Common Patterns'}
+                    </h3>
+                  </button>
                 </div>
 
                 {/* Right column — single insight card, content switches */}
-                <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+                <div className="bg-[#F5F5F5] rounded-[24px] h-full" style={{ padding: 24 }}>
                   <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
-                    {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
+                    {activePersona === 'patterns'
+                      ? (locale === 'ru' ? 'Выводы паттернов сегментов' : 'Segment Pattern Conclusions')
+                      : (locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights')}
                   </h3>
                   <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
                     <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
                       {({
                         rvp: locale === 'ru' ? typograph('Находятся в переходном статусе: уже работают, но ограничены в доступе к кредитным продуктам из-за временного характера разрешения') : typograph('In a transitional status: already employed, but limited in access to credit products due to the temporary nature of their permit'),
                         vnzh: locale === 'ru' ? typograph('Наиболее интегрированный сегмент: имеют стабильный доход, пользуются банковскими продуктами, но сталкиваются с отказами и ограничениями') : typograph('The most integrated segment: have stable income, use banking products, but face rejections and restrictions atypical for citizens'),
+                        patterns: locale === 'ru' ? typograph('Общие выводы по всем сегментам') : typograph('Common conclusions across all segments'),
                       } as Record<string, string>)[activePersona] ?? ''}
                     </p>
                     {activePersona === 'rvp' && (
                       <>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Статус РВП создаёт неопределённост,пользователь уже зарабатывает и тратит, но не может получить рассрочку на стандартных условиях') : typograph('TRP status creates uncertainty: the user already earns and spends locally but cannot get a loan, mortgage, or installment plan on standard terms')}
+                          — {locale === 'ru' ? typograph('Статус РВП создает неопределенность, пользователь уже зарабатывает и тратит, но не может получить рассрочку на стандартных условиях') : typograph('TRP status creates uncertainty: the user already earns and spends locally but cannot get a loan, mortgage, or installment plan on standard terms')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Паттерн переводов двунаправленный: часть дохода отправляется семье, часть остаётся на локальные нужды — продукт должен поддерживать оба сценария') : typograph('Transfer pattern is bidirectional: part of income is sent to family, part stays for local needs — the product must support both scenarios')}
+                          — {locale === 'ru' ? typograph('Паттерн переводов двунаправленный — часть дохода отправляется семье, часть остается на локальные нужды — продукт должен поддерживать оба сценария') : typograph('Transfer pattern is bidirectional: part of income is sent to family, part stays for local needs — the product must support both scenarios')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Языковой барьер в интерфейсах и документах остаётся критичным: ошибки в заполнении форм приводят к отказам, которые воспринимаются как дискриминация') : typograph('Language barrier in interfaces and documents remains critical: errors in filling out forms lead to rejections perceived as discrimination')}
+                          — {locale === 'ru' ? typograph('Языковой барьер в интерфейсах и документах остается критичным для мигрантов с слабым уровнем русского языка') : typograph('Language barrier in interfaces and documents remains critical for migrants with a low level of Russian')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Ожидания от продукта: прозрачные условия, предсказуемые комиссии и понятный статус заявки — без скрытых требований, которые выясняются только при отказе') : typograph('Product expectations: transparent terms, predictable fees, and clear application status — no hidden requirements discovered only upon rejection')}
+                          — {locale === 'ru' ? typograph('Ожидают от продукта прозрачных условий, предсказуемые комиссии и понятный статус заявки') : typograph('Expect transparent terms, predictable fees, and clear application status from the product')}
                         </p>
                       </>
                     )}
                     {activePersona === 'vnzh' && (
                       <>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Несмотря на стабильный статус, ВНЖ не приравнивается к гражданству в скоринговых моделях банков — это ключевой friction point при попытке получить кредитные продукты') : typograph('Despite stable status, residence permit is not equated to citizenship in bank scoring models — this is the key friction point when trying to obtain credit products')}
+                          — {locale === 'ru' ? typograph('Несмотря на стабильный статус, ВНЖ не приравнивается к гражданству в скоринговых моделях банков, что является ключевой friction point при попытке получить кредитные продукты') : typograph('Despite stable status, residence permit is not equated to citizenship in bank scoring models — this is the key friction point when trying to obtain credit products')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Долгосрочное планирование возможно, но ограничено, пользователи готовы к ипотеке и инвестициям, однако банки не предлагают адаптированных продуктов под этот сегмент') : typograph('Long-term planning is possible but limited: users are ready for mortgages and investments, yet banks do not offer adapted products for this segment')}
+                          — {locale === 'ru' ? typograph('Долгосрочное планирование возможно, но ограничено, пользователи готовы к ипотеке и инвестициям, однако не все банки предлагают адаптированных продуктов под этот сегмент') : typograph('Long-term planning is possible but limited: users are ready for mortgages and investments, yet not all banks offer adapted products for this segment')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                          — {locale === 'ru' ? typograph('Переводы за рубеж сохраняются, но их доля в бюджете снижается — растёт потребность в локальных финансовых инструментах') : typograph('International transfers persist but their share of the budget decreases — demand grows for local financial instruments: savings accounts, insurance, subscriptions')}
+                          — {locale === 'ru' ? typograph('Переводы за рубеж сохраняются, но их доля в бюджете снижается — растет потребность в локальных финансовых инструментах') : typograph('International transfers persist but their share of the budget decreases — demand grows for local financial instruments: savings accounts, insurance, subscriptions')}
                         </p>
                         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                           — {locale === 'ru' ? typograph('Сегмент наиболее чувствителен к качеству сервиса, негативный опыт (отказ без объяснения, повторный запрос документов) приводит к оттоку в банки с более лояльной политикой к нерезидентам') : typograph('This segment is most sensitive to service quality: negative experience (rejection without explanation, repeated document requests) leads to churn toward banks with more loyal policies for non-residents')}
                         </p>
+                      </>
+                    )}
+                    {activePersona === 'patterns' && (
+                      <>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Ключевой барьер — неопределенность и отсутствие адаптивности') : typograph('The key barrier is uncertainty and lack of adaptability')}</p>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Пользователи хотят понимать причины отказа и свои шансы') : typograph('Users want to understand rejection reasons and their chances')}</p>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Важна прозрачность условий до начала сценария') : typograph('Transparency of conditions before starting the flow is important')}</p>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Страх потратить время впустую на оформление заявки') : typograph('Fear of wasting time on the application process')}</p>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Необходимость в расширении банковских услуг с иностранными данными') : typograph('Need for expanding banking services with foreign data')}</p>
+                        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">— {locale === 'ru' ? typograph('Большое количество требований по документам') : typograph('Large number of document requirements')}</p>
                       </>
                     )}
                   </div>
@@ -336,12 +383,12 @@ export default function TBankCase({
             {/* Слабые точки пути пользователей — T-Bank only */}
               <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24, marginTop: 32 }}>
                 <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Слабые точки пути пользователей пришлись на:' : 'User journey weak points were:'}
+                  {locale === 'ru' ? 'Слабые точки пути пользователей пришлись на' : 'User journey weak points were:'}
                 </h2>
                 <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  <p className="m-0">1. {locale === 'ru' ? typograph('«Как оформить» предоставляет информацию для граждан РФ') : typograph('"How to apply" provides information for Russian citizens')}</p>
-                  <p className="m-0">2. {locale === 'ru' ? typograph('Форма поддерживает только два вида языка') : typograph('The form supports only two languages')}</p>
-                  <p className="m-0">3. {locale === 'ru' ? typograph('Форма поддерживает только заполнение под паспорт РФ') : typograph('The form only supports Russian passport data entry')}</p>
+                  <p className="m-0">1. {locale === 'ru' ? typograph('«Как оформить» предоставляет информацию только для граждан РФ') : typograph('"How to apply" provides information only for Russian citizens')}</p>
+                  <p className="m-0">2. {locale === 'ru' ? typograph('Форма поддерживает только два языка') : typograph('The form supports only two languages')}</p>
+                  <p className="m-0">3. {locale === 'ru' ? typograph('Форма поддерживает только заполнение под паспорт РФ, из-за чего drop-off составил 100%') : typograph('The form only supports Russian passport data entry, resulting in a 100% drop-off rate')}</p>
                 </div>
               </div>
 
@@ -461,18 +508,20 @@ export default function TBankCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Локализация' : 'Localization'}
                 </h2>
-                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {locale === 'ru'
-                    ? typograph('Если анкета и\u00A0коммуникации с\u00A0банком доступны только на\u00A0русском, часть иностранных пользователей (особенно без сильного знания языка) может не\u00A0справиться с\u00A0заполнением полей для ввода, как следствие: увеличение роста отказа от\u00A0попытки заполнить форму дальше')
-                    : typograph('If the application form and bank communications are only available in Russian, some foreign users (especially those without strong language skills) may struggle to fill in the input fields, resulting in an increased drop-off rate from attempting to complete the form')}
-                </p>
+                <div className="flex flex-col gap-[8px]">
+                  <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
+                    {locale === 'ru'
+                      ? typograph('Если анкета и коммуникация с банком доступны только на русском языке, часть иностранных пользователей может испытывать сложности при заполнении формы. Это приводит к увеличению числа отказов от дальнейшего заполнения заявки. В\u00A0своем решении я\u00A0расширила локализацию для сегмента, уязвимого к\u00A0слабому пониманию русского языка')
+                      : typograph('If the application form and bank communications are only available in Russian, some foreign users may struggle to complete the form. This leads to an increased drop-off rate. In my solution, I expanded localization for the segment vulnerable to limited Russian language comprehension')}
+                  </p>
+                </div>
                 <div
                   className="w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
                     <img loading="lazy"
-                      src={publicUrl('/covers/T-bank/1_1.webp')}
+                      src={publicUrl('/covers/T-bank/7.webp')}
                       alt={locale === 'ru' ? 'Локализация' : 'Localization'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
                       style={{ marginTop: 8 }}
@@ -564,6 +613,65 @@ export default function TBankCase({
                     />
                   </div>
                 </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
+                  style={{ marginTop: 16 }}
+                >
+                  <div className="relative w-full overflow-hidden leading-none">
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/19.webp')}
+                      alt={locale === 'ru' ? 'Внести ясность получения рассрочки' : 'Clarifying Installment Approval'}
+                      className="block w-full h-auto max-w-none origin-center scale-[1.055]"
+                    />
+                  </div>
+                </div>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                  {locale === 'ru'
+                    ? typograph('При переходе в условиях «Подробнее про получение кредита (заема) или рассрочки» пользователь продолжает путь с\u00A0веб-страницы, где получает информацию о\u00A0кредитных продуктах. В\u00A0рамках решения кейса я\u00A0расширила языковую поддержку веб-страницы, синхронизировав ее с\u00A0формой оформления')
+                    : typograph('When navigating to the conditions for "Foreigners", the user continues their journey from a\u00A0web page where they receive information about credit products. As part of the case solution, I\u00A0expanded the language support of the web page, synchronizing it with the application form')}
+                </p>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  style={{ marginTop: 16 }}
+                >
+                  <div className="relative w-full overflow-hidden leading-none">
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/13.webp')}
+                      alt={locale === 'ru' ? 'Расширение языковой поддержки веб-страницы' : 'Web page language support expansion'}
+                      className="block w-full h-auto max-w-none origin-center scale-[1.055]"
+                      style={{ marginTop: 5 }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+            {/* Пошаговый индикатор оформления заявки — T-Bank only */}
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Пошаговый индикатор оформления заявки' : 'Step-by-Step Application Progress Indicator'}
+                </h2>
+                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Пользователи с\u00A0иностранными документами сталкиваются с\u00A0увеличенным количеством полей ввода, что усложняет навигацию по\u00A0форме и\u00A0повышает вероятность ошибок')
+                      : typograph('Users with foreign documents face an increased number of input fields, which complicates form navigation and raises the likelihood of errors')}
+                  </p>
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Если разделить процесс сбора данных на\u00A04 логических этапа, это поможет снизить когнитивную нагрузку и\u00A0повысить завершение заявки')
+                      : typograph('Splitting the data collection process into 4 logical stages will help reduce cognitive load and increase application completion')}
+                  </p>
+                </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/15.webp')}
+                    alt={locale === 'ru' ? 'Пошаговый индикатор оформления заявки' : 'Step-by-Step Application Progress Indicator'}
+                    className="block w-full h-auto"
+                  />
+                </div>
               </div>
 
             {/* Расширение типов документов в анкете — T-Bank only */}
@@ -586,18 +694,26 @@ export default function TBankCase({
                     className="block w-full h-auto"
                   />
                 </div>
-              </div>
-
-            {/* Экран 10 — T-Bank only */}
-              <div
-                className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
-                style={{ marginTop: 24 }}
-              >
-                <img loading="lazy"
-                  src={publicUrl('/covers/T-bank/10.webp')}
-                  alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
-                  className="block w-full h-auto"
-                />
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 24 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/10.webp')}
+                    alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
+                    className="block w-full h-auto"
+                  />
+                </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none"
+                  style={{ marginTop: 24 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/21.webp')}
+                    alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
+                    className="block w-full h-auto"
+                  />
+                </div>
               </div>
 
             {/* Предварительная оценка шанса одобрения — T-Bank only */}
@@ -618,6 +734,30 @@ export default function TBankCase({
                     src={publicUrl('/covers/T-bank/11.webp')}
                     alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                     className="block w-full h-auto origin-center scale-[0.992]"
+                  />
+                </div>
+              </div>
+
+            {/* Статус проживания — T-Bank only */}
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
+                </h2>
+                <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  <p className="m-0">
+                    {locale === 'ru'
+                      ? typograph('Иностранные пользователи чаще получают отказы из-за недостатка данных для оценки их легального статуса и\u00A0стабильности проживания. Добавление документа о\u00A0статусе долгосрочного проживания может снизить неопределенность в\u00A0скоринге, повысить вероятность одобрения заявки и\u00A0снизить риски для банка за\u00A0счет подтверждения долгосрочного статуса клиента')
+                      : typograph('Foreign users are more likely to receive rejections due to insufficient data for assessing their legal status and residency stability. Adding a long-term residency status document can reduce uncertainty in scoring, increase the likelihood of application approval, and lower bank risks by confirming the client\u2019s long-term status')}
+                  </p>
+                </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/16.webp')}
+                    alt={locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
+                    className="block w-full h-auto"
                   />
                 </div>
               </div>
@@ -643,6 +783,31 @@ export default function TBankCase({
                     className="block w-full h-auto origin-center scale-[0.992]"
                   />
                 </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/20.webp')}
+                    alt={locale === 'ru' ? 'Кредитная карта для иностранцев' : 'Credit Card for Foreigners'}
+                    className="block w-full h-auto origin-center"
+                  />
+                </div>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                  {locale === 'ru'
+                    ? typograph('Переход по\u00A0кнопке «оформить кредитную карту для иностранцев» открывает веб-страницу существующего раздела оформления кредитной карты для иностранцев')
+                    : typograph('Clicking the "apply for a credit card for foreigners" button opens a\u00A0web page of the existing credit card application section for foreigners')}
+                </p>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/14.webp')}
+                    alt={locale === 'ru' ? 'Кредитная карта для иностранцев — переход на оформление' : 'Credit Card for Foreigners — application link'}
+                    className="block w-full h-auto origin-center scale-[1.002]"
+                  />
+                </div>
               </div>
 
             {/* Тестирование — T-Bank only */}
@@ -650,11 +815,13 @@ export default function TBankCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Тестирование' : 'Testing'}
                 </h2>
-                <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {locale === 'ru'
-                    ? typograph('Для проверки гипотез я разработала макеты обновлённой формы подачи заявки на рассрочку и использовала метод опроса на респондентах из Custdev интервью из сегментов иностранцев с РВП и ВНЖ. Сценарий включал заполнение анкеты, выбор типа документа, предварительную оценку одобрения и оформление кредитной карты')
-                    : typograph('To validate hypotheses, an interactive prototype of the updated installment application form was developed. The scenario included filling out the form, selecting document type, receiving a preliminary approval estimate, and applying for a credit card. The prototype was tested on respondents from the TRP and RP segments.')}
-                </p>
+                <div className="flex flex-col gap-[8px]">
+                  <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
+                    {locale === 'ru'
+                      ? typograph('Провела качественное тестирование макетов обновленной формы с иностранными пользователями с РВП и ВНЖ. Проверяла, какие решения снижают неопределенность, делают сценарий понятнее и помогают в процессе завершения заявки')
+                      : typograph('To validate hypotheses, an interactive prototype of the updated installment application form was developed. The scenario included filling out the form, selecting document type, receiving a preliminary approval estimate, and applying for a credit card. The prototype was tested on respondents from the TRP and RP segments.')}
+                  </p>
+                </div>
 
                 {/* Что было протестировано */}
                 <h3
@@ -707,7 +874,7 @@ export default function TBankCase({
                 <div className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden chip-image-gap">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr]">
                     {/* Left — text column (below image on mobile, left on desktop) */}
-                    <div className="order-2 md:order-1 flex flex-col gap-[8px]" style={{ padding: '16px' }}>
+                    <div className="order-2 md:order-1 flex flex-col gap-[8px]" style={{ padding: '24px' }}>
                       <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                         {locale === 'ru' ? 'Контекст' : 'Context'}
                       </h3>
@@ -765,12 +932,16 @@ export default function TBankCase({
                     </div>
 
                     {/* Right — image column: on top on mobile (order-1), right on desktop */}
-                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-stretch overflow-hidden md:rounded-none" style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}>
-                      <img loading="lazy"
-                        src={TBANK_TESTING_PROTOTYPE_IMAGES[activeTbankTestChip] ?? TBANK_TESTING_PROTOTYPE_IMAGES[0]}
-                        alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
-                        className="w-full h-full object-cover object-top md:object-left-top"
-                      />
+                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end overflow-hidden">
+                      {TBANK_TESTING_PROTOTYPE_IMAGES.map((src, idx) => (
+                        <img
+                          key={src}
+                          src={src}
+                          alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
+                          className="h-full w-auto object-contain"
+                          style={{ display: activeTbankTestChip === idx ? 'block' : 'none' }}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -783,8 +954,8 @@ export default function TBankCase({
                 </h2>
                 <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
-                    ? typograph('Основными барьерами остаются сложность удалённой идентификации, отсутствие кредитной истории в\u00A0российских бюро, повышенные требования к\u00A0комплаенсу и\u00A0рискам невозврата. Именно поэтому большинство банков по-прежнему требуют личный визит в\u00A0офис. Тем не\u00A0менее рынок иностранных граждан в\u00A0России значителен, а\u00A0финтех постепенно цифровизирует. Например через онлайн форму\u00A0+ курьера или видео-KYC проверку')
-                    : typograph('Legislation does not prohibit issuing loans to non-residents with proper documents, but the main barriers remain the complexity of remote identification, lack of credit history in Russian bureaus, increased compliance requirements and non-repayment risks. That is why most banks still require an in-person office visit. Nevertheless, the market of foreign citizens in Russia is significant, and fintech is gradually digitizing — for example, through online forms + courier or video-KYC verification')}
+                    ? typograph('Решение не\u00A0снимает базовые ограничения кредитования иностранных граждан. Тем не\u00A0менее прогноз остается реалистичным на\u00A0уровне пользовательского пути. Даже без изменений в\u00A0кредитной политике можно сократить нерелевантный drop-off, уменьшить количество ошибок при заполнении анкеты и\u00A0сделать сценарий более понятным для пользователей с\u00A0иностранными документами. Ожидаемый эффект решения\u00A0— сделать форму продукта более доступной, чтобы убрать искусственные барьеры в\u00A0интерфейсе и\u00A0помочь релевантным пользователям дойти до отправки заявки на\u00A0рассмотрение банком')
+                    : typograph('The solution does not remove the underlying restrictions on lending to foreign citizens. Nevertheless, the forecast remains realistic at the level of the user journey. Even without changes to credit policy, it is possible to reduce irrelevant drop-off, decrease the number of errors when filling out the form, and make the scenario more understandable for users with foreign documents. The expected effect of the solution is to make the product form more accessible — to remove artificial barriers in the interface and help relevant users reach the point of submitting their application for bank review')}
                 </p>
               </div>
     </>

@@ -76,7 +76,7 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
       <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
         <div className="flex flex-col gap-[8px]">
           <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-            {locale === 'ru' ? 'Custdev и анализ персон' : 'Custdev and Persona Analysis'}
+            {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
           </h2>
           {/* Link temporarily hidden — table not ready yet */}
           <a

@@ -24,7 +24,7 @@ export interface SiteContent {
   tagline: Record<Locale, string>;
   resumeLabel: Record<Locale, string>;
   resumeSubtitle: Record<Locale, string>;
-  resumeUrl: string;
+  resumeUrl: Record<Locale, string>;
   contactLabel: Record<Locale, string>;
   contactUrl: string;
 }

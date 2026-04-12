@@ -8,6 +8,7 @@
  * Usage: src={publicUrl('/covers/image.webp')}
  */
 const BASE = import.meta.env.BASE_URL; // '/' on Vercel, '/varya-portfolio/' on GitHub Pages
+const BUILD_TIME = import.meta.env.VITE_BUILD_TIME as string;
 
 export const publicUrl = (path: string): string =>
-  `${BASE}${path.replace(/^\//, '')}`;
+  `${BASE}${path.replace(/^\//, '')}?v=${BUILD_TIME}`;

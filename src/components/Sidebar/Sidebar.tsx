@@ -57,7 +57,7 @@ export function Sidebar({
         onMouseEnter={onResumeEnter}
         onMouseLeave={onResumeLeave}
         style={{ padding: '16px 24px' }}
-        className={`w-full box-border rounded-[24px] lg:rounded-[32px] shadow-[0_0_6px_rgba(0,0,0,0.11)] transition-colors duration-200 cursor-pointer ${showResume ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}`}
+        className={`w-full box-border rounded-[24px] lg:rounded-[32px] shadow-[0_0_4px_rgba(0,0,0,0.08)] transition-colors duration-200 cursor-pointer ${showResume ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}`}
       >
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-[4px] flex-1 min-w-0">
@@ -99,7 +99,7 @@ export function Sidebar({
               style={{ padding: '16px 24px' }}
               className={`
                 w-full box-border min-h-[120px] lg:h-[146px] rounded-[24px] lg:rounded-[32px]
-                shadow-[0_0_6px_rgba(0,0,0,0.11)]
+                shadow-[0_0_4px_rgba(0,0,0,0.08)]
                 transition-colors duration-200
                 ${isDisabled ? 'cursor-default' : 'cursor-pointer'} overflow-hidden
                 ${isActive ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}
