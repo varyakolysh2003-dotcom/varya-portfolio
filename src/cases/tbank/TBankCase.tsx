@@ -169,15 +169,15 @@ export default function TBankCase({
                   </p>
                   <div className="flex flex-col gap-[4px]">
                     {(locale === 'ru' ? [
-                      '— Снизить drop-off на\u00A0этапе заполнения заявки;',
-                      '— Сократить количество невалидных и\u00A0брошенных анкет;',
+                      '— Снизить drop-off на\u00A0этапе заполнения заявки',
+                      '— Сократить количество невалидных и\u00A0брошенных анкет',
                       '— Повысить заинтересованность в\u00A0развитии кредитной истории через кредитную карту для иностранцев',
                       '— Сделать маршрутизацию в\u00A0релевантный продукт более точной (только проверенные источники)',
                       '— Повысить конверсию в\u00A0доступные кредитные сценарии внутри экосистемы банка',
                       '— Увеличить доверие и\u00A0лояльность',
                     ] : [
-                      '— Reduce drop-off at the application stage;',
-                      '— Decrease the number of invalid and abandoned applications;',
+                      '— Reduce drop-off at the application stage',
+                      '— Decrease the number of invalid and abandoned applications',
                       '— Increase interest in building credit history through a credit card for foreigners',
                       '— Make routing to the relevant product more precise (verified sources only)',
                       "— Improve conversion into available credit scenarios within the bank's ecosystem",
@@ -716,28 +716,6 @@ export default function TBankCase({
                 </div>
               </div>
 
-            {/* Предварительная оценка шанса одобрения — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
-                </h2>
-                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
-                  {locale === 'ru'
-                    ? typograph('Если динамически показывать вероятность одобрения на\u00A0основе типа документа и\u00A0дохода, пользователь получит прозрачную обратную связь на\u00A0каждом шаге — это снизит неопределённость и\u00A0повысит готовность продолжить оформление')
-                    : typograph('If the approval probability is shown dynamically based on document type and income, the user gets transparent feedback at every step — reducing uncertainty and increasing willingness to continue the application')}
-                </p>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
-                  style={{ marginTop: 16 }}
-                >
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/11.webp')}
-                    alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
-                    className="block w-full h-auto origin-center scale-[0.992]"
-                  />
-                </div>
-              </div>
-
             {/* Статус проживания — T-Bank only */}
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
@@ -758,6 +736,28 @@ export default function TBankCase({
                     src={publicUrl('/covers/T-bank/16.webp')}
                     alt={locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
                     className="block w-full h-auto"
+                  />
+                </div>
+              </div>
+
+            {/* Предварительная оценка шанса одобрения — T-Bank only */}
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
+                </h2>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  {locale === 'ru'
+                    ? typograph('Если динамически показывать вероятность одобрения на\u00A0основе типа документа и\u00A0дохода, пользователь получит прозрачную обратную связь на\u00A0каждом шаге — это снизит неопределённость и\u00A0повысит готовность продолжить оформление')
+                    : typograph('If the approval probability is shown dynamically based on document type and income, the user gets transparent feedback at every step — reducing uncertainty and increasing willingness to continue the application')}
+                </p>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/11.webp')}
+                    alt={locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
+                    className="block w-full h-auto origin-center scale-[0.992]"
                   />
                 </div>
               </div>
