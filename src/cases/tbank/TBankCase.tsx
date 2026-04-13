@@ -932,15 +932,19 @@ export default function TBankCase({
                     </div>
 
                     {/* Right — image column: on top on mobile (order-1), right on desktop */}
-                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end overflow-hidden">
+                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end overflow-visible">
                       {TBANK_TESTING_PROTOTYPE_IMAGES.map((src, idx) => (
-                        <img
+                        <div
                           key={src}
-                          src={src}
-                          alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
-                          className={`h-full w-auto object-contain${idx === 0 ? ' rounded-[var(--radius-media)] shadow-[0_0_6px_rgba(0,0,0,0.11)]' : ''}`}
+                          className={`h-full${idx === 0 ? ' rounded-[var(--radius-media)] shadow-[0_0_6px_rgba(0,0,0,0.11)] overflow-hidden' : ' overflow-hidden'}`}
                           style={{ display: activeTbankTestChip === idx ? 'block' : 'none' }}
-                        />
+                        >
+                          <img
+                            src={src}
+                            alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
+                            className="h-full w-auto object-contain"
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>
