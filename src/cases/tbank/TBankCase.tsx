@@ -883,8 +883,8 @@ export default function TBankCase({
                       <p className="text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ margin: 0 }}>
                         {activeTbankTestChip === 1
                           ? (locale === 'ru'
-                            ? typograph('')
-                            : typograph(''))
+                            ? typograph('Проверяла, помогает\u00A0ли пошаговый индикатор прогресса снизить тревожность пользователя в\u00A0процессе заполнения формы и\u00A0повысить уверенность в\u00A0завершении заявки')
+                            : typograph('Tested whether a step-by-step progress indicator reduces user anxiety during form completion and increases confidence in finishing the application.'))
                           : activeTbankTestChip === 2
                           ? (locale === 'ru'
                             ? typograph('Проверяла, снижает\u00A0ли расширение списка принимаемых документов количество отказов на\u00A0этапе верификации и как меняется конверсия на\u00A0завершение заявки')
@@ -911,6 +911,9 @@ export default function TBankCase({
                       <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                         {activeTbankTestChip === 1 ? (
                           <>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Индикатор этапов снизил ощущение неизвестности и\u00A0помог пользователям понять, сколько шагов осталось до\u00A0завершения') : typograph('— The step indicator reduced uncertainty and helped users understand how many steps remained')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Респонденты реже прерывали заполнение формы на\u00A0промежуточных этапах при наличии видимого прогресса') : typograph('— Respondents were less likely to abandon the form mid-way when visible progress was shown')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Наличие индикатора воспринималось как признак продуманного интерфейса и\u00A0повышало доверие к\u00A0сервису') : typograph('— The presence of the indicator was perceived as a sign of a well-designed interface and increased trust in the service')}</p>
                           </>
                         ) : activeTbankTestChip === 2 ? (
                           <>
