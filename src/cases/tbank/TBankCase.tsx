@@ -932,14 +932,14 @@ export default function TBankCase({
                     </div>
 
                     {/* Right — image column: on top on mobile (order-1), right on desktop */}
-                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end overflow-hidden">
+                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end" style={{ overflow: activeTbankTestChip === 0 ? 'visible' : 'hidden' }}>
                       {TBANK_TESTING_PROTOTYPE_IMAGES.map((src, idx) => (
                         <img
                           key={src}
                           src={src}
                           alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
                           className="h-full w-auto object-contain"
-                          style={{ display: activeTbankTestChip === idx ? 'block' : 'none', boxShadow: idx === 0 ? '0 4px 24px 0 rgba(0,0,0,0.12)' : undefined }}
+                          style={{ display: activeTbankTestChip === idx ? 'block' : 'none', boxShadow: idx === 0 ? '0 4px 24px 0 rgba(0,0,0,0.13)' : undefined }}
                         />
                       ))}
                     </div>
