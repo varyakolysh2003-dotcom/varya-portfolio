@@ -920,6 +920,7 @@ export default function TBankCase({
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Предложение кредитной карты воспринималось как логичный шаг для улучшения кредитной истории') : typograph('— The credit card offer was perceived as a logical step to improve credit history')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Блок с\u00A0переходом к\u00A0оформлению не\u00A0вызывал раздражения благодаря контекстной подаче') : typograph('— The application block did not cause irritation due to contextual presentation')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Респонденты отметили, что явная связь карты с\u00A0вероятностью одобрения повышает мотивацию к\u00A0оформлению') : typograph('— Respondents noted that the explicit link between the card and approval probability increases motivation to apply')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Текст заголовка «Кредитная карта» после открытия формы вызвал тревогу и\u00A0ассоциации с\u00A0обязательным оформлением') : typograph('— The heading "Credit card" after opening the form caused anxiety and associations with mandatory sign-up')}</p>
                           </>
                         ) : (
                           <>
