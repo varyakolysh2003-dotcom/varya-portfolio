@@ -7,6 +7,7 @@ import { publicUrl } from '../../utils/publicUrl';
 /** T-Bank testing block: prototype screens in filename order (same for RU/EN). */
 const TBANK_TESTING_PROTOTYPE_IMAGES = [
   publicUrl('/covers/T-bank/1_1.webp'),
+  publicUrl('/covers/T-bank/1_5.webp'),
   publicUrl('/covers/T-bank/1_2.webp'),
   publicUrl('/covers/T-bank/1_3.webp'),
   publicUrl('/covers/T-bank/1_4.webp'),
@@ -835,6 +836,7 @@ export default function TBankCase({
                 <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
                   {([
                     { ru: 'Локализация интерфейса', en: 'Interface localization' },
+                    { ru: 'Пошаговый индикатор', en: 'Step indicator' },
                     { ru: 'Расширение документов', en: 'Document expansion' },
                     { ru: 'Оценка шанса одобрения', en: 'Approval probability' },
                     { ru: 'Кредитная карта', en: 'Credit card' },
@@ -881,13 +883,17 @@ export default function TBankCase({
                       <p className="text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ margin: 0 }}>
                         {activeTbankTestChip === 1
                           ? (locale === 'ru'
+                            ? typograph('')
+                            : typograph(''))
+                          : activeTbankTestChip === 2
+                          ? (locale === 'ru'
                             ? typograph('Проверяла, снижает\u00A0ли расширение списка принимаемых документов количество отказов на\u00A0этапе верификации и как меняется конверсия на\u00A0завершение заявки')
                             : typograph('Tested whether expanding the list of accepted documents reduces rejections at verification and increases application completion rate.'))
-                          : activeTbankTestChip === 2
+                          : activeTbankTestChip === 3
                           ? (locale === 'ru'
                             ? typograph('Проверяла, повышает\u00A0ли динамическое отображение вероятности одобрения готовность пользователя продолжить оформление и\u00A0снижает\u00A0ли ощущение неопределённости')
                             : typograph('Tested whether dynamically displaying approval probability increases user willingness to continue and reduces uncertainty.'))
-                          : activeTbankTestChip === 3
+                          : activeTbankTestChip === 4
                           ? (locale === 'ru'
                             ? typograph('Проверяла, влияет\u00A0ли предложение кредитной карты для иностранцев на\u00A0восприятие шансов одобрения и\u00A0готовность оформить дополнительный продукт')
                             : typograph('Tested whether the credit card offer for foreigners affects perceived approval chances and willingness to apply for an additional product.'))
@@ -905,17 +911,20 @@ export default function TBankCase({
                       <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                         {activeTbankTestChip === 1 ? (
                           <>
+                          </>
+                        ) : activeTbankTestChip === 2 ? (
+                          <>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователи с\u00A0нестандартными документами проходили верификацию без ручного обращения в\u00A0поддержку или отказа от заполнения формы') : typograph('— Users with non-standard documents passed verification without manual support requests')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Конверсия в\u00A0завершение заявки выросла за\u00A0счёт устранения тупикового сценария на\u00A0этапе выбора документа') : typograph('— Application completion rate increased by eliminating the dead-end scenario at the document selection step')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Респонденты отметили, что наличие знакомого типа документа в\u00A0списке повысило доверие к\u00A0сервису') : typograph('— Respondents noted that seeing a familiar document type in the list increased trust in the service')}</p>
                           </>
-                        ) : activeTbankTestChip === 2 ? (
+                        ) : activeTbankTestChip === 3 ? (
                           <>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Индикатор вероятности одобрения снизил тревожность и\u00A0повысил готовность продолжить оформление') : typograph('— The approval probability indicator reduced anxiety and increased willingness to continue')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователи воспринимали шкалу как прозрачную обратную связь, а\u00A0не как маркетинговый элемент') : typograph('— Users perceived the scale as transparent feedback, not a marketing element')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Динамическое обновление оценки при изменении данных мотивировало заполнять форму полностью') : typograph('— Dynamic estimate updates when changing data motivated users to complete the form fully')}</p>
                           </>
-                        ) : activeTbankTestChip === 3 ? (
+                        ) : activeTbankTestChip === 4 ? (
                           <>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Предложение кредитной карты воспринималось как логичный шаг для улучшения кредитной истории') : typograph('— The credit card offer was perceived as a logical step to improve credit history')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Блок с\u00A0переходом к\u00A0оформлению не\u00A0вызывал раздражения благодаря контекстной подаче') : typograph('— The application block did not cause irritation due to contextual presentation')}</p>
