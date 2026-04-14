@@ -811,6 +811,23 @@ export default function TBankCase({
                 </div>
               </div>
 
+            {/* Статусы оформления заявки — T-Bank only */}
+              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Статусы оформления заявки' : 'Application Status Flow'}
+                </h2>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/22.webp')}
+                    alt={locale === 'ru' ? 'Статусы оформления заявки' : 'Application Status Flow'}
+                    className="block w-full h-auto origin-center"
+                  />
+                </div>
+              </div>
+
             {/* Тестирование — T-Bank only */}
               <div className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
