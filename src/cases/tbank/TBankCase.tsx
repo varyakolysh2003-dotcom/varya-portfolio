@@ -826,6 +826,21 @@ export default function TBankCase({
                     className="block w-full h-auto origin-center"
                   />
                 </div>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                  {locale === 'ru'
+                    ? typograph('При отклонении заявки и переходе по «Почему могут отказать в рассрочке» открывается веб-страница соответствующей статьи Т-банка')
+                    : typograph('When the application is declined and the user taps "Why might an installment be declined", a web page with the relevant T-Bank article opens')}
+                </p>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/23.webp')}
+                    alt={locale === 'ru' ? 'Статья Т-банка при отклонении заявки' : 'T-Bank article on declined application'}
+                    className="block w-full h-auto origin-center"
+                  />
+                </div>
               </div>
 
             {/* Тестирование — T-Bank only */}
