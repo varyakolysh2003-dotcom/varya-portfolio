@@ -262,7 +262,12 @@ img { display: block; max-width: 100%; }
 
   /* Tag pills on mobile */
   .case-container .skill-pill {
-    font-size: 14px !important;
+    font-size: 12px !important;
+  }
+
+  /* Persona chip titles on mobile */
+  .case-container button h3 {
+    font-size: 12px !important;
   }
 }
 
