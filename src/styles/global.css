@@ -244,17 +244,15 @@ img { display: block; max-width: 100%; }
     line-height: 1.3 !important;
   }
 
-  /* Body text: font-size scale + weight compensation for iOS rendering */
+  /* Body text: scale font size for mobile; weights are inherited unchanged */
   .case-container p,
   .case-container a.case-link {
     font-size: 14px !important;
-    font-weight: 400 !important;
   }
 
-  /* Spans that are purely body text (no explicit weight class) */
-  .case-container span:not([class*="font-"]) {
+  /* Unclassed inline spans: scale font size only */
+  .case-container span:not([class*="font-"]):not([class*="text-"]) {
     font-size: 14px !important;
-    font-weight: 400 !important;
   }
 
   /* Section meta labels: matches card/secondary headings (16px) */
