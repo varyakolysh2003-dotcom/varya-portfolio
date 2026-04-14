@@ -65,6 +65,7 @@ html {
 body {
   font-family: var(--font-sans);
   font-synthesis: none; /* prevent browser from synthesizing fake bold/italic */
+  font-optical-sizing: none; /* lock opsz to font default; prevents auto opsz from making smaller text heavier than larger text */
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   min-height: 100dvh;
@@ -244,15 +245,26 @@ img { display: block; max-width: 100%; }
     line-height: 1.3 !important;
   }
 
-  /* Body text: scale font size for mobile; weights are inherited unchanged */
+  /* Body text: scale font size + compensate for iOS rendering at true weight
+     (macOS antialiased rendering makes the same wght appear ~40 units lighter;
+     wght 460 ≈ what wght 500 looks like on desktop with -webkit-font-smoothing: antialiased) */
   .case-container p,
   .case-container a.case-link {
     font-size: 14px !important;
+    font-variation-settings: 'wght' 460;
   }
 
-  /* Unclassed inline spans: scale font size only */
+  /* Unclassed inline spans: same size + weight compensation */
   .case-container span:not([class*="font-"]):not([class*="text-"]) {
     font-size: 14px !important;
+    font-variation-settings: 'wght' 460;
+  }
+
+  /* Mobile homepage body text: same weight compensation for font-medium elements
+     (font-semibold/bold headings and labels are excluded by the :not selectors) */
+  .mobile-home p:not([class*="font-semibold"]):not([class*="font-bold"]),
+  .mobile-home a:not([class*="font-semibold"]):not([class*="font-bold"]) {
+    font-variation-settings: 'wght' 460;
   }
 
   /* Section meta labels: matches card/secondary headings (16px) */

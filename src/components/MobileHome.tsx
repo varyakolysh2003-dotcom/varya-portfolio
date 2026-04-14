@@ -15,7 +15,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="page-enter min-h-dvh bg-[var(--color-bg)]" style={{ padding: '16px 16px 28px' }}>
+    <div className="mobile-home page-enter min-h-dvh bg-[var(--color-bg)]" style={{ padding: '16px 16px 28px' }}>
       {/* ── Header ── */}
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-3">
