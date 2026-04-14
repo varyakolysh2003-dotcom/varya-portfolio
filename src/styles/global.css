@@ -65,7 +65,6 @@ html {
 body {
   font-family: var(--font-sans);
   font-synthesis: none; /* prevent browser from synthesizing fake bold/italic */
-  font-optical-sizing: none; /* lock opsz to font default; prevents auto opsz from making smaller text heavier than larger text */
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   min-height: 100dvh;
