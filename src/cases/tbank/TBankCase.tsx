@@ -47,7 +47,7 @@ export default function TBankCase({
   return (
     <>
             {/* Текущие проблемы формы — T-Bank only */}
-              <div id="section-analysis" className="flex flex-col" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+              <div id="section-analysis" className="flex flex-col mt-[48px] md:mt-[88px] scroll-mt-[32px]">
                 <div className="flex flex-col gap-[8px]">
                   <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                     {locale === 'ru' ? 'Текущие проблемы формы' : 'Current Form Issues'}
@@ -62,10 +62,7 @@ export default function TBankCase({
                     className="block w-full h-auto"
                   />
                 </div>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
-                  style={{ marginTop: 24 }}
-                >
+                <div className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[16px] md:mt-[24px]">
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/2.webp')}
                     alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
@@ -75,7 +72,7 @@ export default function TBankCase({
               </div>
 
             {/* Основные ограничения — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[88px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Основные ограничения' : 'Key Limitations'}
                 </h2>
@@ -94,7 +91,7 @@ export default function TBankCase({
               </div>
 
             {/* POS-система — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 48 }}>
+              <div className="flex flex-col gap-[8px] mt-[28px] md:mt-[48px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'POS-система' : 'POS System'}
                 </h2>
@@ -128,7 +125,7 @@ export default function TBankCase({
               </div>
 
             {/* Что уже известно — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[88px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Что уже известно' : 'What is already known'}
                 </h2>
@@ -153,7 +150,7 @@ export default function TBankCase({
               </div>
 
             {/* Важность развития услуг иностранцам — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 88 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[88px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Преимущество развития иностранных услуг кредитования для бизнеса' : 'Why developing services for foreigners matters for business'}
                 </h2>
@@ -191,7 +188,7 @@ export default function TBankCase({
               </div>
 
             {/* Custdev и анализ персон — T-Bank only */}
-            <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 84 }}>
+            <div className="flex flex-col gap-[16px] md:gap-[24px] mt-[48px] md:mt-[84px]">
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
@@ -354,7 +351,7 @@ export default function TBankCase({
             </div>
 
             {/* Результаты Drop-off из Custdev интервью — T-Bank only */}
-              <div className="flex flex-col" style={{ marginTop: 48 }}>
+              <div className="flex flex-col mt-[28px] md:mt-[48px]">
                 <div className="flex flex-col gap-[8px]">
                   <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                     {locale === 'ru' ? 'Результаты Drop-off из\u00A0Custdev интервью' : 'Drop-off Results from Custdev Interviews'}
@@ -370,8 +367,7 @@ export default function TBankCase({
                   />
                 </div>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
-                  style={{ marginTop: 24 }}
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[16px] md:mt-[24px]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/3.webp')}
@@ -382,7 +378,7 @@ export default function TBankCase({
               </div>
 
             {/* Слабые точки пути пользователей — T-Bank only */}
-              <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24, marginTop: 32 }}>
+              <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px] mt-[20px] md:mt-[32px]" style={{ padding: 24 }}>
                 <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Слабые точки пути пользователей пришлись на' : 'User journey weak points were:'}
                 </h2>
@@ -394,7 +390,7 @@ export default function TBankCase({
               </div>
 
             {/* JTBD — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 48 }}>
+              <div className="flex flex-col gap-[8px] mt-[28px] md:mt-[48px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   JTBD
                 </h2>
@@ -471,7 +467,7 @@ export default function TBankCase({
               </div>
 
             {/* Архитектура — T-Bank only */}
-              <div className="flex flex-col" style={{ marginTop: 84 }}>
+              <div className="flex flex-col mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Архитектура' : 'Architecture'}
                 </h2>
@@ -487,7 +483,7 @@ export default function TBankCase({
               </div>
 
             {/* Экраны — T-Bank only */}
-              <div className="flex flex-col" style={{ marginTop: 40 }}>
+              <div className="flex flex-col mt-[24px] md:mt-[40px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Экраны' : 'Screens'}
                 </h2>
@@ -505,7 +501,7 @@ export default function TBankCase({
               </div>
 
             {/* Локализация — T-Bank only */}
-              <div id="section-solutions" className="flex flex-col gap-[8px]" style={{ marginTop: 48, scrollMarginTop: 32 }}>
+              <div id="section-solutions" className="flex flex-col gap-[8px] mt-[32px] md:mt-[48px] scroll-mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Локализация' : 'Localization'}
                 </h2>
@@ -532,7 +528,7 @@ export default function TBankCase({
               </div>
 
             {/* Варианты перевода — T-Bank only */}
-              <div className="flex flex-col" style={{ marginTop: 32 }}>
+              <div className="flex flex-col mt-[20px] md:mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Варианты перевода' : 'Translation Variants'}
                 </h2>
@@ -593,7 +589,7 @@ export default function TBankCase({
               </div>
 
             {/* Внести ясность получения рассрочки — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Внести ясность получения рассрочки' : 'Clarifying Installment Approval'}
                 </h2>
@@ -626,7 +622,7 @@ export default function TBankCase({
                     />
                   </div>
                 </div>
-                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] mt-[16px] md:mt-[24px]">
                   {locale === 'ru'
                     ? typograph('При переходе в условиях «Подробнее про получение кредита (заема) или рассрочки» пользователь продолжает путь с\u00A0веб-страницы, где получает информацию о\u00A0кредитных продуктах. В\u00A0рамках решения кейса я\u00A0расширила языковую поддержку веб-страницы, синхронизировав ее с\u00A0формой оформления')
                     : typograph('When navigating to the conditions for "Foreigners", the user continues their journey from a\u00A0web page where they receive information about credit products. As part of the case solution, I\u00A0expanded the language support of the web page, synchronizing it with the application form')}
@@ -647,7 +643,7 @@ export default function TBankCase({
               </div>
 
             {/* Пошаговый индикатор оформления заявки — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Пошаговый индикатор оформления заявки' : 'Step-by-Step Application Progress Indicator'}
                 </h2>
@@ -676,7 +672,7 @@ export default function TBankCase({
               </div>
 
             {/* Расширение типов документов в анкете — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Расширение типов документов в\u00A0анкете' : 'Expanding Document Types in the Application'}
                 </h2>
@@ -696,8 +692,7 @@ export default function TBankCase({
                   />
                 </div>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
-                  style={{ marginTop: 24 }}
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none mt-[16px] md:mt-[24px]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/10.webp')}
@@ -705,10 +700,7 @@ export default function TBankCase({
                     className="block w-full h-auto"
                   />
                 </div>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none"
-                  style={{ marginTop: 24 }}
-                >
+                <div className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none mt-[16px] md:mt-[24px]">
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/21.webp')}
                     alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
@@ -718,7 +710,7 @@ export default function TBankCase({
               </div>
 
             {/* Статус проживания — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
                 </h2>
@@ -742,7 +734,7 @@ export default function TBankCase({
               </div>
 
             {/* Предварительная оценка шанса одобрения — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Предварительная оценка шанса одобрения' : 'Preliminary Approval Chance Assessment'}
                 </h2>
@@ -764,7 +756,7 @@ export default function TBankCase({
               </div>
 
             {/* Кредитная карта для иностранцев — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Кредитная карта для иностранцев' : 'Credit Card for Foreigners'}
                 </h2>
@@ -794,7 +786,7 @@ export default function TBankCase({
                     className="block w-full h-auto origin-center"
                   />
                 </div>
-                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] mt-[16px] md:mt-[24px]">
                   {locale === 'ru'
                     ? typograph('Переход по\u00A0кнопке «оформить кредитную карту для иностранцев» открывает веб-страницу существующего раздела оформления кредитной карты для иностранцев')
                     : typograph('Clicking the "apply for a credit card for foreigners" button opens a\u00A0web page of the existing credit card application section for foreigners')}
@@ -812,7 +804,7 @@ export default function TBankCase({
               </div>
 
             {/* Статусы оформления заявки — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Статусы оформления заявки' : 'Application Status Flow'}
                 </h2>
@@ -826,7 +818,7 @@ export default function TBankCase({
                     className="block w-full h-auto origin-center"
                   />
                 </div>
-                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 24 }}>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] mt-[16px] md:mt-[24px]">
                   {locale === 'ru'
                     ? typograph('При отклонении заявки и переходе по «Почему могут отказать в рассрочке» открывается веб-страница соответствующей статьи Т-банка')
                     : typograph('When the application is declined and the user taps "Why might an installment be declined", a web page with the relevant T-Bank article opens')}
@@ -844,7 +836,7 @@ export default function TBankCase({
               </div>
 
             {/* Тестирование — T-Bank only */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px] scroll-mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Тестирование' : 'Testing'}
                 </h2>
@@ -975,18 +967,18 @@ export default function TBankCase({
                       </div>
                     </div>
 
-                    {/* Right — image column: on top on mobile (order-1), right on desktop */}
-                    <div className="order-1 md:order-2 h-[220px] md:h-auto flex items-start justify-end overflow-visible">
+                    {/* Right — image column: full-width on mobile, right-aligned on desktop */}
+                    <div className="order-1 md:order-2 md:h-auto md:flex md:items-start md:justify-end md:overflow-visible overflow-hidden">
                       {TBANK_TESTING_PROTOTYPE_IMAGES.map((src, idx) => (
                         <div
                           key={src}
-                          className={`h-full${idx === 0 ? ' rounded-[var(--radius-media)] shadow-[0_0_6px_rgba(0,0,0,0.11)] overflow-hidden' : ' overflow-hidden'}`}
+                          className={`w-full md:w-auto md:h-full overflow-hidden${idx === 0 ? ' md:rounded-[var(--radius-media)] md:shadow-[0_0_6px_rgba(0,0,0,0.11)]' : ''}`}
                           style={{ display: activeTbankTestChip === idx ? 'block' : 'none' }}
                         >
                           <img
                             src={src}
                             alt={locale === 'ru' ? 'Экраны прототипа' : 'Prototype screens'}
-                            className="h-full w-auto object-contain"
+                            className="w-full h-auto md:h-full md:w-auto object-cover md:object-contain"
                           />
                         </div>
                       ))}
@@ -996,7 +988,7 @@ export default function TBankCase({
               </div>
 
             {/* Насколько реалистичный прогноз? — T-Bank only */}
-              <div id="section-testing" className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
+              <div id="section-testing" className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px] scroll-mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Насколько реалистичный прогноз?' : 'How Realistic Is This Forecast?'}
                 </h2>

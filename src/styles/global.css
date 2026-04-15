@@ -215,6 +215,17 @@ img { display: block; max-width: 100%; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ── Case page body text weight ──────────────────────────────────────────
+   Body paragraphs use font-weight: 400 on ALL breakpoints.
+   font-weight: 400 renders consistently across platforms (macOS, iOS, Android).
+   Using 500 (font-medium) for body text causes a visible mismatch because
+   macOS -webkit-font-smoothing makes 500 look like ~400, while iOS renders
+   it at true weight. Using 400 everywhere removes the platform-specific
+   compensation and gives the same visual hierarchy on all devices.         */
+.case-container p:not(.font-semibold):not(.font-bold) {
+  font-weight: 400;
+}
+
 /* ── Mobile responsive utilities ── */
 
 /* Case page container: reduce padding on mobile + account for sticky nav */
@@ -271,9 +282,9 @@ img { display: block; max-width: 100%; }
     font-size: 16px !important;
   }
 
-  /* Reduce large section gaps */
+  /* Section gaps: Вводные / Миссия / Цель / etc. */
   .case-sections {
-    gap: 12px !important;
+    gap: 20px !important;
   }
 
   /* Tag pills on mobile */
