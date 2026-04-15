@@ -36,6 +36,22 @@ export default function TBankCase({
   activeTbankTestChip,
   setActiveTbankTestChip,
 }: TBankCaseProps) {
+  const [mobileFormIssuesSlide, setMobileFormIssuesSlide] = useState(0);
+  const formIssuesScrollRef = useRef<HTMLDivElement>(null);
+  const handleFormIssuesScroll = useCallback(() => {
+    const el = formIssuesScrollRef.current;
+    if (!el) return;
+    setMobileFormIssuesSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [mobileDropoffSlide, setMobileDropoffSlide] = useState(0);
+  const dropoffScrollRef = useRef<HTMLDivElement>(null);
+  const handleDropoffScroll = useCallback(() => {
+    const el = dropoffScrollRef.current;
+    if (!el) return;
+    setMobileDropoffSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
   const [translationVariantSlide, setTranslationVariantSlide] = useState(0);
   const translationVariantsScrollRef = useRef<HTMLDivElement>(null);
   const handleTranslationVariantsScroll = useCallback(() => {
@@ -53,21 +69,82 @@ export default function TBankCase({
                     {locale === 'ru' ? 'Текущие проблемы формы' : 'Current Form Issues'}
                   </h2>
                 </div>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] chip-image-gap"
-                >
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/1.webp')}
-                    alt={locale === 'ru' ? 'Проблемы формы — часть 1' : 'Form issues — part 1'}
-                    className="block w-full h-auto"
-                  />
+                {/* Mobile: swipeable carousel */}
+                <div className="md:hidden chip-image-gap">
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={formIssuesScrollRef}
+                      onScroll={handleFormIssuesScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[1, 2].map((n) => (
+                        <div
+                          key={n}
+                          className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
+                        >
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Проблемы формы — часть ${n}` : `Form issues — part ${n}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: mobileFormIssuesSlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24, marginTop: 12 }}>
+                    <div className="flex flex-col gap-[8px] text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      {mobileFormIssuesSlide === 0 ? (
+                        <>
+                          <p className="m-0">— {typograph('Нет выбора сменяемости между паспортом РФ и иностранным паспортом')}</p>
+                          <p className="m-0">— {typograph('Нет поддержки формата иностранного паспорта')}</p>
+                          <p className="m-0">— {typograph('У иностранных паспортов отсутствует код подразделения')}</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="m-0">— {typograph('Поддержка только двух языков (русского и английского)')}</p>
+                          <p className="m-0">— {typograph('Нет конкретики в понимании условий для иностранных граждан')}</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[16px] md:mt-[24px]">
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/2.webp')}
-                    alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
-                    className="block w-full h-auto"
-                  />
+
+                {/* Desktop: original stacked images */}
+                <div className="hidden md:flex flex-col chip-image-gap">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]">
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/1.webp')}
+                      alt={locale === 'ru' ? 'Проблемы формы — часть 1' : 'Form issues — part 1'}
+                      className="block w-full h-auto"
+                    />
+                  </div>
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[24px]">
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/2.webp')}
+                      alt={locale === 'ru' ? 'Проблемы формы — часть 2' : 'Form issues — part 2'}
+                      className="block w-full h-auto"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -357,23 +434,70 @@ export default function TBankCase({
                     {locale === 'ru' ? 'Результаты Drop-off из\u00A0Custdev интервью' : 'Drop-off Results from Custdev Interviews'}
                   </h2>
                 </div>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden chip-image-gap"
-                >
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/4.webp')}
-                    alt={locale === 'ru' ? 'Результаты Drop-off — часть 1' : 'Drop-off results — part 1'}
-                    className="block w-full h-auto origin-center scale-[1.007]"
-                  />
+                {/* Mobile: swipeable carousel */}
+                <div className="md:hidden chip-image-gap">
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={dropoffScrollRef}
+                      onScroll={handleDropoffScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[4, 3].map((n) => (
+                        <div
+                          key={n}
+                          className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center"
+                        >
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Результаты Drop-off — часть ${n === 4 ? 1 : 2}` : `Drop-off results — part ${n === 4 ? 1 : 2}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: mobileDropoffSlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[16px] md:mt-[24px]"
-                >
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/3.webp')}
-                    alt={locale === 'ru' ? 'Результаты Drop-off — часть 2' : 'Drop-off results — part 2'}
-                    className="block w-full h-auto origin-center scale-[1.007]"
-                  />
+
+                {/* Desktop: original stacked images */}
+                <div className="hidden md:flex flex-col chip-image-gap">
+                  <div
+                    className="w-full rounded-[var(--radius-media)] overflow-hidden"
+                  >
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/4.webp')}
+                      alt={locale === 'ru' ? 'Результаты Drop-off — часть 1' : 'Drop-off results — part 1'}
+                      className="block w-full h-auto origin-center scale-[1.007]"
+                    />
+                  </div>
+                  <div
+                    className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] mt-[24px]"
+                  >
+                    <img loading="lazy"
+                      src={publicUrl('/covers/T-bank/3.webp')}
+                      alt={locale === 'ru' ? 'Результаты Drop-off — часть 2' : 'Drop-off results — part 2'}
+                      className="block w-full h-auto origin-center scale-[1.007]"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -700,19 +824,12 @@ export default function TBankCase({
                     className="block w-full h-auto"
                   />
                 </div>
-                <div className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none mt-[16px] md:mt-[24px]">
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/21.webp')}
-                    alt={locale === 'ru' ? 'Расширение типов документов' : 'Expanding Document Types'}
-                    className="block w-full h-auto"
-                  />
-                </div>
               </div>
 
             {/* Статус проживания — T-Bank only */}
               <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
+                  {locale === 'ru' ? 'Статус пребывания' : 'Residence Status'}
                 </h2>
                 <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <p className="m-0">
@@ -727,7 +844,16 @@ export default function TBankCase({
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/16.webp')}
-                    alt={locale === 'ru' ? 'Статус проживания' : 'Residence Status'}
+                    alt={locale === 'ru' ? 'Статус пребывания' : 'Residence Status'}
+                    className="block w-full h-auto"
+                  />
+                </div>
+                <div
+                  className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none mt-[16px] md:mt-[24px]"
+                >
+                  <img loading="lazy"
+                    src={publicUrl('/covers/T-bank/21.webp')}
+                    alt={locale === 'ru' ? 'Статус пребывания' : 'Residence Status'}
                     className="block w-full h-auto"
                   />
                 </div>
