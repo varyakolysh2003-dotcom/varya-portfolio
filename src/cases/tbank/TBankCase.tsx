@@ -60,6 +60,30 @@ export default function TBankCase({
     setTranslationVariantSlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
+  const [installmentClaritySlide, setInstallmentClaritySlide] = useState(0);
+  const installmentClarityScrollRef = useRef<HTMLDivElement>(null);
+  const handleInstallmentClarityScroll = useCallback(() => {
+    const el = installmentClarityScrollRef.current;
+    if (!el) return;
+    setInstallmentClaritySlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [docTypesSlide, setDocTypesSlide] = useState(0);
+  const docTypesScrollRef = useRef<HTMLDivElement>(null);
+  const handleDocTypesScroll = useCallback(() => {
+    const el = docTypesScrollRef.current;
+    if (!el) return;
+    setDocTypesSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  const [residenceStatusSlide, setResidenceStatusSlide] = useState(0);
+  const residenceStatusScrollRef = useRef<HTMLDivElement>(null);
+  const handleResidenceStatusScroll = useCallback(() => {
+    const el = residenceStatusScrollRef.current;
+    if (!el) return;
+    setResidenceStatusSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
   return (
     <>
             {/* Текущие проблемы формы — T-Bank only */}
@@ -89,7 +113,7 @@ export default function TBankCase({
                             loading="lazy"
                             src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
                             alt={locale === 'ru' ? `Проблемы формы — часть ${n}` : `Form issues — part ${n}`}
-                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
                           />
                         </div>
                       ))}
@@ -454,7 +478,7 @@ export default function TBankCase({
                             loading="lazy"
                             src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
                             alt={locale === 'ru' ? `Результаты Drop-off — часть ${n === 4 ? 1 : 2}` : `Drop-off results — part ${n === 4 ? 1 : 2}`}
-                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
                           />
                         </div>
                       ))}
@@ -636,8 +660,23 @@ export default function TBankCase({
                       : typograph('If the application form and bank communications are only available in Russian, some foreign users may struggle to complete the form. This leads to an increased drop-off rate. In my solution, I expanded localization for the segment vulnerable to limited Russian language comprehension')}
                   </p>
                 </div>
+                {/* Mobile: phone mockup */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex items-center justify-center"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <img
+                      loading="lazy"
+                      src={publicUrl('/covers/T-bank/Mobile/7.webp')}
+                      alt={locale === 'ru' ? 'Локализация' : 'Localization'}
+                      style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                    />
+                  </div>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
@@ -656,38 +695,39 @@ export default function TBankCase({
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Варианты перевода' : 'Translation Variants'}
                 </h2>
-                {/* Mobile: horizontal carousel */}
+                {/* Mobile: phone mockup carousel */}
                 <div className="chip-image-gap md:hidden">
                   <div
-                    ref={translationVariantsScrollRef}
-                    onScroll={handleTranslationVariantsScroll}
-                    className="no-scrollbar flex flex-row flex-nowrap overflow-x-auto snap-x snap-mandatory gap-[12px]"
-                    style={{ padding: '0 16px', WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
-                    {TBANK_TRANSLATION_VARIANTS.map(({ label, src }) => (
-                      <div key={label} className="snap-center shrink-0" style={{ width: 'calc(100vw - 64px)' }}>
-                        <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5] h-[210px] flex items-center justify-center">
-                          <img loading="lazy"
-                            src={src}
-                            alt={label}
-                            draggable={false}
-                            className="block object-contain"
-                            style={{ maxWidth: '90%', maxHeight: '100%' }}
+                    <div
+                      ref={translationVariantsScrollRef}
+                      onScroll={handleTranslationVariantsScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[8, 9, 10].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Варианты локализации — ${n}` : `Localization variant — ${n}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
                           />
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                   <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {TBANK_TRANSLATION_VARIANTS.map((_, idx) => (
+                    {[0, 1, 2].map((i) => (
                       <div
-                        key={idx}
+                        key={i}
                         style={{
                           width: 6,
                           height: 6,
                           borderRadius: '50%',
                           backgroundColor: '#1a1a1a',
-                          opacity: translationVariantSlide === idx ? 1 : 0.2,
+                          opacity: translationVariantSlide === i ? 1 : 0.2,
                           transition: 'opacity 200ms ease',
                           flexShrink: 0,
                         }}
@@ -722,8 +762,49 @@ export default function TBankCase({
                     ? typograph('Сейчас условия и\u00A0вероятность одобрения рассрочки для иностранных граждан с\u00A0разными типами документов остаются недостаточно прозрачными. Чтобы узнать больше информации об\u00A0условиях в\u00A0Т-банке нужно искать подходящие статьи вручную. Отдельный раздел с\u00A0переходом на\u00A0официальные источники поможет снизить риск дезинформации и\u00A0следить за\u00A0актуальными условиями')
                     : typograph('Currently, the conditions and likelihood of installment approval for foreign citizens with different document types remain insufficiently transparent. To learn more about the conditions at T-Bank, one needs to search for relevant articles manually. A dedicated section with links to official sources will help reduce the risk of misinformation and keep track of current conditions')}
                 </p>
+                {/* Mobile: carousel with 11, 12 */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={installmentClarityScrollRef}
+                      onScroll={handleInstallmentClarityScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[11, 12].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Получение рассрочки — ${n}` : `Installment clarity — ${n}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: installmentClaritySlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
@@ -735,7 +816,7 @@ export default function TBankCase({
                   </div>
                 </div>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
@@ -751,8 +832,23 @@ export default function TBankCase({
                     ? typograph('При переходе в условиях «Подробнее про получение кредита (заема) или рассрочки» пользователь продолжает путь с\u00A0веб-страницы, где получает информацию о\u00A0кредитных продуктах. В\u00A0рамках решения кейса я\u00A0расширила языковую поддержку веб-страницы, синхронизировав ее с\u00A0формой оформления')
                     : typograph('When navigating to the conditions for "Foreigners", the user continues their journey from a\u00A0web page where they receive information about credit products. As part of the case solution, I\u00A0expanded the language support of the web page, synchronizing it with the application form')}
                 </p>
+                {/* Mobile: phone mockup for 13 */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex items-center justify-center"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <img
+                      loading="lazy"
+                      src={publicUrl('/covers/T-bank/Mobile/13.webp')}
+                      alt={locale === 'ru' ? 'Расширение языковой поддержки веб-страницы' : 'Web page language support expansion'}
+                      style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                    />
+                  </div>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)]"
                   style={{ marginTop: 16 }}
                 >
                   <div className="relative w-full overflow-hidden leading-none">
@@ -783,8 +879,23 @@ export default function TBankCase({
                       : typograph('Splitting the data collection process into 4 logical stages will help reduce cognitive load and increase application completion')}
                   </p>
                 </div>
+                {/* Mobile: phone mockup for 14 */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex items-center justify-center"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <img
+                      loading="lazy"
+                      src={publicUrl('/covers/T-bank/Mobile/14.webp')}
+                      alt={locale === 'ru' ? 'Пошаговый индикатор оформления заявки' : 'Step-by-Step Application Progress Indicator'}
+                      style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                    />
+                  </div>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
@@ -805,8 +916,49 @@ export default function TBankCase({
                     ? typograph('Разные типы документов требуют разных данных для заполнения. Если форма будет предусматривать больше вариантов ввода документов и\u00A0стран, пользователи смогут корректно заполнить анкету с\u00A0первого раза')
                     : typograph('Different document types require different data to fill in. If the form accommodates more document and country input options, users will be able to correctly complete the application on the first attempt')}
                 </p>
+                {/* Mobile: carousel with 15, 16 */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={docTypesScrollRef}
+                      onScroll={handleDocTypesScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[15, 16].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Расширение типов документов — ${n}` : `Document types expansion — ${n}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: docTypesSlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
@@ -816,7 +968,7 @@ export default function TBankCase({
                   />
                 </div>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none mt-[16px] md:mt-[24px]"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none mt-[24px]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/10.webp')}
@@ -838,8 +990,61 @@ export default function TBankCase({
                       : typograph('Foreign users are more likely to receive rejections due to insufficient data for assessing their legal status and residency stability. Adding a long-term residency status document can reduce uncertainty in scoring, increase the likelihood of application approval, and lower bank risks by confirming the client\u2019s long-term status')}
                   </p>
                 </div>
+                {/* Mobile: carousel with 17, 18 (ВНЖ), 19 (РВП) */}
+                <div className="md:hidden" style={{ marginTop: 16 }}>
+                  <div
+                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                  >
+                    <div
+                      ref={residenceStatusScrollRef}
+                      onScroll={handleResidenceStatusScroll}
+                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                    >
+                      {[17, 18, 19].map((n) => (
+                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                          <img
+                            loading="lazy"
+                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
+                            alt={locale === 'ru' ? `Статус пребывания — ${n}` : `Residence Status — ${n}`}
+                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                    {[0, 1, 2].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          backgroundColor: '#1a1a1a',
+                          opacity: residenceStatusSlide === i ? 1 : 0.2,
+                          transition: 'opacity 200ms ease',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p
+                    className="text-center font-medium"
+                    style={{
+                      marginTop: 8,
+                      fontSize: 14,
+                      color: '#B0B0B0',
+                      fontFamily: 'Inter, sans-serif',
+                      minHeight: '20px',
+                    }}
+                  >
+                    {residenceStatusSlide === 1 ? 'Форма с ВНЖ' : residenceStatusSlide === 2 ? 'Форма с РВП' : ''}
+                  </p>
+                </div>
+                {/* Desktop */}
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
@@ -849,7 +1054,7 @@ export default function TBankCase({
                   />
                 </div>
                 <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden leading-none mt-[16px] md:mt-[24px]"
+                  className="hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden leading-none mt-[24px]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/T-bank/21.webp')}
