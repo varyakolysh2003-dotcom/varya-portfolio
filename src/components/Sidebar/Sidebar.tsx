@@ -86,6 +86,9 @@ export function Sidebar({
             navigate(`/cases/${cs.id}`);
           };
 
+          const RELEASE_TRANSITION = 'background-color 200ms, transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)';
+          const PRESS_TRANSITION   = 'background-color 200ms, transform 120ms ease-in';
+
           return (
             <div
               key={cs.id}
@@ -96,11 +99,34 @@ export function Sidebar({
               onMouseLeave={onCaseLeave}
               onFocus={() => onCaseEnter(cs)}
               onClick={isDisabled ? undefined : handleClick}
-              style={{ padding: '16px 24px' }}
+              onPointerDown={(e) => {
+                if (isDisabled) return;
+                const el = e.currentTarget as HTMLElement;
+                el.style.transition = PRESS_TRANSITION;
+                el.style.transform = 'scale(0.97)';
+              }}
+              onPointerUp={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transition = RELEASE_TRANSITION;
+                el.style.transform = 'scale(1)';
+              }}
+              onPointerLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transition = RELEASE_TRANSITION;
+                el.style.transform = 'scale(1)';
+              }}
+              onPointerCancel={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transition = RELEASE_TRANSITION;
+                el.style.transform = 'scale(1)';
+              }}
+              style={{
+                padding: '16px 24px',
+                transition: RELEASE_TRANSITION,
+              }}
               className={`
                 w-full box-border min-h-[120px] lg:h-[146px] rounded-[24px] lg:rounded-[32px]
                 shadow-[0_0_4px_rgba(0,0,0,0.08)]
-                transition-colors duration-200
                 ${isDisabled ? 'cursor-default' : 'cursor-pointer'} overflow-hidden
                 ${isActive ? 'bg-[#F8F8F8]' : 'bg-[#FFFFFF] hover:bg-[#F8F8F8]'}
               `}

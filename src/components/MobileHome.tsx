@@ -44,7 +44,11 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
           rel="noopener noreferrer"
           download
           className="flex items-center justify-between gap-3 w-full bg-white rounded-[16px] shadow-[0_0_4px_rgba(0,0,0,0.08)] no-underline"
-          style={{ padding: '12px 16px' }}
+          style={{ padding: '12px 16px', transform: 'scale(1)', transition: 'transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)' }}
+          onPointerDown={(e) => { const el = e.currentTarget; el.style.transition = 'transform 120ms ease-in'; el.style.transform = 'scale(0.97)'; }}
+          onPointerUp={(e)   => { const el = e.currentTarget; el.style.transition = 'transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
+          onPointerLeave={(e) => { const el = e.currentTarget; el.style.transition = 'transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
+          onPointerCancel={(e) => { const el = e.currentTarget; el.style.transition = 'transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
         >
           <div className="flex-1 min-w-0">
             <p className="text-[16px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
@@ -119,7 +123,11 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
                   />
                   <div className="flex-1 min-w-0">
                     <h3 className="text-[16px] font-semibold leading-[1.25] tracking-[-0.01em] text-[var(--color-text-primary)]">
-                      {cs.title[locale]}
+                      {cs.id === 'lavka' && locale === 'ru' ? (
+                        <>{'Совместная корзина\u00a0в'}<br />{'«Яндекс\u00a0Лавка»'}</>
+                      ) : (
+                        cs.title[locale]
+                      )}
                     </h3>
                   </div>
                 </div>

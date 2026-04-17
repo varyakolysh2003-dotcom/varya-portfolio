@@ -74,7 +74,7 @@ export const cases: CaseStudy[] = [
     year: '2025',
     platforms: { ru: 'Веб', en: 'Web' },
     role: {
-      ru: 'Desk research кредитных условий для иностранцев в Т‑банке и проведение Custdev с Drop-off по текущей форме',
+      ru: 'Discovery и UX-адаптация формы рассрочки для иностранцев',
       en: 'Desk research on credit terms for foreigners and Custdev with Drop-off analysis',
     },
     tools: { ru: 'Figma', en: 'Figma' },

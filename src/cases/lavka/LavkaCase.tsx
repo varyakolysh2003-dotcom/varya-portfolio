@@ -258,7 +258,7 @@ export default function LavkaCase({
             c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
           }
         } }}
-                      className="rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
+                      className="press-animate rounded-full text-left shrink-0 px-[14px] py-[8px] md:rounded-[24px] md:p-[24px] md:shrink md:w-full"
                       style={{
                         backgroundColor: activePersona === persona.id ? '#000000' : '#F8F8F8',
                         border: 'none',
@@ -267,7 +267,7 @@ export default function LavkaCase({
                     >
                       <h3
                         className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
-                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)' }}
+                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)', transition: 'color 150ms ease' }}
                       >
                         {persona.title}
                       </h3>
@@ -276,6 +276,7 @@ export default function LavkaCase({
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
+                          transition: 'color 150ms ease',
                         }}
                       >
                         {persona.desc}
@@ -1066,7 +1067,7 @@ export default function LavkaCase({
             c.scrollTo({ left: Math.max(0, Math.min(max, next)), behavior: 'smooth' });
           }
         } }}
-                      className="skill-pill whitespace-nowrap border-none cursor-pointer rounded-[24px] inline-flex items-center justify-center"
+                      className="press-animate skill-pill whitespace-nowrap border-none cursor-pointer rounded-[24px] inline-flex items-center justify-center"
                       style={{
                         padding: '10px 12px',
                         lineHeight: 1,

@@ -56,6 +56,9 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  const PRESS_T   = 'transform 120ms ease-in';
+  const RELEASE_T = 'transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)';
+
   return (
     <div className={className ?? 'relative shrink-0'} ref={langRef}>
       <button
@@ -63,6 +66,11 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         onClick={() => setLangOpen(!langOpen)}
         className="inline-flex items-center justify-center w-[36px] h-[36px] rounded-[10px] lg:w-[44px] lg:h-[44px] lg:rounded-[14px] bg-white shadow-[0_2px_6px_rgba(0,0,0,0.08)]"
         aria-label={locale === 'ru' ? 'Переключить язык' : 'Switch language'}
+        style={{ transform: 'scale(1)', transition: RELEASE_T }}
+        onPointerDown={(e) => { const el = e.currentTarget; el.style.transition = PRESS_T;   el.style.transform = 'scale(0.95)'; }}
+        onPointerUp={(e)   => { const el = e.currentTarget; el.style.transition = RELEASE_T; el.style.transform = 'scale(1)'; }}
+        onPointerLeave={(e) => { const el = e.currentTarget; el.style.transition = RELEASE_T; el.style.transform = 'scale(1)'; }}
+        onPointerCancel={(e) => { const el = e.currentTarget; el.style.transition = RELEASE_T; el.style.transform = 'scale(1)'; }}
       >
         <span className="font-medium text-[13px] lg:text-[16px] text-[rgba(0,0,0,0.4)]">
           {locale === 'ru' ? 'RU' : 'EN'}

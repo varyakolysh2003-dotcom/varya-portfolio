@@ -231,6 +231,11 @@ function ResumeContent({ locale }: { locale: Locale }) {
               rel="noopener noreferrer"
               download={locale === 'ru' ? 'Колыш Варвара Резюме_ru.pdf' : 'Kolysh Varvara Resume_eng.pdf'}
               className="resume-download"
+              style={{ transform: 'scale(1)', transition: 'background-color 150ms ease-out, transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)' }}
+              onPointerDown={(e) => { const el = e.currentTarget; el.style.transition = 'background-color 150ms ease-out, transform 120ms ease-in'; el.style.transform = 'scale(0.93)'; }}
+              onPointerUp={(e)   => { const el = e.currentTarget; el.style.transition = 'background-color 150ms ease-out, transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
+              onPointerLeave={(e) => { const el = e.currentTarget; el.style.transition = 'background-color 150ms ease-out, transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
+              onPointerCancel={(e) => { const el = e.currentTarget; el.style.transition = 'background-color 150ms ease-out, transform 240ms cubic-bezier(0.34, 1.3, 0.64, 1)'; el.style.transform = 'scale(1)'; }}
             >
               <img src={publicUrl('/Icons/download.svg')} alt={locale === 'ru' ? 'Скачать резюме' : 'Download resume'} />
             </a>

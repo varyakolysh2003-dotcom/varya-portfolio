@@ -70,42 +70,38 @@ export function CasePage() {
     }
   }, [resolvedCaseIdForPersona]);
 
+  // Returns the pixel offset from the viewport top used for both scrollTo and scroll-spy.
+  // Must match the scroll-mt values on section elements.
+  const getNavOffset = () => (window.innerWidth >= 1500 ? 32 : 72);
+
   useEffect(() => {
     const lastSectionId = NAV_ITEMS[NAV_ITEMS.length - 1].id;
 
-    // Scroll-spy: find the last section whose top has scrolled past the
-    // activation line (20% from viewport top). This guarantees strict
-    // ordering — a later section can never activate before an earlier one.
     const handleScroll = () => {
-      const activationLine = window.innerHeight * 0.2;
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
+      const scrollY = window.scrollY;
+      const docH = document.documentElement.scrollHeight;
+      const viewportH = window.innerHeight;
+      const offset = getNavOffset();
 
-      // Near bottom of page → activate last section
-      if (docHeight - scrollBottom < 150) {
+      // Near bottom → activate last section
+      if (docH - (scrollY + viewportH) < 300) {
         setActiveSection(lastSectionId);
         return;
       }
 
-      // Collect sections with their real vertical positions and sort by DOM order
-      const sections = NAV_ITEMS
-        .map(({ id }) => {
-          const el = document.getElementById(id);
-          return el ? { id, top: el.getBoundingClientRect().top } : null;
-        })
-        .filter(Boolean) as { id: string; top: number }[];
-      sections.sort((a, b) => a.top - b.top);
-
-      let current = sections[0]?.id ?? NAV_ITEMS[0].id;
-      for (const { id, top } of sections) {
-        if (top <= activationLine) {
+      // Walk sections in DOM order; last one whose top is at or above the
+      // offset line wins. Uses getBoundingClientRect for live accuracy.
+      let current: string = NAV_ITEMS[0].id;
+      for (const { id } of NAV_ITEMS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= offset) {
           current = id;
         }
       }
       setActiveSection(current);
     };
 
-    // Initial calculation after conditional sections mount
     const frameId = requestAnimationFrame(handleScroll);
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
@@ -117,9 +113,13 @@ export function CasePage() {
     };
   }, []);
 
+  // Explicit window.scrollTo so the destination is always exactly (offset) px
+  // from the viewport top — no reliance on CSS scroll-margin-top behavior.
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }, []);
 
 
@@ -196,9 +196,11 @@ export function CasePage() {
                   key={id}
                   type="button"
                   onClick={() => {
-                    const el = document.getElementById(id);
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     setMobileSectionsOpen(false);
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    const top = el.getBoundingClientRect().top + window.scrollY - 72;
+                    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
                   }}
                   className={`flex items-center w-full min-w-0 px-3 py-2 rounded-[10px] text-[13px] transition-colors duration-100 hover:bg-[var(--color-bg)] text-left ${activeSection === id ? 'font-semibold text-[var(--color-text-primary)] bg-[var(--color-bg)]' : 'font-medium text-[var(--color-text-secondary)]'}`}
                 >
@@ -265,7 +267,11 @@ export function CasePage() {
                   className="w-[48px] h-[48px] object-contain shrink-0"
                 />
                 <h1 className="text-[24px] font-bold leading-[1.3]">
-                  {typograph(caseStudy.title[locale])}
+                  {caseStudy.id === 'lavka' && locale === 'ru' ? (
+                    <>Совместная корзина в<br className="md:hidden" />{'«Яндекс\u00a0Лавка»'}</>
+                  ) : (
+                    typograph(caseStudy.title[locale])
+                  )}
                 </h1>
               </div>
             </header>
@@ -368,7 +374,7 @@ export function CasePage() {
           )}
 
           {/* Контекст задачи — standalone block */}
-          <section id="section-context" style={{ marginTop: 24, scrollMarginTop: 32 }}>
+          <section id="section-context" className="scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 24 }}>
             <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24 }}>
               <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                 {locale === 'ru' ? 'Контекст задачи' : 'Task Context'}
