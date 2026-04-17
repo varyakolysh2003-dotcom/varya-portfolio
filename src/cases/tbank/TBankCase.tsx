@@ -68,14 +68,6 @@ export default function TBankCase({
     setInstallmentClaritySlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
-  const [docTypesSlide, setDocTypesSlide] = useState(0);
-  const docTypesScrollRef = useRef<HTMLDivElement>(null);
-  const handleDocTypesScroll = useCallback(() => {
-    const el = docTypesScrollRef.current;
-    if (!el) return;
-    setDocTypesSlide(Math.round(el.scrollLeft / el.clientWidth));
-  }, []);
-
   const [residenceStatusSlide, setResidenceStatusSlide] = useState(0);
   const residenceStatusScrollRef = useRef<HTMLDivElement>(null);
   const handleResidenceStatusScroll = useCallback(() => {
@@ -888,7 +880,7 @@ export default function TBankCase({
                   style={{ marginTop: 16 }}
                 >
                   <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/15.webp')}
+                    src={publicUrl('/covers/T-bank/10.webp')}
                     alt={locale === 'ru' ? 'Пошаговый индикатор оформления заявки' : 'Step-by-Step Application Progress Indicator'}
                     className="block w-full h-auto"
                   />
@@ -905,45 +897,17 @@ export default function TBankCase({
                     ? typograph('Разные типы документов требуют разных данных для заполнения. Если форма будет предусматривать больше вариантов ввода документов и\u00A0стран, пользователи смогут корректно заполнить анкету с\u00A0первого раза')
                     : typograph('Different document types require different data to fill in. If the form accommodates more document and country input options, users will be able to correctly complete the application on the first attempt')}
                 </p>
-                {/* Mobile: carousel with 15, 16 */}
-                <div className="md:hidden" style={{ marginTop: 16 }}>
-                  <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
-                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
-                  >
-                    <div
-                      ref={docTypesScrollRef}
-                      onScroll={handleDocTypesScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
-                    >
-                      {[15, 16].map((n) => (
-                        <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
-                          <img
-                            loading="lazy"
-                            src={publicUrl(`/covers/T-bank/Mobile/${n}.webp`)}
-                            alt={locale === 'ru' ? `Расширение типов документов — ${n}` : `Document types expansion — ${n}`}
-                            style={{ width: '281px', height: '271px', objectFit: 'contain', display: 'block', borderRadius: '20px', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: docTypesSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                {/* Mobile: static image */}
+                <div
+                  className="md:hidden w-full rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img
+                    loading="lazy"
+                    src={publicUrl('/covers/T-bank/10.webp')}
+                    alt={locale === 'ru' ? 'Расширение типов документов в анкете' : 'Expanding Document Types'}
+                    className="block w-full h-auto"
+                  />
                 </div>
                 {/* Desktop */}
                 <div
