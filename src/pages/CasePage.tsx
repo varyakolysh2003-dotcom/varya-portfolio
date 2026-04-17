@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { cases } from '../data/cases';
 import { ScrollToTop } from '../components/ScrollToTop';
 import { useLocale } from '../context/LocaleContext';
+import { useLightbox } from '../context/LightboxContext';
 import { typograph } from '../utils/typograph';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import type { CaseStudy } from '../types';
@@ -28,8 +29,17 @@ const LEGACY_CASE_SLUG: Record<string, string> = {
 export function CasePage() {
   const { caseSlug } = useParams<{ caseSlug: string }>();
   const { locale } = useLocale();
+  const { open: openLightbox } = useLightbox();
   const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
   const mobileSectionsRef = useRef<HTMLDivElement>(null);
+
+  const handleImageClick = useCallback((e: React.MouseEvent) => {
+    const img = e.target as HTMLImageElement;
+    if (img.tagName !== 'IMG') return;
+    // Only lazy-loaded content images (skips nav icons which use loading="eager")
+    if (img.loading !== 'lazy') return;
+    openLightbox(img.src, img.alt);
+  }, [openLightbox]);
 
   // Scroll-reveal for all .case-sections children (see useScrollReveal hook).
   useScrollReveal(caseSlug);
@@ -241,7 +251,7 @@ export function CasePage() {
       </nav>
     )}
 
-    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col items-center pt-[64px] min-[1500px]:pt-0 pb-[84px] px-4 md:px-8 xl:px-[60px]">
+    <div className="case-container page-enter min-h-dvh bg-[var(--color-bg)] flex flex-col items-center pt-[64px] min-[1500px]:pt-0 pb-[84px] px-4 md:px-8 xl:px-[60px]" onClick={handleImageClick}>
 
       <div className="max-w-[880px] w-full min-[1500px]:pt-[32px]">
         <Link
@@ -268,7 +278,7 @@ export function CasePage() {
                 />
                 <h1 className="text-[24px] font-bold leading-[1.3]">
                   {caseStudy.id === 'lavka' && locale === 'ru' ? (
-                    <>Совместная корзина в<br className="md:hidden" />{'«Яндекс\u00a0Лавка»'}</>
+                    <>Совместная корзина в {'«Яндекс\u00a0Лавка»'}</>
                   ) : (
                     typograph(caseStudy.title[locale])
                   )}
