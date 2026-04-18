@@ -149,7 +149,7 @@ export default function LavkaCase({
   return (
     <>
             {/* Бенчмаркинг — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            <div id="section-analysis" className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+            <div id="section-analysis" className="flex flex-col gap-[16px] md:gap-[24px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 88 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
@@ -381,7 +381,7 @@ export default function LavkaCase({
             </div>
 
             {/* Онбординг обновления — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-              <div id="section-solutions" className="flex flex-col" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+              <div id="section-solutions" className="flex flex-col scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 88 }}>
                 <div className="flex flex-col gap-[8px]">
                   <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                     {locale === 'ru' ? 'Онбординг обновления' : 'Feature Onboarding'}
@@ -1011,7 +1011,7 @@ export default function LavkaCase({
               </div>
 
             {/* Тестирование */}
-              <div id="section-testing" className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
+              <div id="section-testing" className="flex flex-col gap-[8px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 84 }}>
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Тестирование' : 'Testing'}
                 </h2>

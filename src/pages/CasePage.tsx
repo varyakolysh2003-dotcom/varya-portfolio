@@ -113,13 +113,13 @@ export function CasePage() {
     };
   }, []);
 
-  // Explicit window.scrollTo so the destination is always exactly (offset) px
-  // from the viewport top — no reliance on CSS scroll-margin-top behavior.
+  // scrollIntoView tracks the element continuously through layout reflows
+  // (lazy images loading during animation), so the landing position is always exact.
+  // scroll-margin-top on each section element provides the sticky-nav offset.
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - getNavOffset();
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
 
