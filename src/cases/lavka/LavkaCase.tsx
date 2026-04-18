@@ -144,13 +144,7 @@ export default function LavkaCase({
     setMobileStatusesSlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
-  const [mobileSuggestionSlide, setMobileSuggestionSlide] = useState(0);
   const suggestionScrollRef = useRef<HTMLDivElement>(null);
-  const handleSuggestionScroll = useCallback(() => {
-    const el = suggestionScrollRef.current;
-    if (!el) return;
-    setMobileSuggestionSlide(Math.round(el.scrollLeft / el.clientWidth));
-  }, []);
 
   return (
     <>
@@ -911,7 +905,7 @@ export default function LavkaCase({
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
                   <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={suggestionScrollRef} onScroll={handleSuggestionScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                    <div ref={suggestionScrollRef} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
                       {[41].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
@@ -922,11 +916,6 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileSuggestionSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
                   </div>
                 </div>
 
@@ -1028,16 +1017,9 @@ export default function LavkaCase({
                 </h2>
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
-                    ? typograph('Для проверки гипотез был разработан интерактивный прототип функции совместной корзины. Прототип был протестирован на респондентах, участвовавших в CustDev-исследовании')
-                    : typograph('To validate hypotheses, an interactive prototype of the shared cart feature was developed. The user scenario included adding items, sending a link to participants, and placing a joint order. The prototype was tested on respondents who participated in the CustDev study.')}
+                    ? typograph('Для проверки гипотез ключевые сценарии частично проверяла на интерактивном прототипе и частично через опрос и обсуждение с респондентами, участвовавшими в CustDev исследовании')
+                    : typograph('To validate hypotheses, key scenarios were partially tested using an interactive prototype and partially through surveys and discussions with respondents who participated in the CustDev research.')}
                 </p>
-
-                {/* Что было протестировано */}
-                <h3
-                  className="case-section-content font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]"
-                >
-                  {locale === 'ru' ? 'Что было протестировано' : 'What was tested'}
-                </h3>
 
                 {/* Filter chips */}
                 <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
@@ -1134,11 +1116,12 @@ export default function LavkaCase({
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователям интересно получать достижения с\u00A0вознаграждениями и\u00A0бонусами') : typograph('— Users are interested in earning achievements with rewards and bonuses')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Визуальная персонализация иконок заданий помогла ориентироваться в\u00A0категории групп') : typograph('— Visual personalization of tasks helped navigate group categories')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Задания помогли разнообразить опциональные задачи, которые пользователи могут закрывать в\u00A0Лавке') : typograph('— Tasks helped diversify optional objectives that users can set for themselves in Lavka')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT составил 73%. Некоторые респонденты ответили, что бонусы не являются ключевой мотивацией к закрытию заданий') : typograph('— CSAT was 73%. Some respondents noted that bonuses are not their primary motivation for completing tasks')}</p>
                           </>
                         ) : activeTestChip === 3 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователи воспринимают создание группы как способ экономии') : typograph('— Users perceive group creation as a way to save money')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Поп-ап с\u00A0объяснением ценности повышает вероятность создания группы, однако не все респонденты выразили удовлетворенность в ситуации, если поп-ап будет появляться после каждого единоразового заказа') : typograph('— A pop-up explaining the value increases the likelihood of group creation, though not all respondents were happy with it appearing after every one-off order')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователи воспринимают создание группы как способ экономии времени') : typograph('— Users perceive group creation as a way to save time')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT +70%. Поп-ап с\u00A0объяснением ценности повышает вероятность создания группы, однако не все респонденты выразили удовлетворенность в ситуации, если поп-ап будет появляться после каждого единоразового заказа') : typograph('— CSAT +70%. A pop-up explaining the value increases the likelihood of group creation, though not all respondents were happy with it appearing after every one-off order')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Возможность приглашать знакомых делает сценарий более понятным и\u00A0социально значимым') : typograph('— The ability to invite acquaintances makes the scenario more understandable and socially meaningful')}</p>
                           </>
                         ) : activeTestChip === 4 ? (
@@ -1146,7 +1129,7 @@ export default function LavkaCase({
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Повторное приглашение воспринимается как удобный способ вернуть участников в\u00A0заказ') : typograph('— Re-invitation is perceived as a convenient way to bring participants back to the order')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Чёткое состояние запроса снижает неопределённость ожидания') : typograph('— A clear request status reduces waiting uncertainty')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Возможность быстро принять или отклонить запрос ускоряет сценарий совместной покупки') : typograph('— The ability to quickly accept or decline a request speeds up the joint purchase scenario')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Решение исключает необходимость выходить из приложения для повторной отправки приглашения') : typograph('— The flow removes the need to leave the app to resend an invitation')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Решение исключает необходимость выходить из приложения для повторной отправки приглашения, CSAT +89%') : typograph('— The flow removes the need to leave the app to resend an invitation, CSAT +89%')}</p>
                           </>
                         ) : activeTestChip === 5 ? (
                           <>
@@ -1160,7 +1143,7 @@ export default function LavkaCase({
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— На\u00A0практике гипотеза о\u00A0неинтуитивности иконки «поделиться» в приложении подтвердилась') : typograph('— In practice, the hypothesis about the non-intuitiveness of the share icon was confirmed')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Даже без полного прохождения онбординга пользователям было достаточно всплывающего поп-апа об\u00A0обновлении, чтобы разобраться самостоятельно') : typograph('— Even without completing onboarding, users found the update pop-up sufficient to figure things out on their own')}</p>
                             <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT по\u00A0результатам достиг +97%') : typograph('— CSAT reached 97%')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Средняя длительность снизилась на 84%') : typograph('— Average duration decreased by 84%')}</p>
+                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Средняя длительность поиска раздела совместной корзины снизилась на 84%') : typograph('— Average duration of searching for the shared cart section decreased by 84%')}</p>
                           </>
                         )}
                       </div>
