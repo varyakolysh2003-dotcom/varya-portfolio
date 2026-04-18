@@ -95,7 +95,7 @@ export function CasePage() {
       for (const { id } of NAV_ITEMS) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= offset) {
+        if (el.getBoundingClientRect().top <= offset + 2) {
           current = id;
         }
       }
@@ -197,10 +197,7 @@ export function CasePage() {
                   type="button"
                   onClick={() => {
                     setMobileSectionsOpen(false);
-                    const el = document.getElementById(id);
-                    if (!el) return;
-                    const top = el.getBoundingClientRect().top + window.scrollY - 72;
-                    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+                    scrollTo(id);
                   }}
                   className={`flex items-center w-full min-w-0 px-3 py-2 rounded-[10px] text-[13px] transition-colors duration-100 hover:bg-[var(--color-bg)] text-left ${activeSection === id ? 'font-semibold text-[var(--color-text-primary)] bg-[var(--color-bg)]' : 'font-medium text-[var(--color-text-secondary)]'}`}
                 >
@@ -556,7 +553,7 @@ export function CasePage() {
 
             {/* Бенчмаркинг — Okolo */}
             {caseStudy.id === 'okolo' && (
-            <div className="flex flex-col gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+            <div id="section-analysis" className="flex flex-col gap-[24px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 88 }}>
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}

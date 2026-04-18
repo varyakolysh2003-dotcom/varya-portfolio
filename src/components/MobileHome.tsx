@@ -122,9 +122,9 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
                     className="w-[32px] h-[32px] shrink-0 object-contain"
                   />
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[16px] font-semibold leading-[1.25] tracking-[-0.01em] text-[var(--color-text-primary)]">
+                    <h3 className="text-[16px] font-semibold leading-[1.25] tracking-[-0.01em] text-[var(--color-text-primary)] text-balance">
                       {cs.id === 'lavka' && locale === 'ru' ? (
-                        <>{'Совместная корзина\u00a0в'}<br />{'«Яндекс\u00a0Лавка»'}</>
+                        <>Совместная корзина в {'«Яндекс\u00a0Лавка»'}</>
                       ) : (
                         cs.title[locale]
                       )}
