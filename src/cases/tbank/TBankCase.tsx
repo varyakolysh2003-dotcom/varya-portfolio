@@ -6,11 +6,11 @@ import { publicUrl } from '../../utils/publicUrl';
 
 /** T-Bank testing block: prototype screens in filename order (same for RU/EN). */
 const TBANK_TESTING_PROTOTYPE_IMAGES = [
-  publicUrl('/covers/T-bank/1_1.webp'),
-  publicUrl('/covers/T-bank/1_5.webp'),
-  publicUrl('/covers/T-bank/1_2.webp'),
-  publicUrl('/covers/T-bank/1_3.webp'),
-  publicUrl('/covers/T-bank/1_4.webp'),
+  publicUrl('/covers/T-bank/1_6.webp'),
+  publicUrl('/covers/T-bank/1_7.webp'),
+  publicUrl('/covers/T-bank/2_0.webp'),
+  publicUrl('/covers/T-bank/1_9.webp'),
+  publicUrl('/covers/T-bank/1_8.webp'),
 ] as const;
 
 const TBANK_TRANSLATION_VARIANTS = [
