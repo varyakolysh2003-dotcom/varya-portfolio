@@ -414,7 +414,7 @@ export default function LavkaCase({
                             style={{
                               height: '460px',
                               width: 'auto',
-                              borderRadius: 'calc(var(--radius-media) - 20px)',
+                              borderRadius: '42px',
                               display: 'block',
                               boxShadow: '0 8px 28px rgba(0,0,0,0.10)',
                             }}
@@ -483,7 +483,7 @@ export default function LavkaCase({
                             style={{
                               height: '460px',
                               width: 'auto',
-                              borderRadius: 'calc(var(--radius-media) - 20px)',
+                              borderRadius: '42px',
                               display: 'block',
                               boxShadow: '0 8px 28px rgba(0,0,0,0.10)',
                             }}
@@ -539,7 +539,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Приглашение' : 'Invitation'} ${n - 20}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -582,7 +582,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Способ оплаты' : 'Payment method'} ${n - 22}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -620,7 +620,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Единая оплата' : 'Joint payment'} ${n - 24}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -663,7 +663,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Проверка адреса' : 'Address check'} ${i + 1}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -706,7 +706,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Подтверждение заказа' : 'Order confirmation'} ${n - 26}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -767,7 +767,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Возобновление заказа' : 'Resume order'} ${n - 6}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -810,7 +810,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Спецпредложения' : 'Special offers'} ${n - 29}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -869,7 +869,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Постоянные группы' : 'Permanent groups'} ${n - 38}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -911,7 +911,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -924,7 +924,7 @@ export default function LavkaCase({
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Mobile/41.webp')}
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                    style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                    style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                   />
                 </div>
               </div>
@@ -949,7 +949,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Раздел заданий' : 'Tasks section'} ${n - 15}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -987,7 +987,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Статус задания' : 'Task status'} ${n - 10}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: 'calc(var(--radius-media) - 20px)', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
