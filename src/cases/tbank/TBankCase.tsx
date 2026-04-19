@@ -1323,7 +1323,7 @@ export default function TBankCase({
                       {TBANK_TESTING_PROTOTYPE_IMAGES.map((src, idx) => (
                         <div
                           key={src}
-                          className="w-full md:w-auto md:h-full overflow-hidden"
+                          className="w-full md:w-auto md:h-full overflow-hidden md:p-4 md:rounded-[calc(var(--radius-media)-16px)]"
                           style={{ display: activeTbankTestChip === idx ? 'block' : 'none' }}
                         >
                           <img
