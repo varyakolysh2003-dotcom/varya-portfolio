@@ -1202,16 +1202,8 @@ export default function TBankCase({
                   </p>
                 </div>
 
-                {/* Что было протестировано */}
-                <h3
-                  className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]"
-                  style={{ marginTop: 24 }}
-                >
-                  {locale === 'ru' ? 'Что было протестировано' : 'What was tested'}
-                </h3>
-
                 {/* Filter chips */}
-                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
+                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 24 }}>
                   {([
                     { ru: 'Локализация интерфейса', en: 'Interface localization' },
                     { ru: 'Пошаговый индикатор', en: 'Step indicator' },
