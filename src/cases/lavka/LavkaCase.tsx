@@ -395,13 +395,14 @@ export default function LavkaCase({
                 {/* Mobile: one shared background container, one image visible at a time */}
                 <div className="case-section-content md:hidden">
                   <div
-                    className="w-full bg-[#F5F5F5] overflow-hidden"
-                    style={{ height: '500px', borderRadius: 'var(--radius-media)' }}
+                    className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col"
+                    style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
                       ref={onboardingScrollRef}
                       onScroll={handleOnboardingScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      style={{ height: '500px' }}
                     >
                       {[1, 2, 3].map((n) => (
                         <div
@@ -414,7 +415,7 @@ export default function LavkaCase({
                             style={{
                               height: '460px',
                               width: 'auto',
-                              borderRadius: '42px',
+                              borderRadius: '24px',
                               display: 'block',
                               boxShadow: '0 8px 28px rgba(0,0,0,0.10)',
                             }}
@@ -422,10 +423,7 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Pagination dots */}
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2].map((i) => (
                       <div
                         key={i}
@@ -440,6 +438,7 @@ export default function LavkaCase({
                         }}
                       />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -464,13 +463,14 @@ export default function LavkaCase({
                 {/* Mobile: one shared background container, one image visible at a time */}
                 <div className="case-section-content md:hidden">
                   <div
-                    className="w-full bg-[#F5F5F5] overflow-hidden"
-                    style={{ height: '500px', borderRadius: 'var(--radius-media)' }}
+                    className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col"
+                    style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
                       ref={entryScrollRef}
                       onScroll={handleEntryScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      style={{ height: '500px' }}
                     >
                       {[4, 5, 6].map((n) => (
                         <div
@@ -483,7 +483,7 @@ export default function LavkaCase({
                             style={{
                               height: '460px',
                               width: 'auto',
-                              borderRadius: '42px',
+                              borderRadius: '24px',
                               display: 'block',
                               boxShadow: '0 8px 28px rgba(0,0,0,0.10)',
                             }}
@@ -491,10 +491,7 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Pagination dots */}
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2].map((i) => (
                       <div
                         key={i}
@@ -509,6 +506,7 @@ export default function LavkaCase({
                         }}
                       />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -532,23 +530,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="chip-image-gap md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={inviteScrollRef} onScroll={handleInviteScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={inviteScrollRef} onScroll={handleInviteScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[21, 22].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Приглашение' : 'Invitation'} ${n - 20}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileInviteSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -575,23 +573,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={paymentScrollRef} onScroll={handlePaymentScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={paymentScrollRef} onScroll={handlePaymentScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[23, 24].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Способ оплаты' : 'Payment method'} ${n - 22}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePaymentSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -613,23 +611,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="chip-image-gap md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={jointPayScrollRef} onScroll={handleJointPayScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={jointPayScrollRef} onScroll={handleJointPayScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[25, 26].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Единая оплата' : 'Joint payment'} ${n - 24}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileJointPaySlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -656,23 +654,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[17, 19].map((n, i) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Проверка адреса' : 'Address check'} ${i + 1}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileAddressSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -699,23 +697,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={confirmScrollRef} onScroll={handleConfirmScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={confirmScrollRef} onScroll={handleConfirmScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[27, 28, 29].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Подтверждение заказа' : 'Order confirmation'} ${n - 26}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileConfirmSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -760,23 +758,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={resumeScrollRef} onScroll={handleResumeScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={resumeScrollRef} onScroll={handleResumeScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[7, 8, 9].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Возобновление заказа' : 'Resume order'} ${n - 6}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileResumeSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -803,23 +801,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={promoScrollRef} onScroll={handlePromoScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={promoScrollRef} onScroll={handlePromoScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[30, 31, 32, 33, 34, 35, 36, 37, 38].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Спецпредложения' : 'Special offers'} ${n - 29}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePromoSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -862,23 +860,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={groupsScrollRef} onScroll={handleGroupsScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={groupsScrollRef} onScroll={handleGroupsScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[39, 40].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Постоянные группы' : 'Permanent groups'} ${n - 38}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileGroupsSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -911,7 +909,7 @@ export default function LavkaCase({
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
@@ -924,7 +922,7 @@ export default function LavkaCase({
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Mobile/41.webp')}
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
-                    style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                    style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                   />
                 </div>
               </div>
@@ -942,23 +940,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={tasksScrollRef} onScroll={handleTasksScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={tasksScrollRef} onScroll={handleTasksScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[16, 17].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Раздел заданий' : 'Tasks section'} ${n - 15}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileTasksSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 
@@ -980,23 +978,23 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
-                    <div ref={statusesScrollRef} onScroll={handleStatusesScroll} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                    <div ref={statusesScrollRef} onScroll={handleStatusesScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[11, 12, 13].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
                             alt={`${locale === 'ru' ? 'Статус задания' : 'Task status'} ${n - 10}`}
-                            style={{ height: '460px', width: 'auto', borderRadius: '42px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
+                            style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 8px 28px rgba(0,0,0,0.10)' }}
                           />
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
+                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
                     {[0, 1, 2].map((i) => (
                       <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileStatusesSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
                     ))}
+                  </div>
                   </div>
                 </div>
 

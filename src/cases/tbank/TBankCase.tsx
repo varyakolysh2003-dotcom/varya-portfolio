@@ -927,18 +927,32 @@ export default function TBankCase({
                       : typograph('Foreign users are more likely to receive rejections due to insufficient data for assessing their legal status and residency stability. Adding a long-term residency status document can reduce uncertainty in scoring, increase the likelihood of application approval, and lower bank risks by confirming the client\u2019s long-term status')}
                   </p>
                 </div>
-                {/* Mobile: carousel with 17, 18 (ВНЖ), 19 (РВП) */}
+                {/* Mobile: static image before carousel */}
+                <div
+                  className="md:hidden w-full overflow-hidden rounded-[var(--radius-media)] shadow-[0_0_6px_rgba(0,0,0,0.11)] leading-none"
+                  style={{ marginTop: 16 }}
+                >
+                  <img
+                    loading="lazy"
+                    src={publicUrl('/covers/T-bank/16.webp')}
+                    alt={locale === 'ru' ? 'Статус пребывания' : 'Residence Status'}
+                    className="block w-full h-auto"
+                  />
+                </div>
+
+                {/* Mobile: carousel with 18 (ВНЖ), 19 (РВП) */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
-                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
                       ref={residenceStatusScrollRef}
                       onScroll={handleResidenceStatusScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      style={{ height: '313px' }}
                     >
-                      {[17, 18, 19].map((n) => (
+                      {[18, 19].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img
                             loading="lazy"
@@ -949,35 +963,35 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
+                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
+                      {[0, 1].map((i) => (
+                        <div
+                          key={i}
+                          style={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: '#1a1a1a',
+                            opacity: residenceStatusSlide === i ? 1 : 0.2,
+                            transition: 'opacity 200ms ease',
+                            flexShrink: 0,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p
+                      className="text-center font-medium"
+                      style={{
+                        margin: '0 0 16px',
+                        fontSize: 14,
+                        color: '#B0B0B0',
+                        fontFamily: 'Inter, sans-serif',
+                        minHeight: '20px',
+                      }}
+                    >
+                      {residenceStatusSlide === 0 ? 'Форма с ВНЖ' : 'Форма с РВП'}
+                    </p>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: residenceStatusSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p
-                    className="text-center font-medium"
-                    style={{
-                      marginTop: 8,
-                      fontSize: 14,
-                      color: '#B0B0B0',
-                      fontFamily: 'Inter, sans-serif',
-                      minHeight: '20px',
-                    }}
-                  >
-                    {residenceStatusSlide === 1 ? 'Форма с ВНЖ' : residenceStatusSlide === 2 ? 'Форма с РВП' : ''}
-                  </p>
                 </div>
                 {/* Desktop */}
                 <div
@@ -1046,13 +1060,14 @@ export default function TBankCase({
                 </div>
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
-                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
                       ref={creditCardScrollRef}
                       onScroll={handleCreditCardScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      style={{ height: '313px' }}
                     >
                       {[22, 23].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -1065,28 +1080,31 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
+                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
+                      {[0, 1].map((i) => (
+                        <div
+                          key={i}
+                          style={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: '#1a1a1a',
+                            opacity: creditCardSlide === i ? 1 : 0.2,
+                            transition: 'opacity 200ms ease',
+                            flexShrink: 0,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p
+                      className="text-center font-medium"
+                      style={{ margin: '0 0 16px', fontSize: 14, color: '#B0B0B0', fontFamily: 'Inter, sans-serif', minHeight: '20px' }}
+                    >
+                      {creditCardSlide === 0
+                        ? (locale === 'ru' ? 'Нет кредитной карты' : 'No credit card')
+                        : (locale === 'ru' ? 'Есть кредитная карта' : 'Has credit card')}
+                    </p>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: creditCardSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 8, textAlign: 'center' }}>
-                    {creditCardSlide === 0
-                      ? (locale === 'ru' ? 'Нет кредитной карты' : 'No credit card')
-                      : (locale === 'ru' ? 'Есть кредитная карта' : 'Has credit card')}
-                  </p>
                 </div>
                 <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] mt-[16px] md:mt-[24px]">
                   {locale === 'ru'
@@ -1114,13 +1132,14 @@ export default function TBankCase({
                 {/* Mobile: carousel */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
-                    style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
+                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
                       ref={statusScrollRef}
                       onScroll={handleStatusScroll}
-                      className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                      style={{ height: '313px' }}
                     >
                       {[24, 25, 26].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -1135,30 +1154,33 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
+                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
+                      {[0, 1, 2].map((i) => (
+                        <div
+                          key={i}
+                          style={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: '#1a1a1a',
+                            opacity: statusSlide === i ? 1 : 0.2,
+                            transition: 'opacity 200ms ease',
+                            flexShrink: 0,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p
+                      className="text-center font-medium"
+                      style={{ margin: '0 0 16px', fontSize: 14, color: '#B0B0B0', fontFamily: 'Inter, sans-serif', minHeight: '20px' }}
+                    >
+                      {statusSlide === 0
+                        ? (locale === 'ru' ? 'Обработка заявки' : 'Application Processing')
+                        : statusSlide === 1
+                        ? (locale === 'ru' ? 'Подтверждение заявки' : 'Application Confirmed')
+                        : (locale === 'ru' ? 'Отклонение заявки' : 'Application Declined')}
+                    </p>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: statusSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]" style={{ marginTop: 8, textAlign: 'center' }}>
-                    {statusSlide === 0
-                      ? (locale === 'ru' ? 'Обработка заявки' : 'Application Processing')
-                      : statusSlide === 1
-                      ? (locale === 'ru' ? 'Подтверждение заявки' : 'Application Confirmed')
-                      : (locale === 'ru' ? 'Отклонение заявки' : 'Application Declined')}
-                  </p>
                 </div>
 
                 {/* Desktop: static images */}
