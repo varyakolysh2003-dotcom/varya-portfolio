@@ -1219,7 +1219,7 @@ export default function TBankCase({
                 <div className="flex flex-col gap-[8px]">
                   <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                     {locale === 'ru'
-                      ? typograph('Провела качественное тестирование макетов обновленной формы с иностранными пользователями с РВП и ВНЖ. Проверяла, какие решения снижают неопределенность, делают сценарий понятнее и помогают в процессе завершения заявки')
+                      ? typograph('Провела качественное тестирование макетов обновленной формы с иностранными пользователями с РВП и ВНЖ через составленный опрос с обновленной формой. Проверяла, какие решения снижают неопределенность, делают сценарий понятнее и помогают в процессе завершения заявки')
                       : typograph('To validate hypotheses, an interactive prototype of the updated installment application form was developed. The scenario included filling out the form, selecting document type, receiving a preliminary approval estimate, and applying for a credit card. The prototype was tested on respondents from the TRP and RP segments.')}
                   </p>
                 </div>
@@ -1370,6 +1370,163 @@ export default function TBankCase({
                     ? typograph('Решение не\u00A0снимает базовые ограничения кредитования иностранных граждан. Тем не\u00A0менее прогноз остается реалистичным на\u00A0уровне пользовательского пути. Даже без изменений в\u00A0кредитной политике можно сократить нерелевантный drop-off, уменьшить количество ошибок при заполнении анкеты и\u00A0сделать сценарий более понятным для пользователей с\u00A0иностранными документами. Ожидаемый эффект решения\u00A0— сделать форму продукта более доступной, чтобы убрать искусственные барьеры в\u00A0интерфейсе и\u00A0помочь релевантным пользователям дойти до отправки заявки на\u00A0рассмотрение банком')
                     : typograph('The solution does not remove the underlying restrictions on lending to foreign citizens. Nevertheless, the forecast remains realistic at the level of the user journey. Even without changes to credit policy, it is possible to reduce irrelevant drop-off, decrease the number of errors when filling out the form, and make the scenario more understandable for users with foreign documents. The expected effect of the solution is to make the product form more accessible — to remove artificial barriers in the interface and help relevant users reach the point of submitting their application for bank review')}
                 </p>
+              </div>
+
+            {/* Возможная стоимость разработки — T-Bank only */}
+              <div className="flex flex-col gap-[8px] mt-[48px] md:mt-[84px]">
+                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Возможная стоимость разработки' : 'Estimated Development Cost'}
+                </h2>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  {locale === 'ru'
+                    ? typograph('В рамках кейса я постаралась оценить возможную стоимость разработки через effort. Гипотетические суммы не приводила, так как это обсуждается непосредственно с командой и поддерживается сразу несколькими факторами')
+                    : typograph('As part of this case, I estimated possible development costs through effort levels. I did not provide hypothetical figures, as these are discussed directly with the team and depend on multiple factors')}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px]" style={{ marginTop: 16 }}>
+
+                  {/* 1 — Локализация интерфейса */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>01</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S–M</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Локализация интерфейса' : 'Interface Localization'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('У Т-банка есть внутренняя система перевода для 3-х основных языков (таджикский, узбекский, кыргызский) для категории пользователей, уязвимых к слабому пониманию русского')
+                        : typograph('T-Bank has an internal translation system for three main languages (Tajik, Uzbek, Kyrgyz) for the category of users vulnerable to limited Russian comprehension')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru'
+                          ? typograph('UX-редизайн продолжает наличие перевода для последующих полей в форме оформления, из-за чего оцениваю как M (medium cost)')
+                          : typograph('The UX redesign extends translation support to subsequent form fields — estimated as M (medium cost)')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 2 — Пошаговый индикатор */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>02</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFF3E0', color: '#E65100' }}>M</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Пошаговый индикатор оформления' : 'Step-by-Step Form Indicator'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('Это новый Flow и дизайн-решение для формы заявки, при которой одна страница разбивается на 4 этапа формы, где нужно сохранять данные между шагами пользователя')
+                        : typograph('A new flow and design solution for the application form, splitting one page into 4 stages with data preservation between user steps')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru'
+                          ? typograph('Упирается в frontend и разделение шагов на отдельные страницы — M (medium cost)')
+                          : typograph('Relies on frontend work and splitting steps into separate pages — M (medium cost)')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 3 — Расширение типов документов */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>03</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFEBEE', color: '#C62828' }}>L</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Расширение типов документов' : 'Document Type Expansion'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('Вводит новые поля (РВП/ВНЖ) и правила обработки данных: серия и номер паспорта с выбором страны, даты действия документов, тип федерального органа, выдавшего документ')
+                        : typograph('Introduces new fields (TRP/RP) and data processing rules: passport series and number with country selection, document validity dates, type of federal authority that issued the document')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru'
+                          ? typograph('Backend и frontend с условиями обработки данных')
+                          : typograph('Backend and frontend with data processing conditions')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 4 — Прозрачность условий */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>04</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Прозрачность условий и объясняющие ссылки' : 'Conditions Transparency & Contextual Links'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('У Т-банка уже есть свежие статьи и информационные ссылки для иностранных пользователей, важно интегрировать их перед заполнением/внутри формы')
+                        : typograph('T-Bank already has up-to-date articles and informational links for foreign users — integrating them before and inside the form is the key task')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru'
+                          ? typograph('Frontend, внесение ссылок и блоков, которые будут вести на информационные ресурсы')
+                          : typograph('Frontend — adding links and blocks pointing to informational resources')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 5 — Оценка шанса одобрения */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>05</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Оценка шанса одобрения' : 'Approval Probability Indicator'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('В своем решении подразумеваю ее как информационную подсказку для типов документов (РВП/ВНЖ), а не как оценку реального расчета в процессе заполнения формы')
+                        : typograph('In my solution this is an informational hint for document types (TRP/RP), not a real-time scoring calculation during form completion')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru' ? 'Frontend' : 'Frontend'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 6 — Кредитная карта для иностранцев */}
+                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>06</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFF3E0', color: '#E65100' }}>M</span>
+                    </div>
+                    <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
+                      {locale === 'ru' ? 'Кредитная карта для иностранцев' : 'Credit Card for Foreigners'}
+                    </h3>
+                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                      {locale === 'ru'
+                        ? typograph('Недавно введенный продукт, позволяющий иностранцам развивать кредитную историю и получать займы на территории РФ. В своем решении я не пыталась менять систему скоринга (это упирается в legal), а интегрировала ее как фактор рассмотрения заявки')
+                        : typograph('A recently launched product enabling foreigners to build credit history and obtain loans in Russia. In my solution I did not attempt to change the scoring system (that is a legal matter), but integrated it as a factor in the application review')}
+                    </p>
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
+                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                        <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
+                        {locale === 'ru'
+                          ? typograph('Frontend и backend, появляются новые формы ввода, хранения и обработки данных')
+                          : typograph('Frontend and backend — new input, storage, and data processing forms required')}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
               </div>
     </>
   );
