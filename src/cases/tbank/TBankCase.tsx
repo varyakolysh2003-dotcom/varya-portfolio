@@ -639,23 +639,7 @@ export default function TBankCase({
                 </div>
               </div>
 
-            {/* Экраны — T-Bank only */}
-              <div className="flex flex-col mt-[24px] md:mt-[40px]">
-                <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
-                  {locale === 'ru' ? 'Экраны' : 'Screens'}
-                </h2>
-                <div
-                  className="w-full rounded-[var(--radius-media)] overflow-hidden"
-                  style={{ marginTop: 20, padding: 0, height: 'auto', lineHeight: 0 }}
-                >
-                  <img loading="lazy"
-                    src={publicUrl('/covers/T-bank/6.webp')}
-                    alt={locale === 'ru' ? 'Экраны' : 'Screens'}
-                    className="block w-full h-auto origin-center scale-[1.007]"
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-              </div>
+            {/* Экраны — T-Bank only — hidden */}
 
             {/* Локализация — T-Bank only */}
               <div id="section-solutions" className="flex flex-col gap-[8px] mt-[32px] md:mt-[48px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]">
