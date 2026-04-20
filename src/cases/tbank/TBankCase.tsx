@@ -1388,7 +1388,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>01</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S–M</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S–M</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Локализация интерфейса' : 'Interface Localization'}
@@ -1412,7 +1412,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>02</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFF3E0', color: '#E65100' }}>M</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>M</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Пошаговый индикатор оформления' : 'Step-by-Step Form Indicator'}
@@ -1436,7 +1436,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>03</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFEBEE', color: '#C62828' }}>L</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>L</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Расширение типов документов' : 'Document Type Expansion'}
@@ -1460,7 +1460,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>04</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Прозрачность условий и объясняющие ссылки' : 'Conditions Transparency & Contextual Links'}
@@ -1484,7 +1484,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>05</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#E8F5E9', color: '#2E7D32' }}>S</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Оценка шанса одобрения' : 'Approval Probability Indicator'}
@@ -1506,7 +1506,7 @@ export default function TBankCase({
                   <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>06</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFF3E0', color: '#E65100' }}>M</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>M</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Кредитная карта для иностранцев' : 'Credit Card for Foreigners'}
