@@ -30,6 +30,10 @@ export function CasePage() {
   const { locale } = useLocale();
   const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
   const mobileSectionsRef = useRef<HTMLDivElement>(null);
+  // Tracks the section id we last scrolled to so the layout-shift corrector
+  // below knows where to re-snap if images inflate the page height mid-scroll.
+  const scrollTargetRef = useRef<string | null>(null);
+  const scrollClearTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Scroll-reveal for all .case-sections children (see useScrollReveal hook).
   useScrollReveal(caseSlug);
@@ -113,13 +117,44 @@ export function CasePage() {
     };
   }, []);
 
-  // scrollIntoView tracks the element continuously through layout reflows
-  // (lazy images loading during animation), so the landing position is always exact.
-  // scroll-margin-top on each section element provides the sticky-nav offset.
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
+
+    // Register the target so the ResizeObserver below can correct position
+    // if lazy images inflate page height during the smooth animation.
+    scrollTargetRef.current = id;
+    if (scrollClearTimerRef.current) clearTimeout(scrollClearTimerRef.current);
+    scrollClearTimerRef.current = setTimeout(() => {
+      scrollTargetRef.current = null;
+    }, 2500);
+
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
+  // scrollIntoView computes the target position once at call time. Lazy images
+  // loading afterward inflate page height and push sections down, causing the
+  // scroll to land in the wrong place. This observer detects body height changes
+  // and re-snaps (instant) to the registered target while it's still active.
+  useEffect(() => {
+    let rafId: number | null = null;
+
+    const observer = new ResizeObserver(() => {
+      if (!scrollTargetRef.current || rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const id = scrollTargetRef.current;
+        if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    });
+
+    observer.observe(document.body);
+
+    return () => {
+      observer.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (scrollClearTimerRef.current) clearTimeout(scrollClearTimerRef.current);
+    };
   }, []);
 
 
