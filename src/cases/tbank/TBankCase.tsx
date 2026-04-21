@@ -821,7 +821,7 @@ export default function TBankCase({
                       src={publicUrl('/covers/T-bank/13.webp')}
                       alt={locale === 'ru' ? 'Расширение языковой поддержки веб-страницы' : 'Web page language support expansion'}
                       className="block w-full h-auto max-w-none origin-center scale-[1.055]"
-                      style={{ marginTop: 5 }}
+                      style={{ marginTop: 10 }}
                     />
                   </div>
                 </div>
@@ -880,6 +880,11 @@ export default function TBankCase({
                   {locale === 'ru'
                     ? typograph('Разные типы документов требуют разных данных для заполнения. Если форма будет предусматривать больше вариантов ввода документов и\u00A0стран, пользователи смогут корректно заполнить анкету с\u00A0первого раза')
                     : typograph('Different document types require different data to fill in. If the form accommodates more document and country input options, users will be able to correctly complete the application on the first attempt')}
+                </p>
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
+                  {locale === 'ru'
+                    ? typograph('Инпут с\u00A0дропдауном выбора страны введены из-за вопросов оценки и\u00A0скоринга для иностранных граждан за\u00A0пределами стран СНГ')
+                    : typograph('A country-selection dropdown input was introduced due to assessment and scoring requirements for foreign citizens outside the CIS countries')}
                 </p>
                 {/* Mobile: static image */}
                 <div

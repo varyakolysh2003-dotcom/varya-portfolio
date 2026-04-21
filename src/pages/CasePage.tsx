@@ -30,10 +30,9 @@ export function CasePage() {
   const { locale } = useLocale();
   const [mobileSectionsOpen, setMobileSectionsOpen] = useState(false);
   const mobileSectionsRef = useRef<HTMLDivElement>(null);
-  // Tracks the section id we last scrolled to so the layout-shift corrector
-  // below knows where to re-snap if images inflate the page height mid-scroll.
-  const scrollTargetRef = useRef<string | null>(null);
-  const scrollClearTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Tracks the most-recent scrollTo target so a deferred click (waiting on
+  // images) can be superseded by a later click instead of firing late.
+  const pendingScrollIdRef = useRef<string | null>(null);
 
   // Scroll-reveal for all .case-sections children (see useScrollReveal hook).
   useScrollReveal(caseSlug);
@@ -117,44 +116,55 @@ export function CasePage() {
     };
   }, []);
 
+  // On first open, lazy images above the target haven't loaded → they render
+  // at 0px → scrollIntoView computes a stale (too-shallow) target Y and the
+  // smooth scroll lands in the wrong place as images load mid-animation.
+  //
+  // Fix: before scrolling, find unloaded images sitting above the target,
+  // promote them to eager loading, await them (with a 500 ms safety cap),
+  // then fire exactly one smooth scrollIntoView against a settled layout.
+  // No mid-scroll corrections, no ResizeObserver, no second scroll call.
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    // Register the target so the ResizeObserver below can correct position
-    // if lazy images inflate page height during the smooth animation.
-    scrollTargetRef.current = id;
-    if (scrollClearTimerRef.current) clearTimeout(scrollClearTimerRef.current);
-    scrollClearTimerRef.current = setTimeout(() => {
-      scrollTargetRef.current = null;
-    }, 2500);
+    pendingScrollIdRef.current = id;
 
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
-
-  // scrollIntoView computes the target position once at call time. Lazy images
-  // loading afterward inflate page height and push sections down, causing the
-  // scroll to land in the wrong place. This observer detects body height changes
-  // and re-snaps (instant) to the registered target while it's still active.
-  useEffect(() => {
-    let rafId: number | null = null;
-
-    const observer = new ResizeObserver(() => {
-      if (!scrollTargetRef.current || rafId !== null) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        const id = scrollTargetRef.current;
-        if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
-      });
+    const targetY = window.scrollY + el.getBoundingClientRect().top;
+    const unloaded = Array.from(document.images).filter((img) => {
+      if (img.complete) return false;
+      return (window.scrollY + img.getBoundingClientRect().top) < targetY;
     });
 
-    observer.observe(document.body);
+    if (unloaded.length === 0) {
+      pendingScrollIdRef.current = null;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
 
-    return () => {
-      observer.disconnect();
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      if (scrollClearTimerRef.current) clearTimeout(scrollClearTimerRef.current);
-    };
+    // Promote lazy → eager so load events actually fire for below-fold images.
+    unloaded.forEach((img) => {
+      if (img.loading === 'lazy') img.loading = 'eager';
+    });
+
+    const loads = unloaded.map(
+      (img) =>
+        new Promise<void>((resolve) => {
+          const done = () => resolve();
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        }),
+    );
+
+    Promise.race([
+      Promise.all(loads),
+      new Promise<void>((r) => setTimeout(r, 500)),
+    ]).then(() => {
+      // Superseded by a later click? Drop this one.
+      if (pendingScrollIdRef.current !== id) return;
+      pendingScrollIdRef.current = null;
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }, []);
 
 
