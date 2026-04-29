@@ -266,7 +266,7 @@ export function CasePage() {
             key={id}
             type="button"
             onClick={() => scrollTo(id)}
-            className="text-left whitespace-nowrap bg-transparent border-none cursor-pointer p-0 m-0 w-full min-w-0"
+            className="press-animate text-left whitespace-nowrap bg-transparent border-none cursor-pointer p-0 m-0 w-full min-w-0 hover:text-[var(--color-text-primary)]"
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: 20,
@@ -275,6 +275,7 @@ export function CasePage() {
               color: activeSection === id
                 ? 'var(--color-text-primary)'
                 : 'var(--color-text-secondary)',
+              transition: 'color var(--motion-quick) ease, transform var(--motion-slow) cubic-bezier(0.34, 1.3, 0.64, 1)',
             }}
           >
             {label[locale]}
@@ -417,7 +418,7 @@ export function CasePage() {
 
           {/* Контекст задачи — standalone block */}
           <section id="section-context" className="scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 24 }}>
-            <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24 }}>
+            <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24 }}>
               <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                 {locale === 'ru' ? 'Контекст задачи' : 'Task Context'}
               </h2>
@@ -630,7 +631,7 @@ export function CasePage() {
                 })}
               </div>
 
-              <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+              <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
                 <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Общие выводы' : 'Key Findings'}
                 </h3>

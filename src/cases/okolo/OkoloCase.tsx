@@ -22,7 +22,7 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
   return (
     <>
       {/* Бенчмаркинг — Okolo */}
-      <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+      <div className="flex flex-col gap-[16px] md:gap-[24px] mt-[88px] scroll-mt-[32px]">
         <div className="flex flex-col gap-[8px]">
           <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
             {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
@@ -54,11 +54,11 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
           })}
         </div>
 
-        <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+        <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
           <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
             {locale === 'ru' ? 'Общие выводы' : 'Key Findings'}
           </h3>
-          <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+          <div className="flex flex-col gap-[8px] mt-[8px]">
             <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
               — {locale === 'ru' ? typograph('Конкуренты закрывают отдельные этапы планирования: подбор мест, списки, карты') : typograph('Competitors cover individual planning steps: place selection, lists, maps')}
             </p>
@@ -73,7 +73,7 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
       </div>
 
       {/* Custdev и анализ персон — Okolo */}
-      <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+      <div className="flex flex-col gap-[16px] md:gap-[24px] mt-[88px] scroll-mt-[32px]">
         <div className="flex flex-col gap-[8px]">
           <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
             {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
@@ -144,12 +144,12 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
           </div>
 
           {/* Right column — single insight card, content switches */}
-          <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+          <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
             <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
               {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
             </h3>
-            <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
-              <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+            <div className="flex flex-col gap-[8px] mt-[8px]">
+              <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden mb-[4px]">
                 {({
                   families: locale === 'ru' ? typograph('Семьи из\u00A02+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases'),
                   friends: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping'),

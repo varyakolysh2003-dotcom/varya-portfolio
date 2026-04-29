@@ -3,6 +3,7 @@ import type { Dispatch, RefObject, SetStateAction } from 'react';
 import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
 import { publicUrl } from '../../utils/publicUrl';
+import CarouselDots from '../../components/CarouselDots';
 
 /** Lavka testing block: prototype screens per chip index (0–5). */
 const LAVKA_TESTING_IMAGES = [
@@ -149,7 +150,7 @@ export default function LavkaCase({
   return (
     <>
             {/* Бенчмаркинг — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            <div id="section-analysis" className="flex flex-col gap-[16px] md:gap-[24px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 88 }}>
+            <div id="section-analysis" className="flex flex-col gap-[16px] md:gap-[24px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px] mt-[88px]">
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Бенчмаркинг' : 'Benchmarking'}
@@ -183,11 +184,11 @@ export default function LavkaCase({
                 })}
               </div>
 
-              <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+              <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
                 <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Общие выводы' : 'Key Findings'}
                 </h3>
-                <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+                <div className="flex flex-col gap-[8px] mt-[8px]">
                   <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                     — {locale === 'ru' ? typograph('Полноценных аналогов решения совместной корзины на рынке России нет') : typograph('No full analogues of shared cart solution exist on the Russian market')}
                   </p>
@@ -208,7 +209,7 @@ export default function LavkaCase({
             </div>
 
             {/* Cust-dev и анализ персон — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-            <div className="flex flex-col gap-[16px] md:gap-[24px]" style={{ marginTop: 88, scrollMarginTop: 32 }}>
+            <div className="flex flex-col gap-[16px] md:gap-[24px] mt-[88px] scroll-mt-[32px]">
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Custdev и анализ персон среди 20 респондентов' : 'Custdev and Persona Analysis'}
@@ -261,7 +262,7 @@ export default function LavkaCase({
                     >
                       <h3
                         className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
-                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)', transition: 'color 150ms ease' }}
+                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)', transition: 'color var(--motion-quick) ease' }}
                       >
                         {persona.title}
                       </h3>
@@ -270,7 +271,7 @@ export default function LavkaCase({
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
-                          transition: 'color 150ms ease',
+                          transition: 'color var(--motion-quick) ease',
                         }}
                       >
                         {persona.desc}
@@ -280,12 +281,12 @@ export default function LavkaCase({
                 </div>
 
                 {/* Right column — single insight card, content switches */}
-                <div className="bg-[#F5F5F5] rounded-[24px]" style={{ padding: 24 }}>
+                <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
                   <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                     {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
                   </h3>
-                  <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
-                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+                  <div className="flex flex-col gap-[8px] mt-[8px]">
+                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden mb-[4px]">
                       {({
                         families: locale === 'ru' ? typograph('Семьи из\u00A02+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases'),
                         friends: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping'),
@@ -381,7 +382,7 @@ export default function LavkaCase({
             </div>
 
             {/* Онбординг обновления — 112px from previous block (88px margin + 24px parent gap = 112px) */}
-              <div id="section-solutions" className="flex flex-col scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 88 }}>
+              <div id="section-solutions" className="flex flex-col scroll-mt-[72px] min-[1500px]:scroll-mt-[32px] mt-[88px]">
                 <div className="flex flex-col gap-[8px]">
                   <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                     {locale === 'ru' ? 'Онбординг обновления' : 'Feature Onboarding'}
@@ -395,7 +396,7 @@ export default function LavkaCase({
                 {/* Mobile: one shared background container, one image visible at a time */}
                 <div className="case-section-content md:hidden">
                   <div
-                    className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col"
+                    className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col"
                     style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -423,28 +424,13 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: mobileOnboardingSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={mobileOnboardingSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet: full-width Onboarding banner */}
                 <div
-                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Onboarding.webp')}
@@ -455,7 +441,7 @@ export default function LavkaCase({
               </div>
 
             {/* Точка входа в сценарий */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 48 }}>
+              <div className="flex flex-col gap-[8px] mt-[48px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Точка входа в сценарий' : 'Scenario Entry Point'}
                 </h2>
@@ -463,7 +449,7 @@ export default function LavkaCase({
                 {/* Mobile: one shared background container, one image visible at a time */}
                 <div className="case-section-content md:hidden">
                   <div
-                    className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col"
+                    className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col"
                     style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -491,28 +477,13 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: mobileEntrySlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={mobileEntrySlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet: full-width banner */}
                 <div
-                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                  className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Scenario start.webp')}
@@ -523,14 +494,14 @@ export default function LavkaCase({
               </div>
 
             {/* Приглашение присоединиться к сбору корзины */}
-              <div className="flex flex-col" style={{ marginTop: 48 }}>
+              <div className="flex flex-col mt-[48px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
                 </h2>
 
                 {/* Mobile: swipeable carousel */}
                 <div className="chip-image-gap md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={inviteScrollRef} onScroll={handleInviteScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[21, 22].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -542,16 +513,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileInviteSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileInviteSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Invite.webp')}
                     alt={locale === 'ru' ? 'Приглашение присоединиться к сбору корзины' : 'Invitation to Join Cart'}
@@ -561,7 +528,7 @@ export default function LavkaCase({
               </div>
 
             {/* Выбор способа оплаты */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
                 </h2>
@@ -573,7 +540,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={paymentScrollRef} onScroll={handlePaymentScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[23, 24].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -585,16 +552,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePaymentSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobilePaymentSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Pay method.webp')}
                     alt={locale === 'ru' ? 'Выбор способа оплаты' : 'Payment Method Selection'}
@@ -604,14 +567,14 @@ export default function LavkaCase({
               </div>
 
             {/* Состояния экранов при единой оплате у приглашенного пользователя */}
-              <div className="flex flex-col" style={{ marginTop: 84 }}>
+              <div className="flex flex-col mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
                 </h2>
 
                 {/* Mobile: swipeable carousel */}
                 <div className="chip-image-gap md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={jointPayScrollRef} onScroll={handleJointPayScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[25, 26].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -623,16 +586,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileJointPaySlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileJointPaySlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="chip-image-gap hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Common user screen.webp')}
                     alt={locale === 'ru' ? 'Состояния экранов при единой оплате у приглашенного пользователя' : 'Screen States for Invited User with Joint Payment'}
@@ -642,7 +601,7 @@ export default function LavkaCase({
               </div>
 
             {/* Проверка адреса перед оплатой */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
                 </h2>
@@ -654,7 +613,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[17, 19].map((n, i) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -666,16 +625,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileAddressSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileAddressSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Adress.webp')}
                     alt={locale === 'ru' ? 'Проверка адреса перед оплатой' : 'Address Verification Before Payment'}
@@ -685,7 +640,7 @@ export default function LavkaCase({
               </div>
 
             {/* Подтверждение заказа после полной оплаты участников */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
                 </h2>
@@ -697,7 +652,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={confirmScrollRef} onScroll={handleConfirmScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[27, 28, 29].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -709,16 +664,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileConfirmSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={mobileConfirmSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Delivery.webp')}
                     alt={locale === 'ru' ? 'Подтверждение заказа после полной оплаты участников' : 'Order Confirmation After Full Payment'}
@@ -728,14 +679,14 @@ export default function LavkaCase({
               </div>
 
             {/* Пуш-напоминание при задержке оплаты или сбора */}
-              <div className="flex flex-col" style={{ marginTop: 64 }}>
+              <div className="flex flex-col mt-[64px]">
                 <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {locale === 'ru'
                     ? (<>Как только пользователь задерживает сбор или оплату заказа, ему приходит пуш-напоминание.<br />Если он остается последним неоплатившим участником, у него есть 20 минут на завершение оплаты, после чего его позиции в заказе отменяются.</>)
                     : typograph('When a user delays collection or payment, they receive a push reminder. If they\'re the last one unpaid, they get 20 minutes to complete before items are cancelled')}
                 </p>
                 <div
-                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]"
+                  className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]"
                 >
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Notification.webp')}
@@ -746,7 +697,7 @@ export default function LavkaCase({
               </div>
 
             {/* Возобновление совместного заказа */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
                 </h2>
@@ -758,7 +709,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={resumeScrollRef} onScroll={handleResumeScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[7, 8, 9].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -770,16 +721,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileResumeSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={mobileResumeSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Try again.webp')}
                     alt={locale === 'ru' ? 'Возобновление совместного заказа' : 'Resuming Shared Order'}
@@ -789,7 +736,7 @@ export default function LavkaCase({
               </div>
 
             {/* Продвижение спецпредложений в группе */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Продвижение спецпредложений в группе' : 'Promoting Special Offers in Group'}
                 </h2>
@@ -801,7 +748,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={promoScrollRef} onScroll={handlePromoScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[30, 31, 32, 33, 34, 35, 36, 37, 38].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -813,31 +760,27 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobilePromoSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={9} active={mobilePromoSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet: three stacked banners */}
                 <div className="case-section-content hidden md:flex flex-col gap-[24px]">
-                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                     <img loading="lazy"
                       src={publicUrl('/covers/YandexLavka materials/Friends.webp')}
                       alt="Спецпредложения — друзья"
                       className="w-full object-cover"
                     />
                   </div>
-                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                     <img loading="lazy"
                       src={publicUrl('/covers/YandexLavka materials/Family.webp')}
                       alt="Спецпредложения — семья"
                       className="w-full object-cover"
                     />
                   </div>
-                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                  <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                     <img loading="lazy"
                       src={publicUrl('/covers/YandexLavka materials/Collegues.webp')}
                       alt="Спецпредложения — коллеги"
@@ -848,7 +791,7 @@ export default function LavkaCase({
               </div>
 
             {/* Создание постоянных групп */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
                 </h2>
@@ -860,7 +803,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={groupsScrollRef} onScroll={handleGroupsScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[39, 40].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -872,16 +815,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileGroupsSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileGroupsSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Group.webp')}
                     alt={locale === 'ru' ? 'Создание постоянных групп' : 'Creating Permanent Groups'}
@@ -891,7 +830,7 @@ export default function LavkaCase({
               </div>
 
             {/* Автосоздание групповой корзины */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
                 </h2>
@@ -902,7 +841,7 @@ export default function LavkaCase({
                 </p>
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden" style={{ height: '500px', borderRadius: 'var(--radius-media)' }}>
                     <div ref={suggestionScrollRef} className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar">
                       {[41].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -918,7 +857,7 @@ export default function LavkaCase({
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:flex items-center justify-center w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]" style={{ minHeight: '500px' }}>
+                <div className="case-section-content hidden md:flex items-center justify-center w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]" style={{ minHeight: '500px' }}>
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Mobile/41.webp')}
                     alt={locale === 'ru' ? 'Автосоздание групповой корзины' : 'Auto-creation of Group Cart'}
@@ -928,7 +867,7 @@ export default function LavkaCase({
               </div>
 
             {/* Раздел заданий для совместных групп в Лавке */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
                 </h2>
@@ -940,7 +879,7 @@ export default function LavkaCase({
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={tasksScrollRef} onScroll={handleTasksScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[16, 17].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -952,16 +891,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileTasksSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileTasksSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Challenges.webp')}
                     alt={locale === 'ru' ? 'Раздел заданий для совместных групп в Лавке' : 'Tasks Section for Shared Groups'}
@@ -971,14 +906,14 @@ export default function LavkaCase({
               </div>
 
             {/* Статусы заданий */}
-              <div className="flex flex-col" style={{ marginTop: 64 }}>
+              <div className="flex flex-col mt-[64px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
                 </h2>
 
                 {/* Mobile: swipeable carousel */}
                 <div className="case-section-content md:hidden">
-                  <div className="w-full bg-[#F5F5F5] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
+                  <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={statusesScrollRef} onScroll={handleStatusesScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
                       {[11, 12, 13].map((n) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
@@ -990,16 +925,12 @@ export default function LavkaCase({
                         </div>
                       ))}
                     </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 16px' }}>
-                    {[0, 1, 2].map((i) => (
-                      <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#1a1a1a', opacity: mobileStatusesSlide === i ? 1 : 0.2, transition: 'opacity 200ms ease', flexShrink: 0 }} />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={mobileStatusesSlide} className="pt-[12px] pb-[16px]" />
                   </div>
                 </div>
 
                 {/* Desktop/tablet */}
-                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[#F5F5F5]">
+                <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
                   <img loading="lazy"
                     src={publicUrl('/covers/YandexLavka materials/Card.webp')}
                     alt={locale === 'ru' ? 'Статусы заданий' : 'Task Statuses'}
@@ -1009,7 +940,7 @@ export default function LavkaCase({
               </div>
 
             {/* Тестирование */}
-              <div id="section-testing" className="flex flex-col gap-[8px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px]" style={{ marginTop: 84 }}>
+              <div id="section-testing" className="flex flex-col gap-[8px] scroll-mt-[72px] min-[1500px]:scroll-mt-[32px] mt-[84px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Тестирование' : 'Testing'}
                 </h2>
@@ -1020,7 +951,7 @@ export default function LavkaCase({
                 </p>
 
                 {/* Filter chips */}
-                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible" style={{ marginTop: 12 }}>
+                <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-[8px] md:flex-wrap md:overflow-visible mt-[12px]">
                   {([
                     { ru: 'Точка входа в\u00A0сценарий', en: 'Scenario entry point' },
                     { ru: 'Разделение оплаты', en: 'Payment splitting' },
@@ -1062,7 +993,7 @@ export default function LavkaCase({
 
                 {/* Main result card */}
                 <div
-                  className="case-section-content rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden"
+                  className="case-section-content rounded-[var(--radius-media)] bg-[var(--color-surface-muted)] overflow-hidden"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
                     {/* Left — text column */}
@@ -1070,7 +1001,7 @@ export default function LavkaCase({
                       <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                         {locale === 'ru' ? 'Контекст' : 'Context'}
                       </h3>
-                      <p className="text-[16px] font-medium text-[var(--color-text-secondary)]" style={{ margin: 0 }}>
+                      <p className="text-[16px] font-medium text-[var(--color-text-secondary)] m-0">
                         {activeTestChip === 1
                           ? (locale === 'ru'
                             ? typograph('Проверяла способ гибкости оплаты и\u00A0процент удовлетворенности настройки, исходя из\u00A0инсайтов о\u00A0потребностях целевой аудитории')
@@ -1097,51 +1028,50 @@ export default function LavkaCase({
                         }
                       </p>
                       <h3
-                        className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]"
-                        style={{ marginTop: 16 }}
+                        className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)] mt-[16px]"
                       >
                         {locale === 'ru' ? 'Выводы' : 'Conclusions'}
                       </h3>
                       <div className="flex flex-col gap-[8px] text-[16px] font-medium text-[var(--color-text-secondary)]">
                         {activeTestChip === 1 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Упростило решение регулирования оплаты в\u00A0компании') : typograph('— Simplified the payment regulation solution within the company')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Поп-ап с\u00A0разъяснением повысил прозрачность условий оплаты и\u00A0помог снизить уровень тревожности пользователей') : typograph('— The explanatory pop-up increased payment terms transparency and helped reduce user anxiety')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT по\u00A0результатам достиг 76%, исключения составили респонденты, кому привычнее отправить сумму одному человеку') : typograph('— CSAT reached 76%, with exceptions being respondents who prefer sending the amount to one person')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Упростило решение регулирования оплаты в\u00A0компании') : typograph('— Simplified the payment regulation solution within the company')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Поп-ап с\u00A0разъяснением повысил прозрачность условий оплаты и\u00A0помог снизить уровень тревожности пользователей') : typograph('— The explanatory pop-up increased payment terms transparency and helped reduce user anxiety')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— CSAT по\u00A0результатам достиг 76%, исключения составили респонденты, кому привычнее отправить сумму одному человеку') : typograph('— CSAT reached 76%, with exceptions being respondents who prefer sending the amount to one person')}</p>
                           </>
                         ) : activeTestChip === 2 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователям интересно получать достижения с\u00A0вознаграждениями и\u00A0бонусами') : typograph('— Users are interested in earning achievements with rewards and bonuses')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Визуальная персонализация иконок заданий помогла ориентироваться в\u00A0категории групп') : typograph('— Visual personalization of tasks helped navigate group categories')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Задания помогли разнообразить опциональные задачи, которые пользователи могут закрывать в\u00A0Лавке') : typograph('— Tasks helped diversify optional objectives that users can set for themselves in Lavka')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT составил 73%. Некоторые респонденты ответили, что бонусы не являются ключевой мотивацией к закрытию заданий') : typograph('— CSAT was 73%. Some respondents noted that bonuses are not their primary motivation for completing tasks')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Пользователям интересно получать достижения с\u00A0вознаграждениями и\u00A0бонусами') : typograph('— Users are interested in earning achievements with rewards and bonuses')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Визуальная персонализация иконок заданий помогла ориентироваться в\u00A0категории групп') : typograph('— Visual personalization of tasks helped navigate group categories')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Задания помогли разнообразить опциональные задачи, которые пользователи могут закрывать в\u00A0Лавке') : typograph('— Tasks helped diversify optional objectives that users can set for themselves in Lavka')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— CSAT составил 73%. Некоторые респонденты ответили, что бонусы не являются ключевой мотивацией к закрытию заданий') : typograph('— CSAT was 73%. Some respondents noted that bonuses are not their primary motivation for completing tasks')}</p>
                           </>
                         ) : activeTestChip === 3 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Пользователи воспринимают создание группы как способ экономии времени') : typograph('— Users perceive group creation as a way to save time')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT +70%. Поп-ап с\u00A0объяснением ценности повышает вероятность создания группы, однако не все респонденты выразили удовлетворенность в ситуации, если поп-ап будет появляться после каждого единоразового заказа') : typograph('— CSAT +70%. A pop-up explaining the value increases the likelihood of group creation, though not all respondents were happy with it appearing after every one-off order')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Возможность приглашать знакомых делает сценарий более понятным и\u00A0социально значимым') : typograph('— The ability to invite acquaintances makes the scenario more understandable and socially meaningful')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Пользователи воспринимают создание группы как способ экономии времени') : typograph('— Users perceive group creation as a way to save time')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— CSAT +70%. Поп-ап с\u00A0объяснением ценности повышает вероятность создания группы, однако не все респонденты выразили удовлетворенность в ситуации, если поп-ап будет появляться после каждого единоразового заказа') : typograph('— CSAT +70%. A pop-up explaining the value increases the likelihood of group creation, though not all respondents were happy with it appearing after every one-off order')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Возможность приглашать знакомых делает сценарий более понятным и\u00A0социально значимым') : typograph('— The ability to invite acquaintances makes the scenario more understandable and socially meaningful')}</p>
                           </>
                         ) : activeTestChip === 4 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Повторное приглашение воспринимается как удобный способ вернуть участников в\u00A0заказ') : typograph('— Re-invitation is perceived as a convenient way to bring participants back to the order')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Чёткое состояние запроса снижает неопределённость ожидания') : typograph('— A clear request status reduces waiting uncertainty')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Возможность быстро принять или отклонить запрос ускоряет сценарий совместной покупки') : typograph('— The ability to quickly accept or decline a request speeds up the joint purchase scenario')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Решение исключает необходимость выходить из приложения для повторной отправки приглашения, CSAT +89%') : typograph('— The flow removes the need to leave the app to resend an invitation, CSAT +89%')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Повторное приглашение воспринимается как удобный способ вернуть участников в\u00A0заказ') : typograph('— Re-invitation is perceived as a convenient way to bring participants back to the order')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Чёткое состояние запроса снижает неопределённость ожидания') : typograph('— A clear request status reduces waiting uncertainty')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Возможность быстро принять или отклонить запрос ускоряет сценарий совместной покупки') : typograph('— The ability to quickly accept or decline a request speeds up the joint purchase scenario')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Решение исключает необходимость выходить из приложения для повторной отправки приглашения, CSAT +89%') : typograph('— The flow removes the need to leave the app to resend an invitation, CSAT +89%')}</p>
                           </>
                         ) : activeTestChip === 5 ? (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Понятное сообщение об\u00A0ошибке помогает быстрее принять решение') : typograph('— A clear error message helps make decisions faster')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Возможность изменить адрес снижает риск отказа от\u00A0оформления заказа') : typograph('— The ability to change the address reduces the risk of order abandonment')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Альтернативный сценарий продолжения оплаты воспринимается как полезная гибкость') : typograph('— An alternative payment continuation scenario is perceived as useful flexibility')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Степень риска возникновения заказов на неправильный адрес понижается, CSAT по опросу составил +92%') : typograph('— Risk of orders going to the wrong address is reduced; survey CSAT reached +92%')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Понятное сообщение об\u00A0ошибке помогает быстрее принять решение') : typograph('— A clear error message helps make decisions faster')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Возможность изменить адрес снижает риск отказа от\u00A0оформления заказа') : typograph('— The ability to change the address reduces the risk of order abandonment')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Альтернативный сценарий продолжения оплаты воспринимается как полезная гибкость') : typograph('— An alternative payment continuation scenario is perceived as useful flexibility')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Степень риска возникновения заказов на неправильный адрес понижается, CSAT по опросу составил +92%') : typograph('— Risk of orders going to the wrong address is reduced; survey CSAT reached +92%')}</p>
                           </>
                         ) : (
                           <>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— На\u00A0практике гипотеза о\u00A0неинтуитивности иконки «поделиться» в приложении подтвердилась') : typograph('— In practice, the hypothesis about the non-intuitiveness of the share icon was confirmed')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Даже без полного прохождения онбординга пользователям было достаточно всплывающего поп-апа об\u00A0обновлении, чтобы разобраться самостоятельно') : typograph('— Even without completing onboarding, users found the update pop-up sufficient to figure things out on their own')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— CSAT по\u00A0результатам достиг +97%') : typograph('— CSAT reached 97%')}</p>
-                            <p style={{ margin: 0 }}>{locale === 'ru' ? typograph('— Средняя длительность поиска раздела совместной корзины снизилась на 84%') : typograph('— Average duration of searching for the shared cart section decreased by 84%')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— На\u00A0практике гипотеза о\u00A0неинтуитивности иконки «поделиться» в приложении подтвердилась') : typograph('— In practice, the hypothesis about the non-intuitiveness of the share icon was confirmed')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Даже без полного прохождения онбординга пользователям было достаточно всплывающего поп-апа об\u00A0обновлении, чтобы разобраться самостоятельно') : typograph('— Even without completing onboarding, users found the update pop-up sufficient to figure things out on their own')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— CSAT по\u00A0результатам достиг +97%') : typograph('— CSAT reached 97%')}</p>
+                            <p className="m-0">{locale === 'ru' ? typograph('— Средняя длительность поиска раздела совместной корзины снизилась на 84%') : typograph('— Average duration of searching for the shared cart section decreased by 84%')}</p>
                           </>
                         )}
                       </div>
@@ -1167,7 +1097,7 @@ export default function LavkaCase({
               </div>
 
             {/* Результаты тестирования */}
-              <div className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
+              <div className="flex flex-col gap-[8px] mt-[84px] scroll-mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Ключевые тезисы от Discovery до тестирования' : 'Testing Results'}
                 </h2>
@@ -1175,21 +1105,21 @@ export default function LavkaCase({
                   className="case-section-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[24px]"
                 >
                   {/* Row 1 */}
-                  <div className="order-1 sm:order-none rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-1 sm:order-none rounded-[24px] bg-[var(--accent-lavka)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-white break-words">
                       {locale === 'ru'
                         ? typograph('Совместная корзина снижает барьеры оформления покупки в группе')
                         : typograph('Shared cart reduces barriers to group checkout')}
                     </p>
                   </div>
-                  <div className="order-3 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-3 sm:order-none rounded-[24px] bg-[var(--color-surface-muted)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Респонденты отметили новизну решения для рынка России')
                         : typograph("Respondents noted the solution's novelty for the Russian market")}
                     </p>
                   </div>
-                  <div className="order-4 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-4 sm:order-none rounded-[24px] bg-[var(--color-surface-muted)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Функция воспринимается как конкурентное преимущество сервиса')
@@ -1198,21 +1128,21 @@ export default function LavkaCase({
                   </div>
 
                   {/* Row 2 */}
-                  <div className="order-2 sm:order-none rounded-[24px] bg-[#00ADFF] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-2 sm:order-none rounded-[24px] bg-[var(--accent-lavka)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-white break-words">
                       {locale === 'ru'
                         ? typograph('Респонденты готовы использовать функцию в реальных покупках')
                         : typograph('Respondents are ready to use the feature in real purchases')}
                     </p>
                   </div>
-                  <div className="order-5 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-5 sm:order-none rounded-[24px] bg-[var(--color-surface-muted)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Решение показало высокий уровень пользовательского интереса')
                         : typograph('The solution showed high user interest')}
                     </p>
                   </div>
-                  <div className="order-6 sm:order-none rounded-[24px] bg-[#F5F5F5] min-w-0 box-border" style={{ padding: 24 }}>
+                  <div className="order-6 sm:order-none rounded-[24px] bg-[var(--color-surface-muted)] min-w-0 box-border" style={{ padding: 24 }}>
                     <p className="m-0 font-sans text-[20px] font-semibold leading-normal text-[var(--color-text-primary)] break-words">
                       {locale === 'ru'
                         ? typograph('Гипотезы получили качественное и количественное подтверждение')
@@ -1223,7 +1153,7 @@ export default function LavkaCase({
               </div>
 
             {/* Рефлексия */}
-              <div id="section-reflection" className="flex flex-col gap-[8px]" style={{ marginTop: 84, scrollMarginTop: 32 }}>
+              <div id="section-reflection" className="flex flex-col gap-[8px] mt-[84px] scroll-mt-[32px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Рефлексия' : 'Reflection'}
                 </h2>

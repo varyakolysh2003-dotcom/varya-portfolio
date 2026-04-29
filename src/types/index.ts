@@ -31,6 +31,6 @@ export interface SiteContent {
 
 export const TAG_LABELS: Record<CaseTag, Record<Locale, string>> = {
   concept: { ru: 'Концепт', en: 'Concept' },
-  startup: { ru: 'Стартап', en: 'Startup' },
+  startup: { ru: 'Учебный кейс', en: 'Study case' },
   production: { ru: 'Продакшн', en: 'Production' },
 };

@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import CarouselDots from '../../components/CarouselDots';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Locale } from '../../types';
 import { typograph } from '../../utils/typograph';
@@ -104,7 +105,7 @@ export default function TBankCase({
                 {/* Mobile: swipeable carousel */}
                 <div className="md:hidden chip-image-gap">
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden"
                     style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -127,23 +128,8 @@ export default function TBankCase({
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: mobileFormIssuesSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24, marginTop: 12 }}>
+                  <CarouselDots count={2} active={mobileFormIssuesSlide} className="mt-[12px]" />
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[8px]" style={{ padding: 24, marginTop: 12 }}>
                     <div className="flex flex-col gap-[8px] text-[14px] font-medium text-[var(--color-text-secondary)]">
                       {mobileFormIssuesSlide === 0 ? (
                         <>
@@ -348,7 +334,7 @@ export default function TBankCase({
                     >
                       <h3
                         className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
-                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)', transition: 'color 150ms ease' }}
+                        style={{ color: activePersona === persona.id ? '#ffffff' : 'var(--color-text-primary)', transition: 'color var(--motion-quick) ease' }}
                       >
                         {persona.title}
                       </h3>
@@ -357,7 +343,7 @@ export default function TBankCase({
                         style={{
                           marginTop: 0,
                           color: activePersona === persona.id ? 'rgba(255,255,255,0.9)' : 'var(--color-text-secondary)',
-                          transition: 'color 150ms ease',
+                          transition: 'color var(--motion-quick) ease',
                         }}
                       >
                         {persona.desc}
@@ -391,7 +377,7 @@ export default function TBankCase({
                   >
                     <h3
                       className="font-sans text-[14px] font-semibold leading-none md:text-[20px] md:leading-normal"
-                      style={{ color: activePersona === 'patterns' ? '#ffffff' : 'var(--color-text-primary)', transition: 'color 150ms ease' }}
+                      style={{ color: activePersona === 'patterns' ? '#ffffff' : 'var(--color-text-primary)', transition: 'color var(--motion-quick) ease' }}
                     >
                       {locale === 'ru' ? 'Общие паттерны' : 'Common Patterns'}
                     </h3>
@@ -399,7 +385,7 @@ export default function TBankCase({
                 </div>
 
                 {/* Right column — single insight card, content switches */}
-                <div className="bg-[#F5F5F5] rounded-[24px] h-full" style={{ padding: 24 }}>
+                <div className="bg-[var(--color-surface-muted)] rounded-[24px] h-full" style={{ padding: 24 }}>
                   <h3 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                     {activePersona === 'patterns'
                       ? (locale === 'ru' ? 'Выводы паттернов сегментов' : 'Segment Pattern Conclusions')
@@ -470,7 +456,7 @@ export default function TBankCase({
                 {/* Mobile: swipeable carousel */}
                 <div className="md:hidden chip-image-gap">
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden"
                     style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -493,22 +479,7 @@ export default function TBankCase({
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: mobileDropoffSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={mobileDropoffSlide} className="mt-[12px]" />
                 </div>
 
                 {/* Desktop: original stacked images */}
@@ -535,7 +506,7 @@ export default function TBankCase({
               </div>
 
             {/* Слабые точки пути пользователей — T-Bank only */}
-              <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[8px] mt-[20px] md:mt-[32px]" style={{ padding: 24 }}>
+              <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[8px] mt-[20px] md:mt-[32px]" style={{ padding: 24 }}>
                 <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Слабые точки пути пользователей пришлись на' : 'User journey weak points were:'}
                 </h2>
@@ -589,7 +560,7 @@ export default function TBankCase({
                       {/* Mobile: each JTBD triplet as one grouped card */}
                       <div className="flex flex-col gap-[12px] md:hidden" style={{ marginTop: 16 }}>
                         {groups.map((group, gi) => (
-                          <div key={gi} className="bg-[#F4F4F4] rounded-[16px] box-border" style={{ padding: 16 }}>
+                          <div key={gi} className="bg-[var(--color-surface-muted)] rounded-[16px] box-border" style={{ padding: 16 }}>
                             {group.map((item, idx) => (
                               <div key={idx}>
                                 {idx > 0 && <div className="h-px bg-black/[0.06]" style={{ marginTop: 10, marginBottom: 10 }} />}
@@ -608,7 +579,7 @@ export default function TBankCase({
                         {items.map((item, index) => (
                           <div
                             key={index}
-                            className="bg-[#F4F4F4] rounded-[20px] h-auto text-left box-border"
+                            className="bg-[var(--color-surface-muted)] rounded-[24px] h-auto text-left box-border"
                             style={{ padding: '16px 20px' }}
                           >
                             <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.45]">
@@ -677,7 +648,7 @@ export default function TBankCase({
                 {/* Mobile: phone mockup carousel */}
                 <div className="chip-image-gap md:hidden">
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden"
                     style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -697,22 +668,7 @@ export default function TBankCase({
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1, 2].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: translationVariantSlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                  <CarouselDots count={3} active={translationVariantSlide} className="mt-[12px]" />
                 </div>
 
                 {/* Desktop/tablet: original static non-carousel layout */}
@@ -744,7 +700,7 @@ export default function TBankCase({
                 {/* Mobile: carousel with 11, 12 */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden"
                     style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -764,22 +720,7 @@ export default function TBankCase({
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-center gap-[6px]" style={{ marginTop: 12 }}>
-                    {[0, 1].map((i) => (
-                      <div
-                        key={i}
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: '#1a1a1a',
-                          opacity: installmentClaritySlide === i ? 1 : 0.2,
-                          transition: 'opacity 200ms ease',
-                          flexShrink: 0,
-                        }}
-                      />
-                    ))}
-                  </div>
+                  <CarouselDots count={2} active={installmentClaritySlide} className="mt-[12px]" />
                 </div>
                 {/* Desktop */}
                 <div
@@ -847,7 +788,7 @@ export default function TBankCase({
                 {/* Mobile: phone mockup for 14 */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden flex items-center justify-center"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden flex items-center justify-center"
                     style={{ height: '313px', borderRadius: 'var(--radius-media)' }}
                   >
                     <img
@@ -948,7 +889,7 @@ export default function TBankCase({
                 {/* Mobile: carousel with 18 (ВНЖ), 19 (РВП) */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden flex flex-col"
                     style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -968,22 +909,7 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
-                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
-                      {[0, 1].map((i) => (
-                        <div
-                          key={i}
-                          style={{
-                            width: 6,
-                            height: 6,
-                            borderRadius: '50%',
-                            backgroundColor: '#1a1a1a',
-                            opacity: residenceStatusSlide === i ? 1 : 0.2,
-                            transition: 'opacity 200ms ease',
-                            flexShrink: 0,
-                          }}
-                        />
-                      ))}
-                    </div>
+                    <CarouselDots count={2} active={residenceStatusSlide} className="pt-[12px] pb-[8px]" />
                     <p
                       className="text-center font-medium"
                       style={{
@@ -1065,7 +991,7 @@ export default function TBankCase({
                 </div>
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden flex flex-col"
                     style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -1085,22 +1011,7 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
-                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
-                      {[0, 1].map((i) => (
-                        <div
-                          key={i}
-                          style={{
-                            width: 6,
-                            height: 6,
-                            borderRadius: '50%',
-                            backgroundColor: '#1a1a1a',
-                            opacity: creditCardSlide === i ? 1 : 0.2,
-                            transition: 'opacity 200ms ease',
-                            flexShrink: 0,
-                          }}
-                        />
-                      ))}
-                    </div>
+                    <CarouselDots count={2} active={creditCardSlide} className="pt-[12px] pb-[8px]" />
                     <p
                       className="text-center font-medium"
                       style={{ margin: '0 0 16px', fontSize: 14, color: '#B0B0B0', fontFamily: 'Inter, sans-serif', minHeight: '20px' }}
@@ -1137,7 +1048,7 @@ export default function TBankCase({
                 {/* Mobile: carousel */}
                 <div className="md:hidden" style={{ marginTop: 16 }}>
                   <div
-                    className="w-full bg-[#F2F2F2] overflow-hidden flex flex-col"
+                    className="w-full bg-[var(--color-surface-inset)] overflow-hidden flex flex-col"
                     style={{ borderRadius: 'var(--radius-media)' }}
                   >
                     <div
@@ -1159,22 +1070,7 @@ export default function TBankCase({
                         </div>
                       ))}
                     </div>
-                    <div className="flex items-center justify-center gap-[6px]" style={{ padding: '12px 0 8px' }}>
-                      {[0, 1, 2].map((i) => (
-                        <div
-                          key={i}
-                          style={{
-                            width: 6,
-                            height: 6,
-                            borderRadius: '50%',
-                            backgroundColor: '#1a1a1a',
-                            opacity: statusSlide === i ? 1 : 0.2,
-                            transition: 'opacity 200ms ease',
-                            flexShrink: 0,
-                          }}
-                        />
-                      ))}
-                    </div>
+                    <CarouselDots count={3} active={statusSlide} className="pt-[12px] pb-[8px]" />
                     <p
                       className="text-center font-medium"
                       style={{ margin: '0 0 16px', fontSize: 14, color: '#B0B0B0', fontFamily: 'Inter, sans-serif', minHeight: '20px' }}
@@ -1266,7 +1162,7 @@ export default function TBankCase({
                         lineHeight: 1,
                         backgroundColor: activeTbankTestChip === idx ? '#000000' : '#F1F1F1',
                         color: activeTbankTestChip === idx ? '#ffffff' : 'rgba(0, 0, 0, 0.35)',
-                        transition: 'background-color 150ms ease, color 150ms ease',
+                        transition: 'background-color var(--motion-quick) ease, color var(--motion-quick) ease',
                       }}
                     >
                       {locale === 'ru' ? chip.ru : chip.en}
@@ -1275,7 +1171,7 @@ export default function TBankCase({
                 </div>
 
                 {/* Prototype result card */}
-                <div className="rounded-[var(--radius-media)] bg-[#F5F5F5] overflow-hidden chip-image-gap">
+                <div className="rounded-[var(--radius-media)] bg-[var(--color-surface-muted)] overflow-hidden chip-image-gap">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr]">
                     {/* Left — text column (below image on mobile, left on desktop) */}
                     <div className="order-2 md:order-1 flex flex-col gap-[8px]" style={{ padding: '24px' }}>
@@ -1390,7 +1286,7 @@ export default function TBankCase({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px]" style={{ marginTop: 16 }}>
 
                   {/* 1 — Локализация интерфейса */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>01</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S–M</span>
@@ -1414,7 +1310,7 @@ export default function TBankCase({
                   </div>
 
                   {/* 2 — Пошаговый индикатор */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>02</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>M</span>
@@ -1438,7 +1334,7 @@ export default function TBankCase({
                   </div>
 
                   {/* 3 — Расширение типов документов */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>03</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>L</span>
@@ -1462,7 +1358,7 @@ export default function TBankCase({
                   </div>
 
                   {/* 4 — Прозрачность условий */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>04</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S</span>
@@ -1486,7 +1382,7 @@ export default function TBankCase({
                   </div>
 
                   {/* 5 — Оценка шанса одобрения */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>05</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S</span>
@@ -1508,7 +1404,7 @@ export default function TBankCase({
                   </div>
 
                   {/* 6 — Кредитная карта для иностранцев */}
-                  <div className="bg-[#F5F5F5] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
+                  <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>06</span>
                       <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>M</span>

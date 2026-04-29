@@ -10,6 +10,8 @@
   --font-sans: 'Inter Variable', 'Inter', sans-serif;
   --color-bg: #FEFEFE;
   --color-surface: #ffffff;
+  --color-surface-muted: #F5F5F5;
+  --color-surface-inset: #F2F2F2;
   --color-preview: #ffffff;
   --card-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   --color-text-primary: #1a1a1a;
@@ -18,6 +20,13 @@
   --color-accent: #ffdd2d;
   --color-accent-hover: #ffd000;
   --color-border: #e8e8e4;
+  --accent-lavka: #00ADFF;
+  --accent-tbank: #ffdd2d;
+  --motion-quick: 150ms;
+  --motion-slow: 240ms;
+  --motion-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --section-gap: 88px;
+  --section-gap-mobile: 48px;
 }
 
 /* Responsive media radius token:
@@ -84,15 +93,15 @@ a.case-link {
   font-size: 16px;
   font-weight: 500;
   line-height: 140%;
-  color: #00ADFF;
+  color: var(--accent-lavka);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-quick) ease-out;
 }
 
 a.case-link:visited {
-  color: #00ADFF;
+  color: var(--accent-lavka);
 }
 
 a.case-link:hover {
