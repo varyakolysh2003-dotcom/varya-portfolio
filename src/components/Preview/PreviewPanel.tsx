@@ -95,8 +95,8 @@ function DefaultContent({
               </h2>
               <p className="font-sans text-[16px] font-medium text-[var(--color-text-secondary)] leading-[1.4]">
                 {locale === 'ru'
-                  ? typograph('Использую продуктовое мышление и улучшаю визуальное качество цифровых продуктов')
-                  : typograph('I apply product thinking and improve the visual quality of digital products')}
+                  ? typograph('Использую продуктовое мышление и улучшаю визуальное качество цифровых сервисов')
+                  : typograph('I apply product thinking and improve the visual quality of digital services')}
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
