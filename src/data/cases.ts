@@ -83,6 +83,29 @@ export const cases: CaseStudy[] = [
     accentColor: '#FFDD2D',
   },
   {
+    id: 't-bank-travel',
+    tag: 'concept',
+    title: {
+      ru: 'Групповые путешествия в Т-банк',
+      en: 'Group Travel at T-Bank',
+    },
+    description: {
+      ru: 'Спроектируйте функционал внутри приложения Т-Банка, который поможет пользователю организовать совместную поездку с другими людьми и оптимизировать фиксацию трат и сбор денег до, во время и после поездки',
+      en: 'Design functionality within the T-Bank app that helps users organize group trips and optimize expense tracking and money collection before, during, and after the trip',
+    },
+    industry: 'Fintech',
+    year: '2026',
+    platforms: { ru: 'iOS', en: 'iOS' },
+    role: {
+      ru: 'Разработка Super App раздела групповых путешествий, полный анализ от Discovery до финальных макетов',
+      en: 'Super App group travel section design, full analysis from Discovery to final mockups',
+    },
+    tools: { ru: 'Figma', en: 'Figma' },
+    logo: publicUrl('/logos/Tbank.svg'),
+    cover: publicUrl('/covers/Т-путешествия — создание новой поездки.webp'),
+    accentColor: '#FFDD2D',
+  },
+  {
     id: 'okolo',
     tag: 'startup',
     title: {

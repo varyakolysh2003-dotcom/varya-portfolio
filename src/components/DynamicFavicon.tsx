@@ -14,6 +14,7 @@ const LEGACY_CASE_SLUG: Record<string, string> = {
 const CASE_FAVICON: Record<string, string> = {
   'yandex-lavka': publicUrl('/logos/YandexLavka.svg'),
   't-bank': publicUrl('/logos/Tbank.svg'),
+  't-bank-travel': publicUrl('/logos/Tbank.svg'),
   okolo: publicUrl('/logos/okolo.svg'),
 };
 

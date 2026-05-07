@@ -11,12 +11,13 @@ import { publicUrl } from '../utils/publicUrl';
 
 const LavkaCase = lazy(() => import('../cases/lavka/LavkaCase'));
 const TBankCase = lazy(() => import('../cases/tbank/TBankCase'));
+const TBankTravelCase = lazy(() => import('../cases/tbanktravel/TBankTravelCase'));
 
 const NAV_ITEMS = [
   { id: 'section-context', label: { ru: 'Контекст', en: 'Context' } },
   { id: 'section-analysis', label: { ru: 'Анализ', en: 'Analysis' } },
   { id: 'section-solutions', label: { ru: 'Гипотезы и решения', en: 'Hypotheses & Solutions' } },
-  { id: 'section-testing', label: { ru: 'Тестирование', en: 'Testing' } },
+  { id: 'section-testing', label: { ru: 'Выводы', en: 'Conclusions' } },
 ] as const;
 
 const LEGACY_CASE_SLUG: Record<string, string> = {
@@ -205,7 +206,7 @@ export function CasePage() {
     <ScrollToTop />
 
     {/* Mobile sticky sections menu — hidden at 1500px+ where fixed side nav appears */}
-    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
       <nav
         className="min-[1500px]:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-sm border-b border-[var(--color-border)]"
         style={{ padding: '10px 16px' }}
@@ -256,7 +257,7 @@ export function CasePage() {
     )}
 
     {/* Fixed side navigation — only visible at 1500px+ where content clears it naturally */}
-    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+    {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
       <nav
         className="hidden min-[1500px]:flex flex-col gap-[12px] fixed z-40"
         style={{ top: 120, left: 56, width: 230 }}
@@ -332,9 +333,11 @@ export function CasePage() {
               <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {caseStudy.year === 'coming soon'
                   ? (locale === 'ru' ? 'скоро' : 'coming soon')
-                  : locale === 'ru'
-                    ? `${caseStudy.year} год`
-                    : caseStudy.year}
+                  : caseStudy.id === 't-bank-travel' && locale === 'ru'
+                    ? `${caseStudy.year} год (7 дней)`
+                    : locale === 'ru'
+                      ? `${caseStudy.year} год`
+                      : caseStudy.year}
               </p>
             </div>
 
@@ -382,7 +385,7 @@ export function CasePage() {
                 />
               </div>
             ) : (
-              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[#EFEFEF] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
+              <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)] min-h-[180px] sm:min-h-[260px] md:min-h-[320px]">
                 <img loading="eager"
                   src={caseStudy.cover}
                   alt={caseStudy.title[locale]}
@@ -435,6 +438,19 @@ export function CasePage() {
                       : typograph("This solution doesn't develop the logic of collaborative item collection, doesn't support joint purchase planning scenarios, and doesn't create a sense of shared cart as a unified space for interaction and order coordination")}
                   </p>
                 </div>
+              ) : caseStudy.id === 't-bank-travel' ? (
+                <div className="flex flex-col gap-[8px]">
+                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
+                    {locale === 'ru'
+                      ? typograph('Представим, что клиент Т-Банка собирается в поездку не один, а с друзьями. На практике такой сценарий почти всегда распадается на множество отдельных задач: до поездки нужно договориться о билетах и жилье, оплатить, собрать деньги, отслеживать, кто уже оплатил свою часть, а кто — нет. Во время поездки возникают совместные траты наличными и картой, которые тоже нужно учитывать и делить между участниками')
+                      : typograph('Imagine a T-Bank customer planning a trip not alone, but with friends. In practice, this scenario almost always breaks into many separate tasks: before the trip, you need to agree on tickets and accommodation, pay, collect money, track who has already paid their share and who hasn\'t. During the trip, there are joint cash and card expenses that also need to be tracked and split among participants')}
+                  </p>
+                  <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
+                    {locale === 'ru'
+                      ? typograph('Сейчас пользователи часто координируются вне одного продукта: обсуждают детали в мессенджерах, пересылают ссылки, переводят деньги друг другу, вручную ведут заметки по расходам и договорённостям')
+                      : typograph('Currently, users often coordinate outside a single product: discussing details in messengers, forwarding links, transferring money to each other, manually keeping notes on expenses and agreements')}
+                  </p>
+                </div>
               ) : caseStudy.id === 't-bank' ? (
                 <div className="flex flex-col gap-[8px]">
                   <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
@@ -469,10 +485,69 @@ export function CasePage() {
             </div>
           </section>
 
+          {/* Дополнительные данные — T-Bank Travel only */}
+          {caseStudy.id === 't-bank-travel' && (
+            <section style={{ marginTop: 24 }}>
+              <div className="bg-[var(--color-surface-muted)] rounded-[24px]" style={{ padding: 24 }}>
+
+                {/* Title */}
+                <h2 className="font-sans text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)]">
+                  {locale === 'ru' ? 'Дополнительные данные' : 'Additional Context'}
+                </h2>
+
+                {/* Qualitative insights — dash-bullet list matching DS */}
+                <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
+                  {(locale === 'ru' ? [
+                    typograph('В групповых поездках часто нет одного «организатора» в полном смысле слова: один человек может искать билеты, другой — жильё, третий — вести общий бюджет'),
+                    typograph('В экосистеме Т-Банка уже есть сервисы, которые могут быть встроены в этот сценарий: билеты, отели, страхование, платежи, переводы, сбор денег, мобильный интернет, заказ справок для визы'),
+                    typograph('Для бизнеса интересен сценарий, в котором суперапп становится не просто местом оплаты, а инструментом координации и совместного действия'),
+                  ] : [
+                    typograph('Group trips often lack a single "organizer" in the full sense: one person may search for tickets, another for accommodation, a third may manage the shared budget'),
+                    typograph('The T-Bank ecosystem already includes services that fit this scenario: tickets, hotels, insurance, payments, transfers, money collection, mobile internet, visa document ordering'),
+                    typograph('From a business perspective, the compelling scenario is one where the superapp becomes not just a payment point, but a tool for coordination and collective action'),
+                  ]).map((text, i) => (
+                    <p key={i} className="text-[16px] font-medium text-[var(--color-text-secondary)] m-0">
+                      — {text}
+                    </p>
+                  ))}
+                </div>
+
+                {/* Quantitative data — sub-block inside the same card */}
+                <div style={{ marginTop: 20 }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-[8px]">
+                    {(locale === 'ru' ? [
+                      { stat: '30%', text: typograph('пользователей регулярно выезжают за границу не реже 1 раза в год') },
+                      { stat: '37%', text: typograph('сталкиваются с трудностями при сборе денег на общие траты до поездки') },
+                      { stat: '33%', text: typograph('хотя бы раз не понимали, кто уже оплатил свою часть, а кто нет') },
+                    ] : [
+                      { stat: '30%', text: typograph('of users travel abroad at least once a year') },
+                      { stat: '37%', text: typograph('struggle collecting money for shared expenses before the trip') },
+                      { stat: '33%', text: typograph("at least once didn't know who had already paid their share") },
+                    ]).map(({ stat, text }) => (
+                      <div
+                        key={stat}
+                        className="bg-[var(--color-bg)] rounded-[16px] flex flex-col"
+                        style={{ padding: '14px 14px 16px' }}
+                      >
+                        <p className="stat-number text-[20px] font-semibold leading-[1.3] text-[var(--color-text-primary)] m-0">
+                          {stat}
+                        </p>
+                        <p className="text-[16px] font-medium leading-[1.4] text-[var(--color-text-secondary)] m-0" style={{ marginTop: 6 }}>
+                          {text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </section>
+          )}
+
           {/* Content group — 112px from Контекст задачи, 24px between sections */}
           <section className="case-sections flex flex-col" style={{ marginTop: 96, gap: 24 }}>
             {/* Вводные */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Вводные' : 'Brief'}
@@ -486,6 +561,10 @@ export function CasePage() {
                     ? (locale === 'ru'
                       ? typograph('Спроектировать веб-сервис подбора маршрутов по локальным местам города с\u00A0фокусом на\u00A0Discovery-фазу, пользовательские сценарии и\u00A0дизайн-систему')
                       : typograph('Design a web service for curating city routes through local places, focusing on the Discovery phase, user scenarios, and design system'))
+                    : caseStudy.id === 't-bank-travel'
+                    ? (locale === 'ru'
+                      ? typograph('Спроектируйте функционал внутри приложения Т-Банка, который поможет пользователю организовать совместную поездку с другими людьми и оптимизировать фиксацию трат и сбор денег до, во время и после поездки')
+                      : typograph('Design functionality within the T-Bank app that helps users organize a group trip with others and optimize expense tracking and money collection before, during, and after the trip'))
                     : (locale === 'ru'
                       ? typograph('Разработать сценарий онлайн-оформления рассрочки, адаптированный под пользователей с иностранными документами')
                       : typograph('Design an online installment application flow adapted for users with foreign documents'))
@@ -495,7 +574,7 @@ export function CasePage() {
             )}
 
             {/* Миссия */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Миссия' : 'Mission'}
@@ -513,6 +592,11 @@ export function CasePage() {
                       <p className="m-0">— {locale === 'ru' ? typograph('Предложить альтернативу бесконечным спискам мест — готовые маршруты с\u00A0логикой передвижения') : typograph('Offer an alternative to endless place lists — ready-made routes with movement logic')}</p>
                       <p className="m-0">— {locale === 'ru' ? typograph('Помочь пользователям открывать локальные места, о\u00A0которых они не\u00A0узнали\u00A0бы через стандартные агрегаторы') : typograph('Help users discover local places they wouldn\'t find through standard aggregators')}</p>
                     </>
+                  ) : caseStudy.id === 't-bank-travel' ? (
+                    <>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Снизить нагрузку в координации между пользователями до и во время планирования поездки') : typograph('Reduce the coordination burden between users before and during trip planning')}</p>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Снизить необходимость поиска деталей для поездки на внешних ресурсах') : typograph('Reduce the need to search for trip details on external resources')}</p>
+                    </>
                   ) : (
                     <>
                       <p className="m-0">— {locale === 'ru' ? typograph('Снизить барьер получения финансовых продуктов для иностранных граждан') : typograph('Lower the barrier to financial products for foreign citizens')}</p>
@@ -524,7 +608,7 @@ export function CasePage() {
             )}
 
             {/* Цель */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Цель' : 'Goal'}
@@ -540,6 +624,11 @@ export function CasePage() {
                       <p className="m-0">— {locale === 'ru' ? typograph('Провести полный цикл Discovery и\u00A0валидировать ключевые гипотезы через Custdev-интервью') : typograph('Conduct a full Discovery cycle and validate key hypotheses through Custdev interviews')}</p>
                       <p className="m-0">— {locale === 'ru' ? typograph('Спроектировать пользовательские сценарии и\u00A0дизайн-систему для MVP веб-сервиса') : typograph('Design user scenarios and a design system for the web service MVP')}</p>
                     </>
+                  ) : caseStudy.id === 't-bank-travel' ? (
+                    <>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Проработать экосистему планирования поездки внутри Т-Банка') : typograph('Develop the trip planning ecosystem within T-Bank')}</p>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Удержать группы пользователей внутри продукта Т-Банка') : typograph('Retain groups of users within the T-Bank product')}</p>
+                    </>
                   ) : (
                     <p className="m-0">{locale === 'ru' ? typograph('Адаптировать существующий онлайн-процесс оформления рассрочки под особенности идентификации и проверки иностранных клиентов') : typograph('Adapt the existing online installment process for the identification and verification specifics of foreign clients')}</p>
                   )}
@@ -548,7 +637,7 @@ export function CasePage() {
             )}
 
             {/* Аудитория */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Аудитория' : 'Audience'}
@@ -562,6 +651,10 @@ export function CasePage() {
                     ? (locale === 'ru'
                       ? typograph('Путешественники и\u00A0локальные жители, которые хотят исследовать город через готовые маршруты вместо самостоятельного поиска и\u00A0планирования')
                       : typograph('Travelers and locals who want to explore the city through curated routes instead of searching and planning on their own'))
+                    : caseStudy.id === 't-bank-travel'
+                    ? (locale === 'ru'
+                      ? typograph('Группы пользователей от 2-х человек, которые совершают совместные поездки')
+                      : typograph('Groups of 2 or more users who take trips together'))
                     : (locale === 'ru'
                       ? typograph('Иностранные граждане с РВП и ВНЖ')
                       : typograph('Foreign citizens with a temporary residence permit (TRP) or permanent residence permit (RP)'))
@@ -571,7 +664,7 @@ export function CasePage() {
             )}
 
             {/* Критерии успеха */}
-            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 'okolo') && (
+            {(caseStudy.id === 'yandex-lavka' || caseStudy.id === 't-bank' || caseStudy.id === 't-bank-travel' || caseStudy.id === 'okolo') && (
               <div className="flex flex-col gap-[8px]">
                 <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
                   {locale === 'ru' ? 'Критерии успеха' : 'Success Criteria'}
@@ -586,6 +679,11 @@ export function CasePage() {
                     <>
                       <p className="m-0">— {locale === 'ru' ? typograph('Валидация гипотез через Custdev: подтверждение потребности в\u00A0готовых маршрутах у\u00A0целевой аудитории') : typograph('Hypothesis validation through Custdev: confirming demand for curated routes among the target audience')}</p>
                       <p className="m-0">— {locale === 'ru' ? typograph('Готовая дизайн-система и\u00A0пользовательские сценарии для передачи в\u00A0разработку MVP') : typograph('Complete design system and user scenarios ready to hand off for MVP development')}</p>
+                    </>
+                  ) : caseStudy.id === 't-bank-travel' ? (
+                    <>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Повышение интереса к планированию поездки между пользователями внутри приложения Т-Банк') : typograph('Increased interest in trip planning among users within the T-Bank app')}</p>
+                      <p className="m-0">— {locale === 'ru' ? typograph('Снижение времени, которое пользователи тратят на поиск и регулирование вопросов планирования поездки на внешних ресурсах') : typograph('Reduction in time users spend searching for and managing trip planning questions on external resources')}</p>
                     </>
                   ) : (
                     <>
@@ -676,6 +774,12 @@ export function CasePage() {
                   activeTbankTestChip={activeTbankTestChip}
                   setActiveTbankTestChip={setActiveTbankTestChip}
                 />
+              </Suspense>
+            )}
+
+            {caseStudy.id === 't-bank-travel' && (
+              <Suspense>
+                <TBankTravelCase locale={locale} />
               </Suspense>
             )}
 

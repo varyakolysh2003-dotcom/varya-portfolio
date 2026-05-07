@@ -6,8 +6,12 @@ import { PreviewPanel } from './Preview/PreviewPanel';
 import { MobileHome } from './MobileHome';
 
 export function PortfolioLayout() {
+  // Okolo is temporarily hidden from the visible UI — all code/assets are preserved
+  const visibleCases = cases.filter(c => c.id !== 'okolo');
+
   const [activeCase, setActiveCase] = useState<CaseStudy | null>(null);
   const [showResume, setShowResume] = useState(false);
+  const [casesHovered, setCasesHovered] = useState(false);
   const leaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resumeLeaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -76,18 +80,21 @@ export function PortfolioLayout() {
         >
           <Sidebar
             siteContent={siteContent}
-            cases={cases}
+            cases={visibleCases}
             activeCaseId={activeCase?.id ?? null}
             showResume={showResume}
             onCaseEnter={handleCaseEnter}
             onCaseLeave={handleCaseLeave}
             onResumeEnter={handleResumeEnter}
             onResumeLeave={handleResumeLeave}
+            onCasesBlockEnter={() => setCasesHovered(true)}
+            onCasesBlockLeave={() => setCasesHovered(false)}
           />
           <PreviewPanel
             activeCase={activeCase}
-            cases={cases}
+            cases={visibleCases}
             showResume={showResume}
+            casesHovered={casesHovered}
             onResumeEnter={handleResumeEnter}
             onResumeLeave={handleResumeLeave}
           />
@@ -96,7 +103,7 @@ export function PortfolioLayout() {
 
       {/* Mobile/Tablet layout — hidden on desktop */}
       <div className="lg:hidden">
-        <MobileHome siteContent={siteContent} cases={cases} />
+        <MobileHome siteContent={siteContent} cases={visibleCases} />
       </div>
     </>
   );

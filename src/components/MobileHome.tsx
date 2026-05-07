@@ -104,7 +104,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
               className="w-full text-left bg-white rounded-[var(--radius-media)] overflow-hidden shadow-[0_0_4px_rgba(0,0,0,0.08)] transition-transform duration-150 active:scale-[0.98] disabled:opacity-100"
             >
               {/* Cover image */}
-              <div className="w-full aspect-[16/10] overflow-hidden bg-[#F0F0F0]">
+              <div className="w-full aspect-[16/10] overflow-hidden bg-[var(--color-surface-muted)]">
                 <img
                   src={cs.cover}
                   alt={cs.title[locale]}

@@ -14,6 +14,7 @@ interface PreviewPanelProps {
   activeCase: CaseStudy | null;
   cases: CaseStudy[];
   showResume: boolean;
+  casesHovered: boolean;
   onResumeEnter: () => void;
   onResumeLeave: () => void;
 }
@@ -151,7 +152,7 @@ function DefaultContent({
                 zIndex: isActive ? 20 : index + 1,
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.06)',
                 transform: isActive ? `translateY(${translateY}px) scale(1.02)` : 'none',
-                transition: 'transform 280ms ease-out, z-index 0s',
+                transition: 'transform 280ms ease-out, z-index 0s, opacity 240ms ease',
               }}
             >
               <img
@@ -291,7 +292,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
           </section>
 
           {/* Опыт / Experience */}
-          <div className="w-full h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32 }} />
+          <div className="h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32, marginLeft: -24, marginRight: -23 }} />
           <section className="flex flex-col gap-4">
             <h3 className="font-sans text-[24px] font-bold text-[var(--color-text-primary)] leading-[1.3] mt-0">
               {locale === 'ru' ? 'Опыт' : 'Experience'}
@@ -327,7 +328,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
           </section>
 
           {/* Навыки / Skills */}
-          <div className="w-full h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32 }} />
+          <div className="h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32, marginLeft: -24, marginRight: -23 }} />
           <section className="flex flex-col gap-4">
             <h3 className="font-sans text-[24px] font-bold text-[var(--color-text-primary)] leading-[1.3] mt-0">
               {locale === 'ru' ? 'Навыки' : 'Skills'}
@@ -367,7 +368,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
           </section>
 
           {/* Достижения / Achievements */}
-          <div className="w-full h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32 }} />
+          <div className="h-px bg-[var(--color-border)]" style={{ marginTop: 24, marginBottom: 32, marginLeft: -24, marginRight: -23 }} />
           <section className="flex flex-col gap-4">
             <h3 className="font-sans text-[24px] font-bold text-[var(--color-text-primary)] leading-[1.3] mt-0">
               {locale === 'ru' ? 'Достижения' : 'Achievements'}

@@ -296,6 +296,17 @@ img { display: block; max-width: 100%; }
     font-size: 16px !important;
   }
 
+  /* Analytical block content: keep explicitly 16px-classed paragraphs
+     at their intended size — overrides the generic p { 14px } rule above */
+  .case-container p.text-\[16px\] {
+    font-size: 16px !important;
+  }
+
+  /* Stat numbers: match heading wght on mobile (p rule would drop it to 460) */
+  .case-container p.stat-number {
+    font-variation-settings: 'wght' 600 !important;
+  }
+
   /* Section gaps: Вводные / Миссия / Цель / etc. */
   .case-sections {
     gap: 20px !important;
