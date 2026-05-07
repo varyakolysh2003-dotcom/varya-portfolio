@@ -392,7 +392,7 @@ export default function TBankCase({
                       : (locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights')}
                   </h3>
                   <div className="flex flex-col gap-[8px]" style={{ marginTop: 8 }}>
-                    <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
+                    <p className="text-[14px] font-medium text-[var(--color-text-secondary)] md:hidden" style={{ marginBottom: 4 }}>
                       {({
                         rvp: locale === 'ru' ? typograph('Находятся в переходном статусе: уже работают, но ограничены в доступе к кредитным продуктам из-за временного характера разрешения') : typograph('In a transitional status: already employed, but limited in access to credit products due to the temporary nature of their permit'),
                         vnzh: locale === 'ru' ? typograph('Наиболее интегрированный сегмент: имеют стабильный доход, пользуются банковскими продуктами, но сталкиваются с отказами и ограничениями') : typograph('The most integrated segment: have stable income, use banking products, but face rejections and restrictions atypical for citizens'),
@@ -1289,18 +1289,18 @@ export default function TBankCase({
                   <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>01</span>
-                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S–M</span>
+                      <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>S</span>
                     </div>
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Локализация интерфейса' : 'Interface Localization'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('У Т-банка есть внутренняя система перевода для 3-х основных языков (таджикский, узбекский, кыргызский) для категории пользователей, уязвимых к слабому пониманию русского')
                         : typograph('T-Bank has an internal translation system for three main languages (Tajik, Uzbek, Kyrgyz) for the category of users vulnerable to limited Russian comprehension')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru'
                           ? typograph('UX-редизайн продолжает наличие перевода для последующих полей в форме оформления, из-за чего оцениваю как M (medium cost)')
@@ -1318,13 +1318,13 @@ export default function TBankCase({
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Пошаговый индикатор оформления' : 'Step-by-Step Form Indicator'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('Это новый Flow и дизайн-решение для формы заявки, при которой одна страница разбивается на 4 этапа формы, где нужно сохранять данные между шагами пользователя')
                         : typograph('A new flow and design solution for the application form, splitting one page into 4 stages with data preservation between user steps')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru'
                           ? typograph('Упирается в frontend и разделение шагов на отдельные страницы — M (medium cost)')
@@ -1342,13 +1342,13 @@ export default function TBankCase({
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Расширение типов документов' : 'Document Type Expansion'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('Вводит новые поля (РВП/ВНЖ) и правила обработки данных: серия и номер паспорта с выбором страны, даты действия документов, тип федерального органа, выдавшего документ')
                         : typograph('Introduces new fields (TRP/RP) and data processing rules: passport series and number with country selection, document validity dates, type of federal authority that issued the document')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru'
                           ? typograph('Backend и frontend с условиями обработки данных')
@@ -1366,13 +1366,13 @@ export default function TBankCase({
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Прозрачность условий и объясняющие ссылки' : 'Conditions Transparency & Contextual Links'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('У Т-банка уже есть свежие статьи и информационные ссылки для иностранных пользователей, важно интегрировать их перед заполнением/внутри формы')
                         : typograph('T-Bank already has up-to-date articles and informational links for foreign users — integrating them before and inside the form is the key task')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru'
                           ? typograph('Frontend, внесение ссылок и блоков, которые будут вести на информационные ресурсы')
@@ -1390,13 +1390,13 @@ export default function TBankCase({
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Оценка шанса одобрения' : 'Approval Probability Indicator'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('В своем решении подразумеваю ее как информационную подсказку для типов документов (РВП/ВНЖ), а не как оценку реального расчета в процессе заполнения формы')
                         : typograph('In my solution this is an informational hint for document types (TRP/RP), not a real-time scoring calculation during form completion')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru' ? 'Frontend' : 'Frontend'}
                       </p>
@@ -1412,13 +1412,13 @@ export default function TBankCase({
                     <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                       {locale === 'ru' ? 'Кредитная карта для иностранцев' : 'Credit Card for Foreigners'}
                     </h3>
-                    <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                    <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                       {locale === 'ru'
                         ? typograph('Недавно введенный продукт, позволяющий иностранцам развивать кредитную историю и получать займы на территории РФ. В своем решении я не пыталась менять систему скоринга (это упирается в legal), а интегрировала ее как фактор рассмотрения заявки')
                         : typograph('A recently launched product enabling foreigners to build credit history and obtain loans in Russia. In my solution I did not attempt to change the scoring system (that is a legal matter), but integrated it as a factor in the application review')}
                     </p>
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                      <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                      <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                         <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{locale === 'ru' ? 'Интеграция и зависимости:' : 'Integration & dependencies:'}</span>{' '}
                         {locale === 'ru'
                           ? typograph('Frontend и backend, появляются новые формы ввода, хранения и обработки данных')

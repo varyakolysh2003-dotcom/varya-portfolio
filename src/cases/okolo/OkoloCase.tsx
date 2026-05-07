@@ -149,7 +149,7 @@ export default function OkoloCase({ locale, activePersona, setActivePersona }: O
               {locale === 'ru' ? 'О ядре категории пользователей' : 'Category Core Insights'}
             </h3>
             <div className="flex flex-col gap-[8px] mt-[8px]">
-              <p className="text-[15px] font-medium text-[var(--color-text-secondary)] md:hidden mb-[4px]">
+              <p className="text-[14px] font-medium text-[var(--color-text-secondary)] md:hidden mb-[4px]">
                 {({
                   families: locale === 'ru' ? typograph('Семьи из\u00A02+ человек с регулярными совместными покупками') : typograph('Families of 2+ people with regular joint purchases'),
                   friends: locale === 'ru' ? typograph('Пары, живущие вместе или встречающиеся, ценящие удобство и совместные покупки') : typograph('Couples living together or dating who value convenience and joint shopping'),

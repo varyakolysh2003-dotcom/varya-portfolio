@@ -54,7 +54,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
             <p className="text-[16px] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
               {locale === 'ru' ? 'Резюме' : 'Resume'}
             </p>
-            <p className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] mt-0.5">
+            <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] mt-0.5">
               {siteContent.resumeSubtitle[locale]}
             </p>
           </div>
@@ -160,7 +160,7 @@ export function MobileHome({ siteContent, cases }: MobileHomeProps) {
 function ContactMobile({ label, value, href }: { label: string; value: string; href?: string }) {
   return (
     <div className="min-w-0">
-      <p className="text-[13px] font-semibold text-[var(--color-text-primary)] mb-0.5">
+      <p className="text-[14px] font-semibold text-[var(--color-text-primary)] mb-0.5">
         {label}
       </p>
       {href ? (
@@ -168,12 +168,12 @@ function ContactMobile({ label, value, href }: { label: string; value: string; h
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline break-words"
+          className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] no-underline break-words"
         >
           {value}
         </a>
       ) : (
-        <p className="text-[13px] font-medium text-[var(--color-text-secondary)] leading-[1.3] break-words">
+        <p className="text-[14px] font-medium text-[var(--color-text-secondary)] leading-[1.3] break-words">
           {value}
         </p>
       )}

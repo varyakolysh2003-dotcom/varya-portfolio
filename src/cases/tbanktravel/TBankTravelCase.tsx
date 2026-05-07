@@ -91,14 +91,6 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
     setGetTransferSlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
-  // Section — Отчеты и оплата
-  const [reportsSlide, setReportsSlide] = useState(0);
-  const reportsScrollRef = useRef<HTMLDivElement>(null);
-  const handleReportsScroll = useCallback(() => {
-    const el = reportsScrollRef.current;
-    if (!el) return;
-    setReportsSlide(Math.round(el.scrollLeft / el.clientWidth));
-  }, []);
 
   return (
     <>
@@ -461,8 +453,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           </h2>
           <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
             {locale === 'ru'
-              ? typograph('Изучив боли и проблемы пользователей я приступила к анализу рынка, чтобы посмотреть, какие конкуренты имеют фичи и продуктовые решения, способные закрыть боли пользователей. Собрав список с описаниями по каждому продукту я выделила 3-х главных в направлении регулирования финансов и путешествий')
-              : typograph('Having studied user pains and problems, I began analysing the market to see which competitors have features and product decisions capable of addressing user pain points. After compiling a list with descriptions for each product, I identified 3 key players in the areas of financial management and travel')}
+              ? typograph('Изучив боли и проблемы пользователей я приступила к анализу рынка, чтобы посмотреть, какие конкуренты имеют фичи и продуктовые решения, способные закрыть боли пользователей на старте. Собрав список с описаниями по каждому продукту я выделила 3-х главных в направлении регулирования финансов и путешествий')
+              : typograph('Having studied user pains and problems, I began analysing the market to see which competitors have features and product decisions capable of addressing user pain points at launch. After compiling a list with descriptions for each product, I identified 3 key players in the areas of financial management and travel')}
           </p>
         </div>
 
@@ -769,6 +761,11 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <h2 className="font-sans text-[24px] font-bold leading-[1.3] text-[var(--color-text-primary)]">
           {locale === 'ru' ? typograph('Чат и коммуникация') : typograph('Chat and communication')}
         </h2>
+        <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
+          {locale === 'ru'
+            ? typograph('В чат можно направлять ссылки на варианты отелей/билетов/мест для бронирования, прикреплять файлы')
+            : typograph('In the chat you can share links to hotels/tickets/places for booking and attach files')}
+        </p>
         {/* Mobile carousel — hidden on md+ */}
         <div className="case-section-content md:hidden">
           <div
@@ -910,8 +907,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         </h2>
         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
           {locale === 'ru'
-            ? typograph('Основной хаос в поездке создают частые мелкие расходы, которые неудобно фиксировать в моменте. Фиксация расходов должна быть автоматизирована или максимально быстрой и простой (если оплата идет наличкой), иначе пользователи откладывают это на потом и данные теряются')
-            : typograph('Most in-trip chaos comes from frequent small expenses that are inconvenient to log on the spot. Expense tracking must be automated or as fast and simple as possible for cash — otherwise users defer it and data is lost')}
+            ? typograph('Основной хаос в поездке создают частые мелкие расходы, которые неудобно фиксировать в моменте. Фиксация расходов должна быть автоматизированной, быстрой и простой (если оплата идет наличкой), иначе пользователи откладывают это на потом и данные теряются')
+            : typograph('Most in-trip chaos comes from frequent small expenses that are inconvenient to log on the spot. Expense tracking must be automated, fast and simple (if payment is in cash) — otherwise users defer it and data is lost')}
         </p>
         {/* Mobile carousel — hidden on md+ */}
         <div className="case-section-content md:hidden">
@@ -1073,35 +1070,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
             : typograph('Users need a financial overview of trip expenses. It is important to show not only debts, but also the current trip status: budget, contributions, total expenses, and remaining balances')}
         </p>
 
-        {/* Mobile carousel — hidden on md+ */}
-        <div className="case-section-content md:hidden">
-          <div
-            className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col"
-            style={{ borderRadius: 'var(--radius-media)' }}
-          >
-            <div
-              ref={reportsScrollRef}
-              onScroll={handleReportsScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
-              style={{ height: '500px' }}
-            >
-              {(['10_1', '10_2', '10_3'] as const).map((n) => (
-                <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
-                  <img
-                    loading="lazy"
-                    src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
-                    alt={locale === 'ru' ? `Отчеты и оплата — ${n}` : `Reports and payment — ${n}`}
-                    style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
-                  />
-                </div>
-              ))}
-            </div>
-            <CarouselDots count={3} active={reportsSlide} className="pt-[12px] pb-[16px]" />
-          </div>
-        </div>
-
-        {/* Desktop image — hidden on mobile */}
-        <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
+        {/* Single image — used on both mobile and desktop */}
+        <div className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy"
             src={publicUrl('/covers/T-bank 2/10.webp')}
@@ -1124,8 +1094,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           </h2>
           <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
             {locale === 'ru'
-              ? typograph('При реальной задаче я бы опиралась на следующие критерии успеха для бизнеса:')
-              : typograph('In a real project, I would rely on the following success criteria for the business:')}
+              ? typograph('На что бы я опиралась для оценки критериев успеха решения:')
+              : typograph('What I would rely on to assess the success criteria of the solution:')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[24px]" style={{ marginTop: 8 }}>
             {([
@@ -1170,7 +1140,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                 <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                   {typograph(title)}
                 </h3>
-                <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {typograph(body)}
                 </p>
               </div>
@@ -1223,17 +1193,17 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                   : 'I observe where users encounter problems and where the flow needs refinement',
               },
               {
-                title: 'CSAT',
+                title: locale === 'ru' ? 'CSAT и скорость выполнения задач' : 'CSAT and task completion speed',
                 body: locale === 'ru'
-                  ? 'Степень удовлетворенности продуктовыми решениями'
-                  : 'Degree of satisfaction with the product decisions',
+                  ? 'Степень удовлетворенности продуктовыми решениями и скорость на их выполнение'
+                  : 'Degree of satisfaction with the product decisions and the speed of completing them',
               },
             ] as { title: string; body: string }[]).map(({ title, body }, i) => (
               <div key={i} className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[10px]" style={{ padding: 24 }}>
                 <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                   {typograph(title)}
                 </h3>
-                <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   {typograph(body)}
                 </p>
               </div>
@@ -1253,19 +1223,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>01</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>
-                  {locale === 'ru' ? 'Высокая' : 'High'}
+                  L
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Суперапп групповых поездок' : 'Group Travel Super App'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'Главная выгода: развивает социальное взаимодействие и регулирование трат внутри приложения Т-Банка. Если такой сценарий заработает, он может хорошо связать имеющиеся travel-разделы и переводы, так как решение является новым продуктовым слоем внутри существующей экосистемы банка'
                   : "Main benefit: builds social interaction and expense management within the T-Bank app. If this scenario takes off, it can effectively connect existing travel sections and transfers as a new product layer within the bank's ecosystem")}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1281,19 +1251,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>02</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>
-                  {locale === 'ru' ? 'Средняя' : 'Medium'}
+                  M
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Роли и права пользователей' : 'User Roles & Permissions'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'На старте и по инсайтам с ТЗ не выглядит как standalone win, поэтому дорого развивать слишком сложную систему ролей на старте невыгодно'
                   : "At launch and per brief insights, this doesn't look like a standalone win — building an overly complex role system from the start isn't cost-effective")}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1309,19 +1279,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>03</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>
-                  {locale === 'ru' ? 'Высокая' : 'High'}
+                  L
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Деньги до / во время / после' : 'Money Before / During / After'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
-                  ? 'На старте и по инсайтам с ТЗ не выглядит как standalone win, поэтому дорого развивать слишком сложную систему ролей на старте невыгодно'
-                  : "At launch and per brief insights, this doesn't look like a standalone win — building an overly complex system from the start isn't cost-effective")}
+                  ? 'На старте и по инсайтам один из основных standalone win, но дорого развивать, нужна сильная поддержка регулирования отчета финансов'
+                  : 'At launch and per insights this is one of the main standalone wins, but costly to develop — it needs strong support for finance reporting and regulation')}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1337,19 +1307,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>04</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>
-                  {locale === 'ru' ? 'Средняя / ниже средней' : 'Medium / Below Avg'}
+                  M
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Отчёт и статистика по поездке' : 'Trip Report & Statistics'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'Входная точка, потому что она закрепляет за банком ownership над сценарием поездки и группировкой между пользователями'
                   : "Entry point — it establishes the bank's ownership over the trip scenario and grouping between users")}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1365,19 +1335,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>05</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>
-                  {locale === 'ru' ? 'Низкая' : 'Low'}
+                  S
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Инвайты пользователей' : 'User Invites'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'Важная часть закрытия потребности внутри приложения в начале старта сценария'
                   : 'A key part of addressing the in-app need at the start of the scenario')}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1392,20 +1362,20 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
             <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>06</span>
-                <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>
-                  {locale === 'ru' ? 'Средняя / ниже средней' : 'Medium / Below Avg'}
+                <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>
+                  L
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Чат группы внутри Т-Банка' : 'Group Chat in T-Bank'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'Логичное решение с точки зрения координации пользователей, но может смещать направление решения в сторону полноценного мессенджера, что может быть сомнительно, так как основную коммуникацию пользователи ведут отдельно вне банка'
                   : "Logical from a user coordination standpoint, but risks shifting the solution toward a full messenger — questionable since users conduct primary communication outside the bank")}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
@@ -1421,19 +1391,19 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>07</span>
                 <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFD6DA', color: '#B71C1C' }}>
-                  {locale === 'ru' ? 'Высокая' : 'High'}
+                  L
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
                 {locale === 'ru' ? 'Организация оплаты / добавление расходов' : 'Payment Organisation / Expense Tracking'}
               </h3>
-              <p className="m-0 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
                   ? 'Самый выгодный блок, потому что он напрямую усиливает банковский продукт в рамках ТЗ: платежи, переводы и удержание пользователей в рамках поездки'
                   : "The most valuable block — directly strengthens the bank's product within the brief: payments, transfers, and user retention within the trip")}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
-                <p className="m-0 text-[14px] font-medium text-[var(--color-text-secondary)]">
+                <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                   <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}

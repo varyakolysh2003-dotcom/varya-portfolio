@@ -296,10 +296,16 @@ img { display: block; max-width: 100%; }
     font-size: 16px !important;
   }
 
-  /* Analytical block content: keep explicitly 16px-classed paragraphs
-     at their intended size — overrides the generic p { 14px } rule above */
-  .case-container p.text-\[16px\] {
-    font-size: 16px !important;
+  /* Body text DS scale on mobile = 14px.
+     Catches explicit Tailwind body sizes (14/15/16/17) so paragraphs
+     and supporting text in analytical cards/captions all render at 14px,
+     matching the generic p { 14px } rule above. Headings (h1/h2/h3) are
+     handled separately and are unaffected by this. */
+  .case-container .text-\[14px\]:not(h1):not(h2):not(h3),
+  .case-container .text-\[15px\]:not(h1):not(h2):not(h3),
+  .case-container .text-\[16px\]:not(h1):not(h2):not(h3),
+  .case-container .text-\[17px\]:not(h1):not(h2):not(h3) {
+    font-size: 14px !important;
   }
 
   /* Stat numbers: match heading wght on mobile (p rule would drop it to 460) */
