@@ -1074,7 +1074,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy"
-            src={publicUrl('/covers/T-bank 2/10.webp')}
+            src={publicUrl('/covers/T-bank 2/mobile/10.webp')}
             alt={locale === 'ru' ? 'Отчеты и оплата' : 'Reports and payment'}
             className="block w-full object-cover"
           />
