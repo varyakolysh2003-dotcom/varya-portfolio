@@ -615,7 +615,7 @@ export default function LavkaCase({
                 <div className="case-section-content md:hidden">
                   <div className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col" style={{ borderRadius: 'var(--radius-media)' }}>
                     <div ref={addressScrollRef} onScroll={handleAddressScroll} className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar" style={{ height: '500px' }}>
-                      {[17, 19].map((n, i) => (
+                      {[18, 19].map((n, i) => (
                         <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                           <img loading="lazy"
                             src={publicUrl(`/covers/YandexLavka materials/Mobile/${n}.webp`)}
