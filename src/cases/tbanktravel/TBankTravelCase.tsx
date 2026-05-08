@@ -591,7 +591,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
               style={{ height: '500px' }}
             >
-              {(['1_0', '1_1', '1_2'] as const).map((n) => (
+              {(['1_0', '1_2', '1_3'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
                     loading="lazy"
