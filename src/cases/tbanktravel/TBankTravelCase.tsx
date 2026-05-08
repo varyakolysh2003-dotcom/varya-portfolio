@@ -91,6 +91,15 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
     setGetTransferSlide(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
+  // Section — Отчеты и оплата
+  const [reportsPaymentSlide, setReportsPaymentSlide] = useState(0);
+  const reportsPaymentScrollRef = useRef<HTMLDivElement>(null);
+  const handleReportsPaymentScroll = useCallback(() => {
+    const el = reportsPaymentScrollRef.current;
+    if (!el) return;
+    setReportsPaymentSlide(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
 
   return (
     <>
@@ -1070,8 +1079,35 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
             : typograph('Users need a financial overview of trip expenses. It is important to show not only debts, but also the current trip status: budget, contributions, total expenses, and remaining balances')}
         </p>
 
-        {/* Single image — used on both mobile and desktop */}
-        <div className="case-section-content w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
+        {/* Mobile carousel — hidden on md+ */}
+        <div className="case-section-content md:hidden">
+          <div
+            className="w-full bg-[var(--color-surface-muted)] overflow-hidden flex flex-col"
+            style={{ borderRadius: 'var(--radius-media)' }}
+          >
+            <div
+              ref={reportsPaymentScrollRef}
+              onScroll={handleReportsPaymentScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+              style={{ height: '500px' }}
+            >
+              {(['10_1', '10_2', '10_3'] as const).map((n) => (
+                <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                  <img
+                    loading="lazy"
+                    src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
+                    alt={locale === 'ru' ? `Отчеты и оплата — ${n}` : `Reports and payment — ${n}`}
+                    style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
+                  />
+                </div>
+              ))}
+            </div>
+            <CarouselDots count={3} active={reportsPaymentSlide} className="pt-[12px] pb-[16px]" />
+          </div>
+        </div>
+
+        {/* Desktop image — hidden on mobile */}
+        <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy"
             src={publicUrl('/covers/T-bank 2/mobile/10.webp')}
