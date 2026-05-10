@@ -24,5 +24,10 @@ export function typograph(text: string): string {
     );
   }
 
+  // Non-breaking hyphen (U+2011) inside the brand "\u0422-\u0411\u0430\u043D\u043A" / "T-Bank"
+  // so it never wraps as "\u0422-" + "\u0411\u0430\u043D\u043A" across two lines.
+  r = r.replace(/\u0422-\u0411\u0430\u043D\u043A/g, '\u0422\u2011\u0411\u0430\u043D\u043A');
+  r = r.replace(/T-Bank/g, 'T\u2011Bank');
+
   return r;
 }
