@@ -308,7 +308,7 @@ function ResumeContent({ locale }: { locale: Locale }) {
                   : typograph('Conducted design reviews, prepared layouts for development, responsive design for desktop, tablet and mobile, defended design decisions, market analysis')}
               </p>
               <p className="font-sans text-[16px] font-medium text-[var(--color-text-tertiary)] leading-[1.4]">
-                {locale === 'ru' ? 'Май 2024 — Сентябрь 2025' : 'May 2024 — September 2025'}
+                {locale === 'ru' ? 'Март 2024 — Март 2026' : 'March 2024 — March 2026'}
               </p>
             </div>
 
