@@ -1171,6 +1171,18 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                   ? 'Какие категории трат выбирают пользователи в процессе формирования поездки'
                   : 'Which expense categories users select while planning a trip',
               },
+              {
+                title: locale === 'ru' ? 'Популярность направлений поездок' : 'Popularity of travel destinations',
+                body: locale === 'ru'
+                  ? 'Сравниваем, как пользователи предпочитают путешествовать (вне страны или внутри страны), чтобы анализировать и предлагать популярные решения внутри сервиса путешествий'
+                  : 'We compare how users prefer to travel (abroad or domestically) to analyse and offer popular solutions within the travel service',
+              },
+              {
+                title: locale === 'ru' ? 'Сезонность' : 'Seasonality',
+                body: locale === 'ru'
+                  ? 'В какие даты и куда чаще всего предпочитают путешествовать пользователи группой'
+                  : 'On which dates and to which destinations users most often prefer to travel as a group',
+              },
             ] as { title: string; body: string }[]).map(({ title, body }, i) => (
               <div key={i} className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[10px]" style={{ padding: 24 }}>
                 <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
