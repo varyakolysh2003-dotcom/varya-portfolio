@@ -1298,8 +1298,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
             <div className="bg-[var(--color-surface-muted)] rounded-[24px] flex flex-col gap-[12px]" style={{ padding: 24 }}>
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-medium" style={{ color: 'rgba(0,0,0,0.35)' }}>02</span>
-                <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#FFE7C2', color: '#BF3F08' }}>
-                  M
+                <span className="rounded-full text-[12px] font-semibold leading-none" style={{ padding: '5px 12px', backgroundColor: '#D4EBD5', color: '#2E7D32' }}>
+                  S
                 </span>
               </div>
               <h3 className="font-sans text-[17px] font-semibold leading-[1.3] text-[var(--color-text-primary)]" style={{ margin: 0 }}>
@@ -1307,8 +1307,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               </h3>
               <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
                 {typograph(locale === 'ru'
-                  ? 'На старте и по инсайтам с ТЗ не выглядит как standalone win, поэтому дорого развивать слишком сложную систему ролей на старте невыгодно'
-                  : "At launch and per brief insights, this doesn't look like a standalone win — building an overly complex role system from the start isn't cost-effective")}
+                  ? 'По инсайтам одна из главных болей распределения обязанностей по нагрузке, поэтому нужно дать максимально расширенные возможности регулирования оплаты между всеми пользователями'
+                  : 'Per insights, one of the main pain points is fair distribution of expense responsibilities, so users need maximally flexible options for regulating payments between all participants')}
               </p>
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 12, marginTop: 'auto' }}>
                 <p className="m-0 text-[16px] font-medium text-[var(--color-text-secondary)]">
@@ -1316,8 +1316,8 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                     {locale === 'ru' ? 'Дороговизна разработки:' : 'Development cost:'}
                   </span>{' '}
                   {typograph(locale === 'ru'
-                    ? 'Усложняется backend-логика различия в правах участников'
-                    : 'Backend logic for participant permission differentiation becomes more complex')}
+                    ? 'Предполагаемая нагрузка на backend снижается, так как точек ограничения прав меньше'
+                    : 'Expected backend load is reduced since there are fewer permission restriction points')}
                 </p>
               </div>
             </div>
