@@ -121,7 +121,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         </div>
         <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/13.webp')}
             alt={locale === 'ru' ? 'Выделение ключевых поинтов' : 'Identifying key points'}
             className="block w-full object-cover"
@@ -264,7 +264,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
 
         <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/1.webp')}
             alt={locale === 'ru' ? 'Детали процесса планирования' : 'Planning Process Details'}
             className="block w-full h-auto"
@@ -470,7 +470,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="flex flex-col gap-[24px]">
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
-              loading="lazy"
+              loading="lazy" decoding="async"
               src={publicUrl('/covers/T-bank 2/14.webp')}
               alt={locale === 'ru' ? 'Бенчмаркинг — обзор конкурентов' : 'Benchmarking — competitor overview'}
               className="block w-full object-cover"
@@ -478,7 +478,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           </div>
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
-              loading="lazy"
+              loading="lazy" decoding="async"
               src={publicUrl('/covers/T-bank 2/15.webp')}
               alt={locale === 'ru' ? 'Бенчмаркинг — сравнительный анализ' : 'Benchmarking — comparative analysis'}
               className="block w-full object-cover"
@@ -565,7 +565,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="flex flex-col gap-[24px]">
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
-              loading="lazy"
+              loading="lazy" decoding="async"
               src={publicUrl('/covers/T-bank 2/11.webp')}
               alt={locale === 'ru' ? 'User Flow — процесс организации поездки вне экосистемы' : 'User Flow — trip organisation outside the ecosystem'}
               className="block w-full object-cover"
@@ -573,7 +573,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           </div>
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
-              loading="lazy"
+              loading="lazy" decoding="async"
               src={publicUrl('/covers/T-bank 2/12.webp')}
               alt={locale === 'ru' ? 'User Flow — процесс планирования внутри приложения' : 'User Flow — planning process inside the app'}
               className="block w-full h-auto"
@@ -603,7 +603,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['1_0', '1_2', '1_3'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Обновление раздела «Путешествия» — ${n}` : `Travel Section Update — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -618,7 +618,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/1_1.webp')}
             alt={locale === 'ru' ? 'Обновление раздела «Путешествия»' : 'Travel Section Update'}
             className="block w-full object-cover"
@@ -656,7 +656,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                 return (
                   <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                     <img
-                      loading="lazy"
+                      loading="lazy" decoding="async"
                       src={src}
                       alt={alt}
                       style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -672,7 +672,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/2.webp')}
             alt={locale === 'ru' ? 'Единое пространство поездки' : 'Unified trip space'}
             className="block w-full object-cover"
@@ -700,7 +700,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['2_3', '3_2'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Пуш приглашение пользователей — ${n}` : `Push invitation for participants — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -715,7 +715,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/3.webp')}
             alt={locale === 'ru' ? 'Пуш приглашение пользователей' : 'Push invitation for participants'}
             className="block w-full object-cover"
@@ -748,7 +748,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['4_1', '4_2', '4_3', '4_4'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Бронирование и автозаполнение — ${n}` : `Booking and auto-fill — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -763,7 +763,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/4.webp')}
             alt={locale === 'ru' ? 'Бронирование и автозаполнение' : 'Booking and auto-fill'}
             className="block w-full object-cover"
@@ -796,7 +796,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['5_1', '5_2'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Чат и коммуникация — ${n}` : `Chat and communication — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -811,7 +811,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/5.webp')}
             alt={locale === 'ru' ? 'Чат и коммуникация' : 'Chat and communication'}
             className="block w-full object-cover"
@@ -844,7 +844,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['6_1', '6_2', '6_3', '6_4'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Права пользователей — ${n}` : `User permissions — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -859,7 +859,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/6.webp')}
             alt={locale === 'ru' ? 'Права пользователей' : 'User permissions'}
             className="block w-full object-cover"
@@ -892,7 +892,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['7_1', '7_2', '7_3', '7_4'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Оплата расходов и долгов — ${n}` : `Paying expenses and debts — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -907,7 +907,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/7.webp')}
             alt={locale === 'ru' ? 'Оплата расходов и долгов' : 'Paying expenses and debts'}
             className="block w-full object-cover"
@@ -940,7 +940,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['8_1', '8_2', '8_3', '8_4'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Организация мелких трат — ${n}` : `Managing small expenses — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -955,7 +955,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/8.webp')}
             alt={locale === 'ru' ? 'Организация мелких трат' : 'Managing small expenses'}
             className="block w-full object-cover"
@@ -983,7 +983,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['9', '9_1', '9_2', '9_3', '9_4', '9_5', '9_6', '9_7', '9_8', '9_9'] as const).map((n, i) => (
                 <div key={`payReg-${i}`} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Регулирование оплаты — ${n}` : `Payment management — ${n}`}
                     style={{
@@ -1015,7 +1015,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           {(['9', '9_1', '9_2', '9_3'] as const).map((n) => (
             <div key={n} className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
               <img
-                loading="lazy"
+                loading="lazy" decoding="async"
                 src={publicUrl(`/covers/T-bank 2/${n}.webp`)}
                 alt={locale === 'ru' ? `Регулирование оплаты — ${n}` : `Payment management — ${n}`}
                 className="block w-full object-cover"
@@ -1051,7 +1051,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['9_10', '9_11', '9_12'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Получить перевод — ${n}` : `Receive a transfer — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -1066,7 +1066,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/9_13.webp')}
             alt={locale === 'ru' ? 'Получить перевод' : 'Receive a transfer'}
             className="block w-full object-cover"
@@ -1100,7 +1100,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               {(['10_1', '10_2', '10_3'] as const).map((n) => (
                 <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                     src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
                     alt={locale === 'ru' ? `Отчеты и оплата — ${n}` : `Reports and payment — ${n}`}
                     style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
@@ -1115,7 +1115,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         {/* Desktop image — hidden on mobile */}
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
-            loading="lazy"
+            loading="lazy" decoding="async"
             src={publicUrl('/covers/T-bank 2/mobile/10.webp')}
             alt={locale === 'ru' ? 'Отчеты и оплата' : 'Reports and payment'}
             className="block w-full object-cover"
