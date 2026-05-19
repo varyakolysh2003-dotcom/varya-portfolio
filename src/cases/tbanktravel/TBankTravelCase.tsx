@@ -648,16 +648,22 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
               style={{ height: '500px' }}
             >
-              {(['1_3', '2_1', '2_2'] as const).map((n) => (
-                <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
-                  <img
-                    loading="lazy"
-                    src={publicUrl(`/covers/T-bank 2/mobile/${n}.webp`)}
-                    alt={locale === 'ru' ? `Единое пространство поездки — ${n}` : `Unified trip space — ${n}`}
-                    style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
-                  />
-                </div>
-              ))}
+              {(['1_3', '2_1', '2_2'] as const).map((n) => {
+                const alt = locale === 'ru' ? `Единое пространство поездки — ${n}` : `Unified trip space — ${n}`;
+                // 2_1 uses a bezel-cropped PNG; other slides use the original WebPs.
+                const ext = n === '2_1' ? 'png' : 'webp';
+                const src = publicUrl(`/covers/T-bank 2/mobile/${n}.${ext}`);
+                return (
+                  <div key={n} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
+                    <img
+                      loading="lazy"
+                      src={src}
+                      alt={alt}
+                      style={{ height: '460px', width: 'auto', borderRadius: '24px', display: 'block', boxShadow: '0 4px 14px rgba(0,0,0,0.08)' }}
+                    />
+                  </div>
+                );
+              })}
             </div>
             <CarouselDots count={3} active={mobileUnifiedSlide} className="pt-[12px] pb-[16px]" />
           </div>
