@@ -736,7 +736,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         </h2>
         <p className="text-[16px] font-medium text-[var(--color-text-secondary)]">
           {locale === 'ru'
-            ? typograph('Пользователи могут выбрать заполнение формы данных для бронирование на всю группу. Позже выведенные в список предложения (билетов, отелей, активностей) можно направить ссылкой в мессенджер или чат группы')
+            ? typograph('Пользователи могут выбрать заполнение формы данных для бронирования на всю группу. Позже выведенные в список предложения (билетов, отелей, активностей) можно направить ссылкой в мессенджер или чат группы')
             : typograph('Users can choose to fill in booking forms for the entire group. The resulting list of suggestions (tickets, hotels, activities) can then be shared as a link to a messenger or group chat')}
         </p>
         {/* Mobile carousel — hidden on md+ */}
