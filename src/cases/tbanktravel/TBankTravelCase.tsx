@@ -122,6 +122,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy" decoding="async"
+            width={1010} height={1604}
             src={publicUrl('/covers/T-bank 2/13.webp')}
             alt={locale === 'ru' ? 'Выделение ключевых поинтов' : 'Identifying key points'}
             className="block w-full object-cover"
@@ -471,6 +472,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
               loading="lazy" decoding="async"
+              width={3134} height={1762}
               src={publicUrl('/covers/T-bank 2/14.webp')}
               alt={locale === 'ru' ? 'Бенчмаркинг — обзор конкурентов' : 'Benchmarking — competitor overview'}
               className="block w-full object-cover"
@@ -479,6 +481,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
               loading="lazy" decoding="async"
+              width={4008} height={2412}
               src={publicUrl('/covers/T-bank 2/15.webp')}
               alt={locale === 'ru' ? 'Бенчмаркинг — сравнительный анализ' : 'Benchmarking — comparative analysis'}
               className="block w-full object-cover"
@@ -574,6 +577,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
           <div className="w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
             <img
               loading="lazy" decoding="async"
+              width={12800} height={6826}
               src={publicUrl('/covers/T-bank 2/12.webp')}
               alt={locale === 'ru' ? 'User Flow — процесс планирования внутри приложения' : 'User Flow — planning process inside the app'}
               className="block w-full h-auto"
@@ -619,6 +623,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy" decoding="async"
+            width={3534} height={2250}
             src={publicUrl('/covers/T-bank 2/1_1.webp')}
             alt={locale === 'ru' ? 'Обновление раздела «Путешествия»' : 'Travel Section Update'}
             className="block w-full object-cover"
@@ -673,6 +678,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
         <div className="case-section-content hidden md:block w-full rounded-[var(--radius-media)] overflow-hidden bg-[var(--color-surface-muted)]">
           <img
             loading="lazy" decoding="async"
+            width={3534} height={2740}
             src={publicUrl('/covers/T-bank 2/2.webp')}
             alt={locale === 'ru' ? 'Единое пространство поездки' : 'Unified trip space'}
             className="block w-full object-cover"
