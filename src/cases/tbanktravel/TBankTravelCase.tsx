@@ -986,7 +986,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
               className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
               style={{ height: '500px' }}
             >
-              {(['9', '9_1', '9_2', '9_3', '9_4', '9_5', '9_6', '9_7', '9_8', '9_9'] as const).map((n, i) => (
+              {(['9', '9_1', '9_2', '9_3', '9_4', '9_5', '9_6', '9_7'] as const).map((n, i) => (
                 <div key={`payReg-${i}`} className="snap-center flex-shrink-0 w-full h-full flex items-center justify-center">
                   <img
                     loading="lazy" decoding="async"
@@ -995,7 +995,7 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                     style={{
                       height: '460px',
                       width: 'auto',
-                      borderRadius: (n === '9_1' || n === '9_3' || n === '9_7' || n === '9_9') ? '20px' : '24px',
+                      borderRadius: (n === '9_1' || n === '9_3' || n === '9_7') ? '20px' : '24px',
                       display: 'block',
                       boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
                     }}
@@ -1003,14 +1003,14 @@ export default function TBankTravelCase({ locale }: TBankTravelCaseProps) {
                 </div>
               ))}
             </div>
-            <CarouselDots count={10} active={payRegSlide} className="pt-[12px] pb-[8px]" />
+            <CarouselDots count={8} active={payRegSlide} className="pt-[12px] pb-[8px]" />
             <p
               className="text-center font-medium"
               style={{ margin: '0 0 16px', fontSize: 14, color: 'var(--color-text-tertiary)', minHeight: '20px' }}
             >
               {locale === 'ru'
-                ? (['Траты / поровну', 'Траты / поровну', 'Получение / частями', 'Получение / частями', 'Получение / суммой', 'Получение / суммой', 'Перевод', 'Перевод', 'Получение / суммой', 'Получение / суммой'] as const)[payRegSlide]
-                : (['Expenses / split equally', 'Expenses / split equally', 'Receiving / in parts', 'Receiving / in parts', 'Receiving / lump sum', 'Receiving / lump sum', 'Transfer', 'Transfer', 'Receiving / lump sum', 'Receiving / lump sum'] as const)[payRegSlide]
+                ? (['Траты / поровну', 'Траты / поровну', 'Получение / частями', 'Получение / частями', 'Получение / перевод', 'Получение / перевод', 'Получение', 'Получение'] as const)[payRegSlide]
+                : (['Expenses / split equally', 'Expenses / split equally', 'Receiving / in parts', 'Receiving / in parts', 'Receiving / transfer', 'Receiving / transfer', 'Receiving', 'Receiving'] as const)[payRegSlide]
               }
             </p>
           </div>
